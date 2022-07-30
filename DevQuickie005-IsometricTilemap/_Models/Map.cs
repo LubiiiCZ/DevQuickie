@@ -50,10 +50,13 @@ public class Map
     private Point ScreenToMap(Point mousePos)
     {
         Vector2 cursor = new(mousePos.X - (int)(MAP_OFFSET.X * TILE_SIZE.X), mousePos.Y - (int)(MAP_OFFSET.Y * TILE_SIZE.Y));
-        var mapX = (cursor.X + (2 * cursor.Y) - (TILE_SIZE.X / 2)) / TILE_SIZE.X;
-        var mapY = (-cursor.X + (2 * cursor.Y) + (TILE_SIZE.X / 2)) / TILE_SIZE.X;
 
-        return new((int)mapX, (int)mapY);
+        var x = cursor.X + (2 * cursor.Y) - (TILE_SIZE.X / 2);
+        int mapX = (x < 0) ? -1 : (int)(x / TILE_SIZE.X);
+        var y = -cursor.X + (2 * cursor.Y) + (TILE_SIZE.X / 2);
+        int mapY = (y < 0) ? -1 : (int)(y / TILE_SIZE.X);
+
+        return new(mapX, mapY);
     }
 
     public void Update()
