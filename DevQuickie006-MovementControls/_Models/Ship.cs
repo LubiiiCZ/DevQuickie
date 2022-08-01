@@ -1,4 +1,3 @@
-using System;
 namespace Quickie006;
 
 public class Ship : Sprite
