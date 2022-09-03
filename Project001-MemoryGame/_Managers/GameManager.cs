@@ -2,19 +2,30 @@ namespace Project001;
 
 public class GameManager
 {
-    private readonly Board _board;
+    public Board Board { get; }
+    private GameState _gameState;
+    public Card FirstCard { get; set; }
+    public Card SecondCard { get; set; }
 
     public GameManager()
     {
-        _board = new();
+        Board = new();
+        _gameState = new FlipFirstCardState();
+    }
+
+    public void ChangeState(GameState state)
+    {
+        if (state is not null) _gameState = state;
     }
 
     public void Update()
     {
+        InputManager.Update();
+        _gameState.Update(this);
     }
 
     public void Draw()
     {
-        _board.Draw();
+        Board.Draw();
     }
 }

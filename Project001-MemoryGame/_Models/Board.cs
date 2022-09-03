@@ -22,13 +22,31 @@ public class Board
 
         for (int i = 0; i < cardsCount; i++)
         {
-            var front = fronts[i / 2];
+            var id = i / 2;
+            var front = fronts[id];
             var x = (cardDistance * (i % CARDS_DIM)) + BOARD_SPACING;
             var y = (cardDistance * (i / CARDS_DIM)) + BOARD_SPACING;
-            Cards.Add(new(back, front, new(x, y)));
+            Cards.Add(new(id, back, front, new(x, y)));
         }
 
         Shuffle();
+    }
+
+    public Card GetClickedCard()
+    {
+        if (!InputManager.MouseClicked) return null;
+
+        foreach (Card card in Cards)
+        {
+            if (!card.Visible) continue;
+
+            if (card.CardRectangle.Intersects(InputManager.MouseRectangle))
+            {
+                return card;
+            }
+        }
+
+        return null;
     }
 
     public void Shuffle()

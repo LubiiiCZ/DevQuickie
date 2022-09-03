@@ -7,14 +7,18 @@ public class Card
     public Vector2 Position { get; set; }
     private bool _flipped;
     private Texture2D _activeTexture;
+    public Rectangle CardRectangle => new((int)Position.X, (int)Position.Y, _activeTexture.Width, _activeTexture.Height);
+    public int Id { get; }
+    public bool Visible { get; set; }
 
-    public Card(Texture2D back, Texture2D front, Vector2 position)
+    public Card(int id, Texture2D back, Texture2D front, Vector2 position)
     {
+        Id = id;
         _back = back;
         _front = front;
         Position = position;
         _activeTexture = _back;
-        Flip();
+        Visible = true;
     }
 
     public void Flip()
@@ -25,6 +29,6 @@ public class Card
 
     public void Draw()
     {
-        Globals.SpriteBatch.Draw(_activeTexture, Position, Color.White);
+        if (Visible) Globals.SpriteBatch.Draw(_activeTexture, Position, Color.White);
     }
 }
