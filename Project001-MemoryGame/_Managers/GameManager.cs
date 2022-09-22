@@ -9,23 +9,33 @@ public class GameManager
 
     public GameManager()
     {
+        GameStateManager.Init();
         Board = new();
-        _gameState = new FlipFirstCardState();
+        Restart();
     }
 
-    public void ChangeState(GameState state)
+    public void Restart()
     {
-        if (state is not null) _gameState = state;
+        Board.Reset();
+        ScoreManager.Reset();
+        ChangeState(GameStates.FlipFirstCard);
+    }
+
+    public void ChangeState(GameStates state)
+    {
+        _gameState = GameStateManager.States[state];
     }
 
     public void Update()
     {
         InputManager.Update();
+        ScoreManager.Update();
+        if (InputManager.MouseRightClicked || ScoreManager.TurnTimeLeft <= 0) Restart();
         _gameState.Update(this);
     }
 
     public void Draw()
     {
-        Board.Draw();
+        _gameState.Draw(this);
     }
 }

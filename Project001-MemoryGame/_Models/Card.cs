@@ -21,6 +21,11 @@ public class Card
         Visible = true;
     }
 
+    public bool IsFlipped()
+    {
+        return _flipped;
+    }
+
     public void Flip()
     {
         _flipped = !_flipped;

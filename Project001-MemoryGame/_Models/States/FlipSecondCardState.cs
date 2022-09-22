@@ -1,6 +1,6 @@
 namespace Project001;
 
-public class FlipSecondCardState : GameState
+public class FlipSecondCardState : PlayState
 {
     public override void Update(GameManager gm)
     {
@@ -10,7 +10,7 @@ public class FlipSecondCardState : GameState
         {
             card.Flip();
             gm.SecondCard = card;
-            gm.ChangeState(new ResolveTurnState());
+            gm.ChangeState(GameStates.ResolveTurn);
         }
     }
 }
