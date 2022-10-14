@@ -24,7 +24,10 @@ public class Player : Sprite
         if (InputManager.Direction != Vector2.Zero)
         {
             var dir = Vector2.Normalize(InputManager.Direction);
-            Position += dir * Speed * Globals.TotalSeconds;
+            Position = new(
+                MathHelper.Clamp(Position.X + (dir.X * Speed * Globals.TotalSeconds), 0, Globals.Bounds.X),
+                MathHelper.Clamp(Position.Y + (dir.Y * Speed * Globals.TotalSeconds), 0, Globals.Bounds.Y)
+            );
         }
 
         var toMouse = InputManager.MousePosition - Position;
