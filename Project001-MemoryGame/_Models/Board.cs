@@ -14,7 +14,7 @@ public class Board
         var window = Globals.SpriteBatch.GraphicsDevice.PresentationParameters.Bounds;
         Point cardDistance = new(back.Width + CARD_SPACING, back.Height + CARD_SPACING);
         Point boardSize = new((cardDistance.X * CARDS_DIM) - CARD_SPACING, (cardDistance.Y * CARDS_DIM) - CARD_SPACING);
-        Point boardSpacing = new((window.Width - boardSize.X) / 2, (window.Height - boardSize.Y) / 2);
+        Point boardSpacing = new((window.Width - boardSize.X + back.Width) / 2, (window.Height - boardSize.Y + back.Height) / 2);
 
         const int cardsCount = CARDS_DIM * CARDS_DIM;
         CardsLeft = cardsCount;
@@ -45,6 +45,7 @@ public class Board
         foreach (Card card in Cards)
         {
             if (!card.Visible) continue;
+            if (card.Flipping) continue;
 
             if (card.CardRectangle.Intersects(InputManager.MouseRectangle))
             {
@@ -68,8 +69,7 @@ public class Board
 
         foreach (Card card in Cards)
         {
-            card.Visible = true;
-            if (card.IsFlipped()) card.Flip();
+            card.Reset();
         }
 
         Shuffle();
@@ -83,6 +83,14 @@ public class Board
         {
             int j = rand.Next(i + 1);
             (Cards[j].Position, Cards[i].Position) = (Cards[i].Position, Cards[j].Position);
+        }
+    }
+
+    public void Update()
+    {
+        foreach (Card card in Cards)
+        {
+            card.Update();
         }
     }
 

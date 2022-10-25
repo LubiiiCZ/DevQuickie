@@ -4,6 +4,8 @@ public class ResolveTurnState : PlayState
 {
     public override void Update(GameManager gm)
     {
+        base.Update(gm);
+
         if (InputManager.MouseClicked)
         {
             if (gm.FirstCard.Id == gm.SecondCard.Id)
