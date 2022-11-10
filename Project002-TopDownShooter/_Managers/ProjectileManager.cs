@@ -5,9 +5,9 @@ public static class ProjectileManager
     private static Texture2D _texture;
     public static List<Projectile> Projectiles { get; } = new();
 
-    public static void Init()
+    public static void Init(Texture2D tex)
     {
-        _texture = Globals.Content.Load<Texture2D>("bullet");
+        _texture = tex;
     }
 
     public static void AddProjectile(ProjectileData data)
@@ -15,11 +15,21 @@ public static class ProjectileManager
         Projectiles.Add(new(_texture, data));
     }
 
-    public static void Update()
+    public static void Update(List<Zombie> zombies)
     {
         foreach (var p in Projectiles)
         {
             p.Update();
+            foreach (var z in zombies)
+            {
+                if (z.HP <= 0) continue;
+                if ((p.Position - z.Position).Length() < 32)
+                {
+                    z.TakeDamage(1);
+                    p.Destroy();
+                    break;
+                }
+            }
         }
         Projectiles.RemoveAll((p) => p.Lifespan <= 0);
     }

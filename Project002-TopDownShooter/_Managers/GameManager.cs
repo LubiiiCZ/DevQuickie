@@ -6,7 +6,10 @@ public class GameManager
 
     public GameManager()
     {
-        ProjectileManager.Init();
+        var texture = Globals.Content.Load<Texture2D>("bullet");
+        ProjectileManager.Init(texture);
+        UIManager.Init(texture);
+
         _player = new(Globals.Content.Load<Texture2D>("player"), new(Globals.Bounds.X / 2, Globals.Bounds.Y / 2));
         ZombieManager.Init();
     }
@@ -16,7 +19,7 @@ public class GameManager
         InputManager.Update();
         _player.Update();
         ZombieManager.Update(_player);
-        ProjectileManager.Update();
+        ProjectileManager.Update(ZombieManager.Zombies);
     }
 
     public void Draw()
@@ -24,5 +27,6 @@ public class GameManager
         ProjectileManager.Draw();
         _player.Draw();
         ZombieManager.Draw();
+        UIManager.Draw(_player);
     }
 }

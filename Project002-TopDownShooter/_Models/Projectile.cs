@@ -13,6 +13,11 @@ public class Projectile : Sprite
         Lifespan = data.Lifespan;
     }
 
+    public void Destroy()
+    {
+        Lifespan = 0;
+    }
+
     public void Update()
     {
         Position += Direction * Speed * Globals.TotalSeconds;
