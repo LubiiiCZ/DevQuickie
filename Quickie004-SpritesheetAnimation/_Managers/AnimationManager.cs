@@ -13,9 +13,9 @@ public class AnimationManager
 
     public void Update(object key)
     {
-        if (_anims.ContainsKey(key))
+        if (_anims.TryGetValue(key, out Animation value))
         {
-            _anims[key].Start();
+            value.Start();
             _anims[key].Update();
             _lastKey = key;
         }
