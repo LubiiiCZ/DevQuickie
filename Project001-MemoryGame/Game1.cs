@@ -15,9 +15,11 @@ public class Game1 : Game
 
     protected override void Initialize()
     {
-        _graphics.PreferredBackBufferWidth = 1024;
-        _graphics.PreferredBackBufferHeight = 768;
+        Globals.Bounds = new(1024, 768);
+        _graphics.PreferredBackBufferWidth = Globals.Bounds.X;
+        _graphics.PreferredBackBufferHeight = Globals.Bounds.Y;
         _graphics.ApplyChanges();
+        Window.Title = "GameDev Quickie: Memory Game";
 
         base.Initialize();
     }
@@ -34,7 +36,9 @@ public class Game1 : Game
     protected override void Update(GameTime gameTime)
     {
         if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-            Exit();
+        {
+            _gameManager.ChangeState(GameStates.Menu);
+        }
 
         Globals.Update(gameTime);
         _gameManager.Update();

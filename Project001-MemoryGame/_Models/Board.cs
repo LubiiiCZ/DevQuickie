@@ -2,40 +2,56 @@ namespace Project001;
 
 public class Board
 {
-    private const int CARDS_DIM = 6;
+    private const int MAX_CARDS = 18;
+    private Point _dimensions;
     private const int CARD_SPACING = 10;
+    private readonly Point _cardDistance;
     public List<Card> Cards { get; } = new();
     public int CardsLeft { get; private set; }
+    private readonly Texture2D _textureBack;
+    private readonly Texture2D[] _textureFront = new Texture2D[MAX_CARDS];
 
     public Board()
     {
-        var back = Globals.Content.Load<Texture2D>("back");
+        _textureBack = Globals.Content.Load<Texture2D>("back");
+        _cardDistance = new(_textureBack.Width + CARD_SPACING, _textureBack.Height + CARD_SPACING);
 
-        var window = Globals.SpriteBatch.GraphicsDevice.PresentationParameters.Bounds;
-        Point cardDistance = new(back.Width + CARD_SPACING, back.Height + CARD_SPACING);
-        Point boardSize = new((cardDistance.X * CARDS_DIM) - CARD_SPACING, (cardDistance.Y * CARDS_DIM) - CARD_SPACING);
-        Point boardSpacing = new((window.Width - boardSize.X + back.Width) / 2, (window.Height - boardSize.Y + back.Height) / 2);
-
-        const int cardsCount = CARDS_DIM * CARDS_DIM;
-        CardsLeft = cardsCount;
-        const int cardsCountHalf = cardsCount / 2;
-
-        Texture2D[] fronts = new Texture2D[cardsCountHalf];
-        for (int i = 0; i < cardsCountHalf; i++)
+        for (int i = 0; i < MAX_CARDS; i++)
         {
-            fronts[i] = Globals.Content.Load<Texture2D>($"{i+1}");
+            _textureFront[i] = Globals.Content.Load<Texture2D>($"{i+1}");
         }
+    }
+
+    public void SetDifficulty(Difficulty dificulty)
+    {
+        switch (dificulty)
+        {
+            case Difficulty.Easy:
+                _dimensions = new(4, 4);
+                break;
+            case Difficulty.Medium:
+                _dimensions = new(6, 4);
+                break;
+            case Difficulty.Hard:
+                _dimensions = new(6, 6);
+                break;
+        }
+
+        Point boardSize = new((_cardDistance.X * _dimensions.X) - CARD_SPACING, (_cardDistance.Y * _dimensions.Y) - CARD_SPACING);
+        Point boardSpacing = new((Globals.Bounds.X - boardSize.X + _textureBack.Width) / 2, (Globals.Bounds.Y - boardSize.Y + _textureBack.Height) / 2);
+
+        var cardsCount = _dimensions.X * _dimensions.Y;
+        CardsLeft = cardsCount;
+        Cards.Clear();
 
         for (int i = 0; i < cardsCount; i++)
         {
             var id = i / 2;
-            var front = fronts[id];
-            var x = (cardDistance.X * (i % CARDS_DIM)) + boardSpacing.X;
-            var y = (cardDistance.Y * (i / CARDS_DIM)) + boardSpacing.Y;
-            Cards.Add(new(id, back, front, new(x, y)));
+            var front = _textureFront[id];
+            var x = (_cardDistance.X * (i % _dimensions.X)) + boardSpacing.X;
+            var y = (_cardDistance.Y * (i / _dimensions.X)) + boardSpacing.Y;
+            Cards.Add(new(id, _textureBack, front, new(x, y)));
         }
-
-        Shuffle();
     }
 
     public Card GetClickedCard()
@@ -61,11 +77,13 @@ public class Board
         c1.Visible = false;
         c2.Visible = false;
         CardsLeft -= 2;
+        CardPartsManager.AddParts(c1);
+        CardPartsManager.AddParts(c2);
     }
 
     public void Reset()
     {
-        CardsLeft = CARDS_DIM * CARDS_DIM;
+        CardsLeft = _dimensions.X * _dimensions.Y;
 
         foreach (Card card in Cards)
         {

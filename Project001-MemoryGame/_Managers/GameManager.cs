@@ -1,5 +1,12 @@
 namespace Project001;
 
+public enum Difficulty
+{
+    Easy,
+    Medium,
+    Hard
+}
+
 public class GameManager
 {
     public Board Board { get; }
@@ -9,8 +16,31 @@ public class GameManager
 
     public GameManager()
     {
-        GameStateManager.Init();
         Board = new();
+        ScoreManager.Init();
+        GameStateManager.Init(this);
+        ChangeState(GameStates.Menu);
+    }
+
+    public void StartEasy(object sender, EventArgs e)
+    {
+        Init(Difficulty.Easy);
+    }
+
+    public void StartMedium(object sender, EventArgs e)
+    {
+        Init(Difficulty.Medium);
+    }
+
+    public void StartHard(object sender, EventArgs e)
+    {
+        Init(Difficulty.Hard);
+    }
+
+    public void Init(Difficulty difficulty)
+    {
+        Board.SetDifficulty(difficulty);
+        ScoreManager.SetDifficulty(difficulty);
         Restart();
     }
 
@@ -30,12 +60,14 @@ public class GameManager
     {
         InputManager.Update();
         ScoreManager.Update();
-        if (InputManager.MouseRightClicked || ScoreManager.TurnTimeLeft <= 0) Restart();
+        CardPartsManager.Update();
+        if (ScoreManager.Active && (InputManager.MouseRightClicked || ScoreManager.TurnTimeLeft <= 0)) Restart();
         _gameState.Update(this);
     }
 
     public void Draw()
     {
         _gameState.Draw(this);
+        CardPartsManager.Draw();
     }
 }

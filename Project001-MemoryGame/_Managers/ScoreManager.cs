@@ -2,45 +2,49 @@ namespace Project001;
 
 public static class ScoreManager
 {
-    private const float FIRST_ROUND_TIME = 20;
-    private static readonly int _screenWidth;
+    private static float _firstRoundTime;
     private static float _turnTime;
     public static float TurnTimeLeft { get; private set; }
-    private static readonly Texture2D _texture;
+    private static Texture2D _texture;
     private static Rectangle _rectangle;
     public static float Score { get; private set; }
-    private static bool _active;
+    public static bool Active { get; private set; }
 
-    static ScoreManager()
+    public static void Init()
     {
-        _turnTime = FIRST_ROUND_TIME;
-        TurnTimeLeft = _turnTime;
-        _active = false;
-
         _texture = new Texture2D(Globals.SpriteBatch.GraphicsDevice, 1, 1);
         _texture.SetData(new Color[] { new(200, 80, 30) });
+        _rectangle = new(0, 0, Globals.Bounds.X, 20);
+    }
 
-        _screenWidth = Globals.SpriteBatch.GraphicsDevice.PresentationParameters.BackBufferWidth;
-        _rectangle = new(0, 0, _screenWidth, 20);
+    public static void SetDifficulty(Difficulty dificulty)
+    {
+        _firstRoundTime = dificulty switch
+        {
+            Difficulty.Easy => 30,
+            Difficulty.Medium => 25,
+            Difficulty.Hard => 20,
+            _ => 20
+        };
     }
 
     public static void Start()
     {
-        _active = true;
+        Active = true;
     }
 
     public static void Stop()
     {
-        _active = false;
+        Active = false;
     }
 
     public static void Reset()
     {
-        _turnTime = FIRST_ROUND_TIME;
+        _turnTime = _firstRoundTime;
         TurnTimeLeft = _turnTime;
         Score = 0;
-        _active = false;
-        _rectangle.Width = _screenWidth;
+        Active = false;
+        _rectangle.Width = Globals.Bounds.X;
     }
 
     public static void NextTurn()
@@ -57,10 +61,10 @@ public static class ScoreManager
 
     public static void Update()
     {
-        if (!_active) return;
+        if (!Active) return;
 
         TurnTimeLeft -= Globals.Time;
-        _rectangle.Width = (int)(_screenWidth * TurnTimeLeft / _turnTime);
+        _rectangle.Width = (int)(Globals.Bounds.X * TurnTimeLeft / _turnTime);
     }
 
     public static void Draw()
