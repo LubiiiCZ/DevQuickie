@@ -18,6 +18,12 @@ public static class ZombieManager
         _padding = _texture.Width / 2;
     }
 
+    public static void Reset()
+    {
+        Zombies.Clear();
+        _spawnTime = _spawnCooldown;
+    }
+
     private static Vector2 RandomPosition()
     {
         float w = Globals.Bounds.X;

@@ -1,18 +1,19 @@
 namespace Project002;
 
-public class Zombie : Sprite
+public class Zombie : MovingSprite
 {
     public int HP { get; private set; }
 
     public Zombie(Texture2D tex, Vector2 pos) : base(tex, pos)
     {
         Speed = 100;
-        HP = 1;
+        HP = 2;
     }
 
     public void TakeDamage(int dmg)
     {
         HP -= dmg;
+        if (HP <= 0) ExperienceManager.AddExperience(Position);
     }
 
     public void Update(Player player)

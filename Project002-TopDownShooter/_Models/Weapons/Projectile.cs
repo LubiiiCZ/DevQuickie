@@ -1,9 +1,10 @@
 namespace Project002;
 
-public class Projectile : Sprite
+public class Projectile : MovingSprite
 {
     public Vector2 Direction { get; set; }
     public float Lifespan { get; private set; }
+    public int Damage { get; }
 
     public Projectile(Texture2D tex, ProjectileData data) : base(tex, data.Position)
     {
@@ -11,6 +12,7 @@ public class Projectile : Sprite
         Rotation = data.Rotation;
         Direction = new((float)Math.Cos(Rotation), (float)Math.Sin(Rotation));
         Lifespan = data.Lifespan;
+        Damage = data.Damage;
     }
 
     public void Destroy()

@@ -10,6 +10,11 @@ public static class ProjectileManager
         _texture = tex;
     }
 
+    public static void Reset()
+    {
+        Projectiles.Clear();
+    }
+
     public static void AddProjectile(ProjectileData data)
     {
         Projectiles.Add(new(_texture, data));
@@ -25,7 +30,7 @@ public static class ProjectileManager
                 if (z.HP <= 0) continue;
                 if ((p.Position - z.Position).Length() < 32)
                 {
-                    z.TakeDamage(1);
+                    z.TakeDamage(p.Damage);
                     p.Destroy();
                     break;
                 }
