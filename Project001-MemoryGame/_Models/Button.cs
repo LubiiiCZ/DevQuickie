@@ -3,6 +3,7 @@ namespace Project001;
 public class Button : Sprite
 {
     private readonly Rectangle _rectangle;
+    public bool Disabled { get; set; }
 
     public Button(Texture2D tex, Vector2 pos) : base(tex, pos)
     {
@@ -13,9 +14,18 @@ public class Button : Sprite
 
     public void Update()
     {
-        if (InputManager.MouseClicked && _rectangle.Contains(InputManager.MouseRectangle))
+        color = Color.White;
+
+        if (_rectangle.Contains(InputManager.MouseRectangle))
         {
-            OnClick?.Invoke(this, EventArgs.Empty);
+            color = Color.DarkGray;
+
+            if (InputManager.MouseClicked)
+            {
+                OnClick?.Invoke(this, EventArgs.Empty);
+            }
         }
+
+        if (Disabled) color *= 0.3f;
     }
 }

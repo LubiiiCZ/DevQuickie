@@ -9,22 +9,22 @@ public class Board
     public List<Card> Cards { get; } = new();
     public int CardsLeft { get; private set; }
     private readonly Texture2D _textureBack;
-    private readonly Texture2D[] _textureFront = new Texture2D[MAX_CARDS];
+    public static readonly Texture2D[] CardTextures = new Texture2D[MAX_CARDS];
 
     public Board()
     {
-        _textureBack = Globals.Content.Load<Texture2D>("back");
+        _textureBack = Globals.Content.Load<Texture2D>("Cards/back");
         _cardDistance = new(_textureBack.Width + CARD_SPACING, _textureBack.Height + CARD_SPACING);
 
         for (int i = 0; i < MAX_CARDS; i++)
         {
-            _textureFront[i] = Globals.Content.Load<Texture2D>($"{i+1}");
+            CardTextures[i] = Globals.Content.Load<Texture2D>($"Cards/{i+1}");
         }
     }
 
-    public void SetDifficulty(Difficulty dificulty)
+    public void SetDifficulty(Difficulty difficulty)
     {
-        switch (dificulty)
+        switch (difficulty)
         {
             case Difficulty.Easy:
                 _dimensions = new(4, 4);
@@ -47,7 +47,7 @@ public class Board
         for (int i = 0; i < cardsCount; i++)
         {
             var id = i / 2;
-            var front = _textureFront[id];
+            var front = CardTextures[id];
             var x = (_cardDistance.X * (i % _dimensions.X)) + boardSpacing.X;
             var y = (_cardDistance.Y * (i / _dimensions.X)) + boardSpacing.Y;
             Cards.Add(new(id, _textureBack, front, new(x, y)));
@@ -79,6 +79,7 @@ public class Board
         CardsLeft -= 2;
         CardPartsManager.AddParts(c1);
         CardPartsManager.AddParts(c2);
+        SoundManager.PlayTearFX();
     }
 
     public void Reset()

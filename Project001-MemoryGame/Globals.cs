@@ -8,6 +8,7 @@ public static class Globals
     public static ContentManager Content { get; set; }
     public static SpriteBatch SpriteBatch { get; set; }
     public static Point Bounds { get; set; }
+    public static Game Game { get; set; }
 
     public static void Update(GameTime gt)
     {

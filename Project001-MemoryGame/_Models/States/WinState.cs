@@ -10,8 +10,8 @@ public class WinState : GameState
 
     public WinState()
     {
-        _texture = Globals.Content.Load<Texture2D>("win");
-        _font = Globals.Content.Load<SpriteFont>("font");
+        _texture = Globals.Content.Load<Texture2D>("Menu/win");
+        _font = Globals.Content.Load<SpriteFont>("Menu/font");
         _position = new((Globals.Bounds.X - _texture.Width) / 2, (Globals.Bounds.Y - _texture.Height) / 2);
     }
 
@@ -22,7 +22,7 @@ public class WinState : GameState
             gm.ChangeState(GameStates.Menu);
         }
 
-        _text = Math.Round(ScoreManager.Score).ToString();
+        _text = ScoreManager.Score.ToString();
         var size = _font.MeasureString(_text);
         _textPosition = new((Globals.Bounds.X - size.X) / 2, _position.Y + (_texture.Height / 4));
     }

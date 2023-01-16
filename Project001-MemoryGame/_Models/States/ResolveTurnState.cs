@@ -15,6 +15,8 @@ public class ResolveTurnState : PlayState
             {
                 gm.ChangeState(GameStates.Win);
                 ScoreManager.Stop();
+                ScoreManager.SaveScores();
+                SoundManager.PlayVictoryFX();
             }
             else
             {

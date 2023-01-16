@@ -40,6 +40,7 @@ public class Card : Sprite
         Flipped = !Flipped;
         _flippingDir = -1;
         _flipTimeLeft = _flipTime;
+        SoundManager.PlayFlipFx();
     }
 
     public void Update()

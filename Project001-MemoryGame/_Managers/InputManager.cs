@@ -11,7 +11,8 @@ public static class InputManager
     {
         var ms = Mouse.GetState();
         var onscreen = ms.X >= 0 && ms.X < Globals.SpriteBatch.GraphicsDevice.PresentationParameters.BackBufferWidth
-                    && ms.Y >= 0 && ms.Y < Globals.SpriteBatch.GraphicsDevice.PresentationParameters.BackBufferHeight;
+                    && ms.Y >= 0 && ms.Y < Globals.SpriteBatch.GraphicsDevice.PresentationParameters.BackBufferHeight
+                    && Globals.Game.IsActive;
 
         MouseClicked = (ms.LeftButton == ButtonState.Pressed)
                         && (_lastMouseState.LeftButton == ButtonState.Released)

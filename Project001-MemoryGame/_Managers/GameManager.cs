@@ -1,12 +1,5 @@
 namespace Project001;
 
-public enum Difficulty
-{
-    Easy,
-    Medium,
-    Hard
-}
-
 public class GameManager
 {
     public Board Board { get; }
@@ -17,6 +10,7 @@ public class GameManager
     public GameManager()
     {
         Board = new();
+        SoundManager.Init();
         ScoreManager.Init();
         GameStateManager.Init(this);
         ChangeState(GameStates.Menu);
