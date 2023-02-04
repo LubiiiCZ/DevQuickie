@@ -41,6 +41,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quickie015", "Quickie015-Ti
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quickie016", "Quickie016-TilemapPathfinding\Quickie016.csproj", "{676EC69F-13CF-4550-9A66-73C80621A25D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quickie017", "Quickie017-ObserverDesignPattern\Quickie017.csproj", "{3794A118-70F7-4783-8CAA-1B2B2B8870A0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -126,5 +128,9 @@ Global
 		{676EC69F-13CF-4550-9A66-73C80621A25D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{676EC69F-13CF-4550-9A66-73C80621A25D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{676EC69F-13CF-4550-9A66-73C80621A25D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3794A118-70F7-4783-8CAA-1B2B2B8870A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3794A118-70F7-4783-8CAA-1B2B2B8870A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3794A118-70F7-4783-8CAA-1B2B2B8870A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3794A118-70F7-4783-8CAA-1B2B2B8870A0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
