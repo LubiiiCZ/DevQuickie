@@ -47,6 +47,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quickie018", "Quickie018-Pr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quickie019", "Quickie019-MovementTrail\Quickie019.csproj", "{384D0F78-573F-4BF5-A061-47898EADB00E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quickie020", "Quickie020-RenderTarget2D\Quickie020.csproj", "{8D9696F1-DC5C-4F4F-ADFA-76A35D479088}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -144,5 +146,9 @@ Global
 		{384D0F78-573F-4BF5-A061-47898EADB00E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{384D0F78-573F-4BF5-A061-47898EADB00E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{384D0F78-573F-4BF5-A061-47898EADB00E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D9696F1-DC5C-4F4F-ADFA-76A35D479088}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D9696F1-DC5C-4F4F-ADFA-76A35D479088}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D9696F1-DC5C-4F4F-ADFA-76A35D479088}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D9696F1-DC5C-4F4F-ADFA-76A35D479088}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
