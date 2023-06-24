@@ -49,6 +49,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quickie019", "Quickie019-Mo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quickie020", "Quickie020-RenderTarget2D\Quickie020.csproj", "{8D9696F1-DC5C-4F4F-ADFA-76A35D479088}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quickie021", "Quickie021-JumpingAndGravity\Quickie021.csproj", "{36151396-2146-484F-95B1-1C908309A0DD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -150,5 +152,9 @@ Global
 		{8D9696F1-DC5C-4F4F-ADFA-76A35D479088}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8D9696F1-DC5C-4F4F-ADFA-76A35D479088}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8D9696F1-DC5C-4F4F-ADFA-76A35D479088}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36151396-2146-484F-95B1-1C908309A0DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36151396-2146-484F-95B1-1C908309A0DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36151396-2146-484F-95B1-1C908309A0DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36151396-2146-484F-95B1-1C908309A0DD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
