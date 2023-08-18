@@ -4,7 +4,6 @@ public class GameManager
 {
     private readonly Canvas _canvas;
     private readonly Map _map;
-    private readonly Hero _hero;
     private readonly Button _button;
     private readonly Texture2D _buttonTex;
     private readonly MonsterManger _monsterManager;
@@ -14,7 +13,6 @@ public class GameManager
         _monsterManager = new();
         _canvas = new(graphics.GraphicsDevice, 64 * Map.Size.X, 64 * (Map.Size.Y + 1));
         _map = new();
-        _hero = new(Globals.Content.Load<Texture2D>("hero"), Vector2.Zero);
         _buttonTex = Globals.Content.Load<Texture2D>("button");
 
         Pathfinder.Init(_map);
@@ -40,7 +38,6 @@ public class GameManager
         _monsterManager.Update();
         _button.Update();
         _map.Update();
-        _hero.Update();
     }
 
     public void Draw()
