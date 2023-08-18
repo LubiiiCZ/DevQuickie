@@ -1,0 +1,20 @@
+TODO
+-------------------
+* Monster factory
+* Monster pathfinding
+Wave system
+Monsters in a wave counter
+Game state
+Tower acquirement
+Tower placement
+Pathfinding recalculation
+Tower range indicator
+Tower attack
+Damage type
+Monster resistances
+
+
+DONE
+--------------------
+Monster factory (Stream 001)
+Monster pathfinding (Stream 001)

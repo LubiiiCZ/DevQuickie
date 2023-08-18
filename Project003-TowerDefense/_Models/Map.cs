@@ -4,10 +4,11 @@ public class Map
 {
     public static Point Size { get; } = new(8, 12);
     public Tile[,] Tiles { get; }
-    public Point TileSize { get; }
+    public static Point TileSize { get; private set; }
 
     public Vector2 MapToScreen(int x, int y) =>  new(x * TileSize.X, y * TileSize.Y);
-    public (int x, int y) ScreenToMap(Vector2 pos) => ((int)pos.X / TileSize.X, (int)pos.Y / TileSize.Y);
+    public (int x, int y) ScreenToMap(Vector2 pos)
+        => ((int)(pos.X - TileSize.X / 2) / TileSize.X, (int)(pos.Y - TileSize.Y / 2) / TileSize.Y);
 
     public Map()
     {

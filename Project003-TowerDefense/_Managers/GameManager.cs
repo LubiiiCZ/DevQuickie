@@ -5,49 +5,42 @@ public class GameManager
     private readonly Canvas _canvas;
     private readonly Map _map;
     private readonly Hero _hero;
-    private readonly List<Monster> _monsters = new();
-    private readonly Texture2D _monsterTex;
     private readonly Button _button;
+    private readonly Texture2D _buttonTex;
+    private readonly MonsterManger _monsterManager;
 
     public GameManager(GraphicsDeviceManager graphics)
     {
+        _monsterManager = new();
         _canvas = new(graphics.GraphicsDevice, 64 * Map.Size.X, 64 * (Map.Size.Y + 1));
         _map = new();
         _hero = new(Globals.Content.Load<Texture2D>("hero"), Vector2.Zero);
-        _monsterTex = Globals.Content.Load<Texture2D>("hero");
-        Pathfinder.Init(_map, _hero);
+        _buttonTex = Globals.Content.Load<Texture2D>("button");
 
-        for (int i = 0; i < 10; i++)
-        {
-            SpawnMonster();
-        }
+        Pathfinder.Init(_map);
 
-        Monster.OnDeath += (e, a) => SpawnMonster();
+        SpawnMonsters();
 
-        _button = new(_monsterTex, new Vector2(32, 13 * 64 - 32));
-        _button.OnTap += (e, a) => SpawnMonster();
+        //Monster.OnDeath += (e, a) => SpawnMonster();
+
+        _button = new(_buttonTex, new Vector2(32, 13 * 64 - 32));
+        _button.OnTap += (e, a) => SpawnMonsters();
     }
 
-    public void SpawnMonster()
+    public void SpawnMonsters()
     {
-        Random r = new();
-        Vector2 pos = new(r.Next(64, 448), 0);
-
-        _monsters.Add(new(_monsterTex, pos));
+        for (int i = 0; i < Map.Size.X; i++)
+        {
+            _monsterManager.SpawnMonster(i);
+        }
     }
 
     public void Update()
     {
+        _monsterManager.Update();
         _button.Update();
         _map.Update();
         _hero.Update();
-
-        foreach (var monster in _monsters.ToArray())
-        {
-            monster.Update();
-        }
-
-        _monsters.RemoveAll(m => m.Dead);
     }
 
     public void Draw()
@@ -57,12 +50,7 @@ public class GameManager
         Globals.SpriteBatch.Begin();
 
             _map.Draw();
-
-            foreach (var monster in _monsters)
-            {
-                monster.Draw();
-            }
-
+            _monsterManager.Draw();
             _button.Draw();
 
         Globals.SpriteBatch.End();

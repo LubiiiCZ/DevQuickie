@@ -3,7 +3,6 @@ namespace Project003;
 public class Tile : Sprite
 {
     public bool Blocked { get; set; }
-    public bool Path { get; set; }
     private readonly int _mapX;
     private readonly int _mapY;
 
@@ -15,20 +14,11 @@ public class Tile : Sprite
 
     public void Update()
     {
-        if (Pathfinder.Ready())
+        if (InputManager.WasTapped(Rectangle))
         {
-            if (InputManager.WasTapped(Rectangle))
-            {
-                Blocked = !Blocked;
-            }
-
-            /*if (InputManager.MouseRightClicked)
-            {
-                Pathfinder.BFSearch(_mapX, _mapY);
-            }*/
+            Blocked = !Blocked;
         }
 
-        Color = Path ? Color.Green : Color.White;
-        Color = Blocked ? Color.Red : Color;
+        Color = Blocked ? Color.Red : Color.White;
     }
 }

@@ -18,19 +18,12 @@ public static class Pathfinder
 
     private static Node[,] _nodeMap;
     private static Map _map;
-    private static Hero _hero;
-    private static readonly int[] row = { -1, 0, 0, 1 };
-    private static readonly int[] col = { 0, -1, 1, 0 };
+    private static readonly int[] row = { 0, -1, 1, 0, };
+    private static readonly int[] col = { 1, 0, 0, -1, };
 
-    public static void Init(Map map, Hero hero)
+    public static void Init(Map map)
     {
         _map = map;
-        _hero = hero;
-    }
-
-    public static bool Ready()
-    {
-        return _hero.MoveDone;
     }
 
     public static (int x, int y) ScreenToMap(Vector2 pos)
@@ -51,30 +44,30 @@ public static class Pathfinder
         {
             for (int j = 0; j < Map.Size.Y; j++)
             {
-                _map.Tiles[i, j].Path = false;
                 _nodeMap[i, j] = new(i, j);
                 if (_map.Tiles[i, j].Blocked) _nodeMap[i, j].visited = true;
             }
         }
     }
 
-    public static List<Vector2> BFSearch(int goalX, int goalY)
+    public static List<Vector2> BFSearch(Vector2 start, Point goal)
     {
         CreateNodeMap();
         Queue<Node> q = new();
 
-        (int startX, int startY) = ScreenToMap(_hero.Position);
-        var start = _nodeMap[startX, startY];
-        start.visited = true;
-        q.Enqueue(start);
+        (int startX, int startY) = ScreenToMap(start);
+
+        var startNode = _nodeMap[startX, startY];
+        startNode.visited = true;
+        q.Enqueue(startNode);
 
         while (q.Count > 0)
         {
             Node curr = q.Dequeue();
 
-            if (curr.x == goalX && curr.y == goalY)
+            if (curr.x == goal.X && curr.y == goal.Y)
             {
-                return RetracePath(goalX, goalY);
+                return RetracePath(goal.X, goal.Y);
             }
 
             for (int i = 0; i < row.Length; i++)
@@ -102,14 +95,11 @@ public static class Pathfinder
 
         while (curr is not null)
         {
-            _map.Tiles[curr.x, curr.y].Path = true;
             stack.Push(_map.Tiles[curr.x, curr.y].Position);
             curr = curr.parent;
         }
 
         while (stack.Count > 0) result.Add(stack.Pop());
-
-        _hero.SetPath(result);
 
         return result;
     }
