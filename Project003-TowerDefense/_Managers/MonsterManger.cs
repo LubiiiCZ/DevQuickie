@@ -26,6 +26,11 @@ public class MonsterManger
         }
 
         _monsters.RemoveAll(m => m.Dead);
+
+        if (_monsters.Count < 1)
+        {
+            StateManager.SwitchState(States.IdleState);
+        }
     }
 
     public void Draw()

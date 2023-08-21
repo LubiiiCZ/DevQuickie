@@ -3,41 +3,41 @@ namespace Project003;
 public class GameManager
 {
     private readonly Canvas _canvas;
-    private readonly Map _map;
-    private readonly Button _button;
+    public readonly Map map;
+    public readonly Button button;
     private readonly Texture2D _buttonTex;
-    private readonly MonsterManger _monsterManager;
+    public readonly MonsterManger monsterManager;
 
     public GameManager(GraphicsDeviceManager graphics)
     {
-        _monsterManager = new();
+        StateManager.Initialize(this);
+        monsterManager = new();
         _canvas = new(graphics.GraphicsDevice, 64 * Map.Size.X, 64 * (Map.Size.Y + 1));
-        _map = new();
+        map = new();
         _buttonTex = Globals.Content.Load<Texture2D>("button");
 
-        Pathfinder.Init(_map);
+        Pathfinder.Init(map);
 
-        SpawnMonsters();
-
+        //SpawnMonsters();
         //Monster.OnDeath += (e, a) => SpawnMonster();
 
-        _button = new(_buttonTex, new Vector2(32, 13 * 64 - 32));
-        _button.OnTap += (e, a) => SpawnMonsters();
+        button = new(_buttonTex, new Vector2(32, 13 * 64 - 32));
+        button.OnTap += (e, a) => StartWave();
     }
 
-    public void SpawnMonsters()
+    public void StartWave()
     {
         for (int i = 0; i < Map.Size.X; i++)
         {
-            _monsterManager.SpawnMonster(i);
+            monsterManager.SpawnMonster(i);
         }
+
+        StateManager.SwitchState(States.PlayState);
     }
 
     public void Update()
     {
-        _monsterManager.Update();
-        _button.Update();
-        _map.Update();
+        StateManager.Update();
     }
 
     public void Draw()
@@ -45,11 +45,7 @@ public class GameManager
         _canvas.Activate();
 
         Globals.SpriteBatch.Begin();
-
-            _map.Draw();
-            _monsterManager.Draw();
-            _button.Draw();
-
+            StateManager.Draw();
         Globals.SpriteBatch.End();
 
         _canvas.Draw(Globals.SpriteBatch);

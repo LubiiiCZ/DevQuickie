@@ -1,20 +1,22 @@
 TODO
 -------------------
-* Monster factory
-* Monster pathfinding
+* Tower attack
+
 Wave system
 Monsters in a wave counter
-Game state
 Tower acquirement
-Tower placement
 Pathfinding recalculation
 Tower range indicator
-Tower attack
 Damage type
 Monster resistances
 
 
 DONE
 --------------------
-Monster factory (Stream 001)
-Monster pathfinding (Stream 001)
+Tower placement (Stream 2)
+Game state (Stream 2)
+Monster factory (Stream 1)
+Monster pathfinding (Stream 1)
+UI Button (Stream 0)
+Monster movement (Stream 0)
+Monster spawning (Stream 0)

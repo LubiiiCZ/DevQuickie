@@ -45,7 +45,7 @@ public static class Pathfinder
             for (int j = 0; j < Map.Size.Y; j++)
             {
                 _nodeMap[i, j] = new(i, j);
-                if (_map.Tiles[i, j].Blocked) _nodeMap[i, j].visited = true;
+                if (_map.MapTiles[i, j].Blocked) _nodeMap[i, j].visited = true;
             }
         }
     }
@@ -95,7 +95,7 @@ public static class Pathfinder
 
         while (curr is not null)
         {
-            stack.Push(_map.Tiles[curr.x, curr.y].Position);
+            stack.Push(_map.MapTiles[curr.x, curr.y].Position);
             curr = curr.parent;
         }
 
