@@ -1,18 +1,22 @@
 TODO
 -------------------
-* Tower attack
+* Tower range indicator
 
+Prevent blocking all paths
+Refactor tap map logic
+Refactor origin
+Removing towers
 Wave system
 Monsters in a wave counter
 Tower acquirement
 Pathfinding recalculation
-Tower range indicator
 Damage type
 Monster resistances
-
+Flying monsters
 
 DONE
 --------------------
+Tower attack (Stream 3)
 Tower placement (Stream 2)
 Game state (Stream 2)
 Monster factory (Stream 1)

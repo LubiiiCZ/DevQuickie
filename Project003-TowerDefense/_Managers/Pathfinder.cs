@@ -1,6 +1,6 @@
 namespace Project003;
 
-public static class Pathfinder
+public class Pathfinder
 {
     class Node
     {
@@ -16,33 +16,33 @@ public static class Pathfinder
         }
     }
 
-    private static Node[,] _nodeMap;
-    private static Map _map;
-    private static readonly int[] row = { 0, -1, 1, 0, };
-    private static readonly int[] col = { 1, 0, 0, -1, };
+    private Node[,] _nodeMap;
+    private Map _map;
+    private readonly int[] row = { 0, -1, 1, 0, };
+    private readonly int[] col = { 1, 0, 0, -1, };
 
-    public static void Init(Map map)
+    public Pathfinder(Map map)
     {
         _map = map;
     }
 
-    public static (int x, int y) ScreenToMap(Vector2 pos)
+    private (int x, int y) ScreenToMap(Vector2 pos)
     {
         return _map.ScreenToMap(pos);
     }
 
-    private static bool IsValid(int x, int y)
+    private bool IsValid(int x, int y)
     {
         return x >= 0 && x < _nodeMap.GetLength(0) && y >= 0 && y < _nodeMap.GetLength(1);
     }
 
-    private static void CreateNodeMap()
+    private void CreateNodeMap()
     {
-        _nodeMap = new Node[Map.Size.X, Map.Size.Y];
+        _nodeMap = new Node[Map.SIZE_X, Map.SIZE_Y];
 
-        for (int i = 0; i < Map.Size.X; i++)
+        for (int i = 0; i < Map.SIZE_X; i++)
         {
-            for (int j = 0; j < Map.Size.Y; j++)
+            for (int j = 0; j < Map.SIZE_Y; j++)
             {
                 _nodeMap[i, j] = new(i, j);
                 if (_map.MapTiles[i, j].Blocked) _nodeMap[i, j].visited = true;
@@ -50,7 +50,7 @@ public static class Pathfinder
         }
     }
 
-    public static List<Vector2> BFSearch(Vector2 start, Point goal)
+    public List<Vector2> BFSearch(Vector2 start, Point goal)
     {
         CreateNodeMap();
         Queue<Node> q = new();
@@ -87,7 +87,7 @@ public static class Pathfinder
         return null;
     }
 
-    private static List<Vector2> RetracePath(int goalX, int goalY)
+    private List<Vector2> RetracePath(int goalX, int goalY)
     {
         Stack<Vector2> stack = new();
         List<Vector2> result = new();

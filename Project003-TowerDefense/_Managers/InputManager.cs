@@ -1,6 +1,6 @@
 namespace Project003;
 
-public static class InputManager
+public class InputManager
 {
     private static TouchCollection _touchCollection;
     public static float Scale { get; set; } = 1f;

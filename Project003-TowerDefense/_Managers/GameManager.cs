@@ -11,23 +11,28 @@ public class GameManager
     public GameManager(GraphicsDeviceManager graphics)
     {
         StateManager.Initialize(this);
-        monsterManager = new();
-        _canvas = new(graphics.GraphicsDevice, 64 * Map.Size.X, 64 * (Map.Size.Y + 1));
         map = new();
+        monsterManager = new(map);
+        _canvas = new(graphics.GraphicsDevice, Map.TILE_SIZE * Map.SIZE_X,
+            Map.TILE_SIZE * (Map.SIZE_Y + 1));
+
         _buttonTex = Globals.Content.Load<Texture2D>("button");
-
-        Pathfinder.Init(map);
-
-        //SpawnMonsters();
-        //Monster.OnDeath += (e, a) => SpawnMonster();
-
         button = new(_buttonTex, new Vector2(32, 13 * 64 - 32));
-        button.OnTap += (e, a) => StartWave();
+        button.OnTap += StartWave;
     }
 
-    public void StartWave()
+    public void AssignTargets()
     {
-        for (int i = 0; i < Map.Size.X; i++)
+        foreach (var tower in map.Towers)
+        {
+            var monster = monsterManager.GetClosestMonster(tower.Position, tower.Range);
+            if (monster is not null) tower.Target = monster;
+        }
+    }
+
+    public void StartWave(object sender, EventArgs eventArgs)
+    {
+        for (int i = 0; i < Map.SIZE_X; i++)
         {
             monsterManager.SpawnMonster(i);
         }

@@ -1,6 +1,6 @@
 namespace Project003;
 
-public record SelectionData(int MapX, int MapY);
+public readonly record struct SelectionData(int MapX, int MapY);
 
 public class Tile : Sprite
 {
@@ -9,7 +9,7 @@ public class Tile : Sprite
     private readonly int _mapY;
     public Tiles type;
 
-    public Tile(Tiles tileType, Texture2D texture, Vector2 position, int mapX, int mapY) : base(texture, position)
+    public Tile(Tiles tileType, Texture2D texture, int mapX, int mapY) : base(texture, Map.MapToScreen(mapX, mapY))
     {
         type = tileType;
         _mapX = mapX;
@@ -27,7 +27,5 @@ public class Tile : Sprite
                 OnSelect?.Invoke(this, new SelectionData(_mapX, _mapY));
             }
         }
-
-        //Color = Blocked ? Color.Red : Color.White;
     }
 }

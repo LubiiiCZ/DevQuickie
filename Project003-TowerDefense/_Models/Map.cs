@@ -2,56 +2,61 @@ namespace Project003;
 
 public class Map
 {
+    public const int TILE_SIZE = 64;
+    public const int SIZE_X = 8;
+    public const int SIZE_Y = 12;
     private readonly TileFactory _tileFactory;
-    public static Point Size { get; } = new(8, 12);
     public Tile[,] MapTiles { get; }
-    public static Point TileSize { get; private set; }
+    public List<TowerTile> Towers { get; private set; } = new();
 
-    public static Vector2 MapToScreen(int x, int y) =>  new(x * TileSize.X, y * TileSize.Y);
+    public static Vector2 MapToScreen(int x, int y)
+        => new(x * TILE_SIZE + TILE_SIZE / 2, y * TILE_SIZE  + TILE_SIZE / 2);
     public (int x, int y) ScreenToMap(Vector2 pos)
-        => ((int)(pos.X - TileSize.X / 2) / TileSize.X, (int)(pos.Y - TileSize.Y / 2) / TileSize.Y);
+        => ((int)(pos.X - TILE_SIZE / 2) / TILE_SIZE, (int)(pos.Y - TILE_SIZE / 2) / TILE_SIZE);
 
     public Map()
     {
         _tileFactory = new();
-        MapTiles = new Tile[Size.X, Size.Y];
+        MapTiles = new Tile[SIZE_X, SIZE_Y];
         var texture = Globals.Content.Load<Texture2D>("tile");
-        TileSize = new(texture.Width, texture.Height);
 
-        for (int y = 0; y < Size.Y; y++)
+        for (int y = 0; y < SIZE_Y; y++)
         {
-            for (int x = 0; x < Size.X; x++)
+            for (int x = 0; x < SIZE_X; x++)
             {
                 ChangeTile(Tiles.Grass, x, y);
             }
         }
 
-        Tile.OnSelect += (s, e) => HandleSelection(e);
+        Tile.OnSelect += HandleSelection;
     }
 
     public void ChangeTile(Tiles type, int mapX, int mapY)
     {
         MapTiles[mapX, mapY] = _tileFactory.CreateTile(type, mapX, mapY);
+        if (type is Tiles.Tower) Towers.Add((TowerTile)MapTiles[mapX, mapY]);
     }
 
-    public void HandleSelection(SelectionData data)
+    public void HandleSelection(object sender, SelectionData data)
     {
         ChangeTile(Tiles.Tower, data.MapX, data.MapY);
     }
 
     public void Update()
     {
-        for (int y = 0; y < Size.Y; y++)
+        for (int y = 0; y < SIZE_Y; y++)
         {
-            for (int x = 0; x < Size.X; x++) MapTiles[x, y].Update();
+            for (int x = 0; x < SIZE_X; x++) MapTiles[x, y].Update();
         }
     }
 
     public void Draw()
     {
-        for (int y = 0; y < Size.Y; y++)
+        for (int y = 0; y < SIZE_Y; y++)
         {
-            for (int x = 0; x < Size.X; x++) MapTiles[x, y].Draw();
+            for (int x = 0; x < SIZE_X; x++) MapTiles[x, y].Draw();
         }
+
+        Towers.ForEach(t => t.Projectiles.ForEach(p => p.Draw()));
     }
 }

@@ -1,3 +1,6 @@
+using System.Reflection.Metadata;
+using Microsoft.VisualBasic;
+
 namespace Project003;
 
 public class TileFactory
@@ -20,13 +23,20 @@ public class TileFactory
 
     public Tile CreateTile(Tiles type, int mapX, int mapY)
     {
-        Tile tile = new(type, GetTileTexture(type), Map.MapToScreen(mapX, mapY) + (Map.TileSize.ToVector2() / 2), mapX, mapY);
+        if (type is Tiles.Grass) return new Tile(type, GetTileTexture(type), mapX, mapY);
 
         if (type is Tiles.Tower)
         {
-            tile.Blocked = true;
+            var tile = new TowerTile(type, GetTileTexture(type), mapX, mapY)
+            {
+                Blocked = true,
+                Range = Map.TILE_SIZE * 4,
+            };
+            tile.SetCooldown(1f);
+
+            return tile;
         }
 
-        return tile;
+        return null;
     }
 }

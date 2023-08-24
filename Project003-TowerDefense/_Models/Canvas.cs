@@ -35,7 +35,7 @@ public class Canvas
     public void Activate()
     {
         _graphicsDevice.SetRenderTarget(_target);
-        _graphicsDevice.Clear(Color.CornflowerBlue);
+        _graphicsDevice.Clear(Color.DimGray);
     }
 
     public void Draw(SpriteBatch spriteBatch)

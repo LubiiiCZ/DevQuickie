@@ -6,7 +6,7 @@ public enum States
     PlayState,
 }
 
-public static class StateManager
+public class StateManager
 {
     private static GameState _currentState;
     private static GameManager _gm;

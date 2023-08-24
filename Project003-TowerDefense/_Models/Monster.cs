@@ -11,7 +11,7 @@ public class Monster : Sprite
     public Monster(Texture2D texture, Vector2 position) : base(texture, position)
     {
         Random r = new();
-        _speed = 150;//r.Next(100, 151);
+        _speed = 150;
     }
 
     public void SetPath(List<Vector2> path)
@@ -55,7 +55,7 @@ public class Monster : Sprite
         var direction = DestinationPosition - Position;
         if (direction != Vector2.Zero) direction.Normalize();
         Position += direction * Globals.Time * _speed;
-        if (Position.Y > (Map.Size.Y - 1) * Map.TileSize.Y) Die();
+        if (Position.Y > (Map.SIZE_Y - 1) * Map.TILE_SIZE) Die();
 
         if (NearDestination()) return;
     }
