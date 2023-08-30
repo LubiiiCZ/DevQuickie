@@ -25,6 +25,7 @@ public class GameManager
     {
         foreach (var tower in map.Towers)
         {
+            if (tower.CooldownLeft > 0) continue;
             var monster = monsterManager.GetClosestMonster(tower.Position, tower.Range);
             if (monster is not null) tower.Target = monster;
         }
@@ -32,11 +33,7 @@ public class GameManager
 
     public void StartWave(object sender, EventArgs eventArgs)
     {
-        for (int i = 0; i < Map.SIZE_X; i++)
-        {
-            monsterManager.SpawnMonster(i);
-        }
-
+        monsterManager.SpawnMonsters(16);
         StateManager.SwitchState(States.PlayState);
     }
 

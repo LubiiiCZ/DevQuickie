@@ -1,14 +1,16 @@
 TODO
 -------------------
-* Tower range indicator
+* Prevent building in play state
+* Prevent blocking all paths
+* Remove projectile when target removed
 
-Prevent blocking all paths
-Refactor tap map logic
-Refactor origin
-Removing towers
+Monster hp bar
 Wave system
 Monsters in a wave counter
 Tower acquirement
+Refactor tap map logic
+Refactor origin
+Removing towers
 Pathfinding recalculation
 Damage type
 Monster resistances
@@ -16,6 +18,11 @@ Flying monsters
 
 DONE
 --------------------
+Random spawn (Stream 4)
+Monster hit flash (Stream 4)
+Monster HP (Stream 4)
+Tower range indicator (Stream 4)
+Acquire target only when ready (Stream 4)
 Tower attack (Stream 3)
 Tower placement (Stream 2)
 Game state (Stream 2)

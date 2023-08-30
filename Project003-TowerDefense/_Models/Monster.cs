@@ -6,12 +6,21 @@ public class Monster : Sprite
     public List<Vector2> Path { get; private set; }
     private int _current;
     public Vector2 DestinationPosition { get; protected set; }
+    public int Health { get; private set; } = 3;
     public bool Dead { get; private set; }
+    private float _hitDurationLeft;
 
     public Monster(Texture2D texture, Vector2 position) : base(texture, position)
     {
         Random r = new();
         _speed = 150;
+    }
+
+    public void TakeDamage(int dmg)
+    {
+        _hitDurationLeft = 0.1f;
+        Health -= dmg;
+        if (Health <= 0) Die();
     }
 
     public void SetPath(List<Vector2> path)
@@ -51,6 +60,13 @@ public class Monster : Sprite
     public void Update()
     {
         if (Dead) return;
+
+        Color = (_hitDurationLeft > 0) ? Color.Red : Color.White;
+
+        if (_hitDurationLeft > 0)
+        {
+            _hitDurationLeft -= Globals.Time;
+        }
 
         var direction = DestinationPosition - Position;
         if (direction != Vector2.Zero) direction.Normalize();

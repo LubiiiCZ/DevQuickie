@@ -3,7 +3,7 @@ namespace Project003;
 public class Projectile : Sprite
 {
     private Monster _target;
-    private float _speed = 200f;
+    private float _speed = 500f;
     private int _damage = 1;
     public bool Dead { get; private set; }
 
@@ -18,7 +18,7 @@ public class Projectile : Sprite
         if (direction.Length() < 5)
         {
             Dead = true;
-            _target.Die();
+            _target.TakeDamage(_damage);
             return;
         }
 
