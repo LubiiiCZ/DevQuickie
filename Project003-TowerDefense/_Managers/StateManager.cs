@@ -4,6 +4,8 @@ public enum States
 {
     IdleState,
     PlayState,
+    RewardState,
+    PlacementState,
 }
 
 public class StateManager
@@ -20,8 +22,10 @@ public class StateManager
 
         _states.Add(States.IdleState, new IdleState(_gm));
         _states.Add(States.PlayState, new PlayState(_gm));
+        _states.Add(States.RewardState, new RewardState(_gm));
+        _states.Add(States.PlacementState, new PlacementState(_gm));
 
-        _currentState = _states[States.IdleState];
+        _currentState = _states[States.RewardState];
     }
 
     public static void SwitchState(States state)

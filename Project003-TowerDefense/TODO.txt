@@ -1,33 +1,38 @@
 TODO
 -------------------
-* Prevent building in play state
-* Prevent blocking all paths
-* Remove projectile when target removed
+* Wave system
 
-Monster hp bar
-Wave system
-Monsters in a wave counter
-Tower acquirement
+Prettier rewards selection screen
+Multiple reward options
+Prevent building in play state
+Prevent blocking all paths
+Remove projectile when target removed
+Walls
+Tower upgrading
+Tower stats
 Refactor tap map logic
-Refactor origin
 Removing towers
 Pathfinding recalculation
 Damage type
 Monster resistances
 Flying monsters
+Sound FXs
+Music
 
-DONE
+Stream number - DONE
 --------------------
-Random spawn (Stream 4)
-Monster hit flash (Stream 4)
-Monster HP (Stream 4)
-Tower range indicator (Stream 4)
-Acquire target only when ready (Stream 4)
-Tower attack (Stream 3)
-Tower placement (Stream 2)
-Game state (Stream 2)
-Monster factory (Stream 1)
-Monster pathfinding (Stream 1)
-UI Button (Stream 0)
-Monster movement (Stream 0)
-Monster spawning (Stream 0)
+05 - Tower acquirement
+05 - Monsters in a wave counter
+05 - Monster HP bar
+04 - Random spawn
+04 - Monster hit flash
+04 - Monster HP
+04 - Tower range indicator
+03 - Tower attack (3)
+02 - Tower placement (2)
+02 - Game state (2)
+01 - Monster factory (1)
+01 - Monster pathfinding (1)
+00 - UI Button (0)
+00 - Monster movement (0)
+00 - Monster spawning (0)

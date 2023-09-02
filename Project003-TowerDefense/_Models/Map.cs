@@ -45,6 +45,7 @@ public class Map
     public void HandleSelection(object sender, SelectionData data)
     {
         ChangeTile(Tiles.Tower, data.MapX, data.MapY);
+        StateManager.SwitchState(States.IdleState);
     }
 
     public void Update()

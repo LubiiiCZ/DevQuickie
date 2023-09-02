@@ -7,6 +7,7 @@ public class Monster : Sprite
     private int _current;
     public Vector2 DestinationPosition { get; protected set; }
     public int Health { get; private set; } = 3;
+    public int MaxHealth { get; private set; } = 3;
     public bool Dead { get; private set; }
     private float _hitDurationLeft;
 

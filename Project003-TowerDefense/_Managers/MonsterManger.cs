@@ -2,19 +2,38 @@ namespace Project003;
 
 public class MonsterManger
 {
-    private readonly List<Monster> _monsters = new();
+    public List<Monster> Monsters { get; } = new();
     private readonly Texture2D _monsterTex;
     private readonly Pathfinder _pathfinder;
     private readonly List<int>[] _monsterQueues = new List<int>[Map.SIZE_X];
+    private readonly Texture2D _hpBarTexture;
 
-    public MonsterManger(Map map)
+    public MonsterManger(Map map, GraphicsDevice graphicsDevice)
     {
         _monsterTex = Globals.Content.Load<Texture2D>("hero");
         _pathfinder = new(map);
+        _hpBarTexture = new(graphicsDevice, 1, 1);
+        _hpBarTexture.SetData(new Color[] { Color.DarkGreen });
 
         for (int i = 0; i < Map.SIZE_X; i++)
         {
             _monsterQueues[i] = new();
+        }
+    }
+
+    private void DrawHPBar(Monster monster)
+    {
+        Vector2 barPosition = new(monster.Position.X - monster.Origin.X + 4, monster.Position.Y - monster.Origin.Y - 5);
+        var width = (float)monster.Health / monster.MaxHealth * (Map.TILE_SIZE - 8);
+        Rectangle destRectangle = new((int)barPosition.X, (int)barPosition.Y, (int)width, 3);
+        Globals.SpriteBatch.Draw(_hpBarTexture, destRectangle, Color.White);
+    }
+
+    public void DrawHPBars()
+    {
+        foreach (var monster in Monsters)
+        {
+            DrawHPBar(monster);
         }
     }
 
@@ -57,7 +76,7 @@ public class MonsterManger
         Vector2 pos = new((column + 0.5f) * Map.TILE_SIZE, -row * Map.TILE_SIZE);
         Monster monster = new(_monsterTex, pos);
         monster.SetPath(_pathfinder.BFSearch(monster.Position, new(column, Map.SIZE_Y - 1)));
-        _monsters.Add(monster);
+        Monsters.Add(monster);
     }
 
     public Monster GetClosestMonster(Vector2 position, float range)
@@ -65,7 +84,7 @@ public class MonsterManger
         Monster result = null;
         float minDistance = float.MaxValue;
 
-        foreach (var monster in _monsters)
+        foreach (var monster in Monsters)
         {
             var distance = Vector2.Distance(position, monster.Position);
             if (distance < minDistance)
@@ -82,22 +101,22 @@ public class MonsterManger
 
     public void Update()
     {
-        foreach (var monster in _monsters.ToArray())
+        foreach (var monster in Monsters.ToArray())
         {
             monster.Update();
         }
 
-        _monsters.RemoveAll(m => m.Dead);
+        Monsters.RemoveAll(m => m.Dead);
 
-        if (_monsters.Count < 1)
+        if (Monsters.Count < 1)
         {
-            StateManager.SwitchState(States.IdleState);
+            StateManager.SwitchState(States.RewardState);
         }
     }
 
     public void Draw()
     {
-        foreach (var monster in _monsters)
+        foreach (var monster in Monsters)
         {
             monster.Draw();
         }

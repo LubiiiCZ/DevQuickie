@@ -4,21 +4,20 @@ public class GameManager
 {
     private readonly Canvas _canvas;
     public readonly Map map;
-    public readonly Button button;
-    private readonly Texture2D _buttonTex;
     public readonly MonsterManger monsterManager;
+    public readonly UIManager uiManager;
+    public readonly RewardManager rewardsManager;
+    public int monstersInWave = 0;
 
     public GameManager(GraphicsDeviceManager graphics)
     {
-        StateManager.Initialize(this);
+        rewardsManager = new();
         map = new();
-        monsterManager = new(map);
-        _canvas = new(graphics.GraphicsDevice, Map.TILE_SIZE * Map.SIZE_X,
-            Map.TILE_SIZE * (Map.SIZE_Y + 1));
-
-        _buttonTex = Globals.Content.Load<Texture2D>("button");
-        button = new(_buttonTex, new Vector2(32, 13 * 64 - 32));
-        button.OnTap += StartWave;
+        monsterManager = new(map, graphics.GraphicsDevice);
+        _canvas = new(graphics.GraphicsDevice, Map.TILE_SIZE * Map.SIZE_X, Map.TILE_SIZE * (Map.SIZE_Y + 1));
+        uiManager = new();
+        uiManager.buttonStartWave.OnTap += StartWave;
+        StateManager.Initialize(this);
     }
 
     public void AssignTargets()
@@ -33,7 +32,7 @@ public class GameManager
 
     public void StartWave(object sender, EventArgs eventArgs)
     {
-        monsterManager.SpawnMonsters(16);
+        monsterManager.SpawnMonsters(monstersInWave);
         StateManager.SwitchState(States.PlayState);
     }
 

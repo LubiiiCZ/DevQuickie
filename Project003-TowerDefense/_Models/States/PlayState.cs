@@ -17,6 +17,8 @@ public class PlayState : GameState
     {
         _gm.map.Draw();
         _gm.monsterManager.Draw();
+        _gm.monsterManager.DrawHPBars();
         _gm.map.DrawProjectiles();
+        _gm.uiManager.DrawMonsterCounter(_gm.monsterManager.Monsters.Count);
     }
 }

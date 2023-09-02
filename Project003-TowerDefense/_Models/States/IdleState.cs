@@ -8,15 +8,13 @@ public class IdleState : GameState
 
     public override void Update()
     {
-        _gm.monsterManager.Update();
-        _gm.map.Update();
-        _gm.button.Update();
+        _gm.uiManager.Update();
     }
 
     public override void Draw()
     {
         _gm.map.Draw();
-        _gm.monsterManager.Draw();
-        _gm.button.Draw();
+        _gm.uiManager.Draw();
+        //_gm.uiManager.DrawMonsterCounter(_gm.monsterManager.Monsters.Count); //TODO
     }
 }
