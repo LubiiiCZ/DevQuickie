@@ -3,7 +3,7 @@ namespace Project003;
 public class Sprite
 {
     protected Texture2D texture;
-    public Vector2 Position { get; protected set; }
+    public Vector2 Position { get; set; }
     public Vector2 Origin { get; protected set; }
     public Color Color { get; set; }
     public Rectangle Rectangle => new((Position - Origin).ToPoint(), new(texture.Width, texture.Height));

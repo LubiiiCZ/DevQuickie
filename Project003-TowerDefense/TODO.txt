@@ -1,13 +1,11 @@
 TODO
 -------------------
 * Wave system
+* Prettier rewards selection screen
 
-Prettier rewards selection screen
-Multiple reward options
 Prevent building in play state
 Prevent blocking all paths
 Remove projectile when target removed
-Walls
 Tower upgrading
 Tower stats
 Refactor tap map logic
@@ -21,18 +19,20 @@ Music
 
 Stream number - DONE
 --------------------
-05 - Tower acquirement
+06 - Multiple reward options
+06 - Walls
+05 - Rewards system
 05 - Monsters in a wave counter
 05 - Monster HP bar
 04 - Random spawn
 04 - Monster hit flash
 04 - Monster HP
 04 - Tower range indicator
-03 - Tower attack (3)
-02 - Tower placement (2)
-02 - Game state (2)
-01 - Monster factory (1)
-01 - Monster pathfinding (1)
-00 - UI Button (0)
-00 - Monster movement (0)
-00 - Monster spawning (0)
+03 - Tower attack
+02 - Tower placement
+02 - Game state
+01 - Monster factory
+01 - Monster pathfinding
+00 - UI Button
+00 - Monster movement
+00 - Monster spawning

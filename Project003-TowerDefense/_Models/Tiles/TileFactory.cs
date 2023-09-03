@@ -9,7 +9,8 @@ public class TileFactory
         _tileTextures = new()
         {
             { Tiles.Grass, Globals.Content.Load<Texture2D>("tile") },
-            { Tiles.Tower, Globals.Content.Load<Texture2D>("tower") }
+            { Tiles.Tower, Globals.Content.Load<Texture2D>("tower") },
+            { Tiles.Wall, Globals.Content.Load<Texture2D>("wall") },
         };
     }
 
@@ -30,6 +31,16 @@ public class TileFactory
                 Range = Map.TILE_SIZE * 4,
             };
             tile.SetCooldown(1f);
+
+            return tile;
+        }
+
+        if (type is Tiles.Wall)
+        {
+            var tile = new Tile(type, GetTileTexture(type), mapX, mapY)
+            {
+                Blocked = true,
+            };
 
             return tile;
         }

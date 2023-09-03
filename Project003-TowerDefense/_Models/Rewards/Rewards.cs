@@ -1,8 +1,7 @@
 namespace Project003;
 
-public enum Tiles
+public enum Rewards
 {
-    Grass,
     Tower,
     Wall,
 }

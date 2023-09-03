@@ -42,10 +42,11 @@ public class Map
         if (type is Tiles.Tower) Towers.Add((TowerTile)MapTiles[mapX, mapY]);
     }
 
+    public event EventHandler<SelectionData> OnTileSelection;
+
     public void HandleSelection(object sender, SelectionData data)
     {
-        ChangeTile(Tiles.Tower, data.MapX, data.MapY);
-        StateManager.SwitchState(States.IdleState);
+        OnTileSelection?.Invoke(this, data);
     }
 
     public void Update()

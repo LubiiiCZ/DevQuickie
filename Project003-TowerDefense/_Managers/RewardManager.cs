@@ -1,23 +1,45 @@
 namespace Project003;
 
+public delegate void RewardOptionHandler(List<RewardItem> rewards);
+
 public class RewardManager
 {
-    public readonly Button buttonReward1;
-    private readonly Texture2D _buttonTex;
+    private readonly RewardFactory _rewardFactory;
+    private readonly List<RewardOption> _rewardOptions = new();
 
     public RewardManager()
     {
-        _buttonTex = Globals.Content.Load<Texture2D>("tower");
-        buttonReward1 = new(_buttonTex, new Vector2(Map.SIZE_X * Map.TILE_SIZE / 2, Map.SIZE_Y * Map.TILE_SIZE / 2));
+        _rewardFactory = new();
+        AddRewardOption(_rewardFactory.GetRewardOption(new() { Rewards.Tower }, new(300, 500)));
+        AddRewardOption(_rewardFactory.GetRewardOption(new() { Rewards.Wall }, new(400, 500)));
+
+        RewardOption.OnTap += RewardSelected;
+    }
+
+    public event RewardOptionHandler OnRewardSelection;
+
+    public void RewardSelected(List<RewardItem> rewards)
+    {
+        OnRewardSelection?.Invoke(rewards);
+    }
+
+    public void AddRewardOption(RewardOption rewardOption)
+    {
+        _rewardOptions.Add(rewardOption);
+    }
+
+    public void ClearRewardOptions()
+    {
+        _rewardOptions.Clear();
     }
 
     public void Update()
     {
-        buttonReward1.Update();
+        _rewardOptions.ForEach(r => r.Update());
     }
 
     public void Draw()
     {
-        buttonReward1.Draw();
+        _rewardOptions.ForEach(r => r.Draw());
     }
 }

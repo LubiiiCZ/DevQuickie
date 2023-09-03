@@ -6,12 +6,14 @@ public class GameManager
     public readonly Map map;
     public readonly MonsterManger monsterManager;
     public readonly UIManager uiManager;
-    public readonly RewardManager rewardsManager;
+    public readonly RewardManager rewardManager;
     public int monstersInWave = 0;
+    public Rewards CurrentReward { get; set; }
+    public int RewardCount { get; set; }
 
     public GameManager(GraphicsDeviceManager graphics)
     {
-        rewardsManager = new();
+        rewardManager = new();
         map = new();
         monsterManager = new(map, graphics.GraphicsDevice);
         _canvas = new(graphics.GraphicsDevice, Map.TILE_SIZE * Map.SIZE_X, Map.TILE_SIZE * (Map.SIZE_Y + 1));
