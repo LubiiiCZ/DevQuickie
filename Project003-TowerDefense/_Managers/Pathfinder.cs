@@ -50,6 +50,15 @@ public class Pathfinder
         }
     }
 
+    public bool CheckPlacementValidity(int x, int y)
+    {
+        _map.MapTiles[x, y].Blocked = true;
+        var check = BFSearch(Vector2.One, new(0, Map.SIZE_Y - 1));
+        _map.MapTiles[x, y].Blocked = false;
+
+        return check is not null;
+    }
+
     public List<Vector2> BFSearch(Vector2 start, Point goal)
     {
         CreateNodeMap();

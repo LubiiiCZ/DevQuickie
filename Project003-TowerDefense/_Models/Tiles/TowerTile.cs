@@ -48,6 +48,7 @@ public class TowerTile : Tile
 
         Projectiles.ForEach(p => p.Update());
         Projectiles.RemoveAll(p => p.Dead);
+
         Target = null;
     }
 }

@@ -62,6 +62,11 @@ public class Map
         Towers.ForEach(t => t.Projectiles.ForEach(p => p.Draw()));
     }
 
+    public void UpdateTowers()
+    {
+        Towers.ForEach(t => t.Update());
+    }
+
     public void Draw()
     {
         for (int y = 0; y < SIZE_Y; y++)

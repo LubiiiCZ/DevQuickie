@@ -14,6 +14,8 @@ public class PlacementState : GameState
 
     public void HandleSelection(object sender, SelectionData data)
     {
+        if (!_gm.monsterManager.CheckPlacementValidity(data.MapX, data.MapY)) return;
+
         Tiles tile = _gm.CurrentReward switch
         {
             Rewards.Tower => Tiles.Tower,
@@ -22,12 +24,8 @@ public class PlacementState : GameState
         };
 
         _gm.map.ChangeTile(tile, data.MapX, data.MapY);
-        _gm.RewardCount--;
 
-        if (_gm.RewardCount <= 0)
-        {
-            StateManager.SwitchState(States.IdleState);
-        }
+        StateManager.SwitchState(States.ProcessRewards);
     }
 
     public override void Draw()

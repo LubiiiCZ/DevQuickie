@@ -15,13 +15,13 @@ public class RewardFactory
         return new(rewardID, _rewardTextures[rewardID]);
     }
 
-    public RewardOption GetRewardOption(List<Rewards> rewards, Vector2 pos)
+    public RewardOption GetRewardOption(List<Rewards> rewards)
     {
-        RewardOption result = new(pos);
+        RewardOption result = new();
 
         foreach (var reward in rewards)
         {
-            RewardItem item = new(reward, _rewardTextures[reward]);
+            RewardItem item = GetItem(reward);
             result.AddRewardItem(item);
         }
 

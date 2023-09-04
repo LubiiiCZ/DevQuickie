@@ -1,11 +1,10 @@
 TODO
 -------------------
-* Wave system
 * Prettier rewards selection screen
+* Wave system
+- Prioritize previous target
 
-Prevent building in play state
-Prevent blocking all paths
-Remove projectile when target removed
+Change the texture for top and bottom rows
 Tower upgrading
 Tower stats
 Refactor tap map logic
@@ -19,6 +18,8 @@ Music
 
 Stream number - DONE
 --------------------
+07 - Prevent blocking all paths
+07 - Pending rewards queue
 06 - Multiple reward options
 06 - Walls
 05 - Rewards system

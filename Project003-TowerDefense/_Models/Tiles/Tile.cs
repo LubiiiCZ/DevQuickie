@@ -20,6 +20,8 @@ public class Tile : Sprite
 
     public virtual void Update()
     {
+        if (_mapY == 0 || _mapY == Map.SIZE_Y - 1) return;
+
         if (InputManager.WasTapped(Rectangle))
         {
             if (type == Tiles.Grass)

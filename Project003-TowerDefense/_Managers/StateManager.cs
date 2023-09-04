@@ -2,10 +2,11 @@ namespace Project003;
 
 public enum States
 {
-    IdleState,
-    PlayState,
-    RewardState,
-    PlacementState,
+    Idle,
+    Play,
+    Reward,
+    ProcessRewards,
+    Placement,
 }
 
 public class StateManager
@@ -20,12 +21,13 @@ public class StateManager
         _states = new();
         _gm = gm;
 
-        _states.Add(States.IdleState, new IdleState(_gm));
-        _states.Add(States.PlayState, new PlayState(_gm));
-        _states.Add(States.RewardState, new RewardState(_gm));
-        _states.Add(States.PlacementState, new PlacementState(_gm));
+        _states.Add(States.Idle, new IdleState(_gm));
+        _states.Add(States.Play, new PlayState(_gm));
+        _states.Add(States.Reward, new RewardState(_gm));
+        _states.Add(States.ProcessRewards, new ProcessRewardsState(_gm));
+        _states.Add(States.Placement, new PlacementState(_gm));
 
-        _currentState = _states[States.RewardState];
+        _currentState = _states[States.Reward];
     }
 
     public static void SwitchState(States state)

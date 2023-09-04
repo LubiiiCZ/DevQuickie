@@ -10,7 +10,7 @@ public class PlayState : GameState
     {
         _gm.monsterManager.Update();
         _gm.AssignTargets();
-        _gm.map.Update();
+        _gm.map.UpdateTowers();
     }
 
     public override void Draw()

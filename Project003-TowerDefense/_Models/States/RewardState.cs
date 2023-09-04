@@ -13,11 +13,10 @@ public class RewardState : GameState
 
         foreach (var item in rewards)
         {
-            _gm.CurrentReward = item.RewardID;
-            _gm.RewardCount = (item.RewardID == Rewards.Wall) ? 3 : 1;
+            _gm.Rewards.Enqueue(item);
         }
 
-        StateManager.SwitchState(States.PlacementState);
+        StateManager.SwitchState(States.ProcessRewards);
     }
 
     public override void Update()
@@ -29,6 +28,6 @@ public class RewardState : GameState
     {
         _gm.map.Draw();
         _gm.rewardManager.Draw();
-        //_gm.uiManager.DrawMonsterCounter(_gm.monsterManager.Monsters.Count);
+        _gm.uiManager.DrawMonsterCounter(_gm.monstersInWave);
     }
 }

@@ -8,8 +8,8 @@ public class GameManager
     public readonly UIManager uiManager;
     public readonly RewardManager rewardManager;
     public int monstersInWave = 0;
+    public Queue<RewardItem> Rewards { get; set; } = new();
     public Rewards CurrentReward { get; set; }
-    public int RewardCount { get; set; }
 
     public GameManager(GraphicsDeviceManager graphics)
     {
@@ -27,7 +27,7 @@ public class GameManager
         foreach (var tower in map.Towers)
         {
             if (tower.CooldownLeft > 0) continue;
-            var monster = monsterManager.GetClosestMonster(tower.Position, tower.Range);
+            var monster = monsterManager.GetClosestMonster(tower);
             if (monster is not null) tower.Target = monster;
         }
     }
@@ -35,7 +35,7 @@ public class GameManager
     public void StartWave(object sender, EventArgs eventArgs)
     {
         monsterManager.SpawnMonsters(monstersInWave);
-        StateManager.SwitchState(States.PlayState);
+        StateManager.SwitchState(States.Play);
     }
 
     public void Update()

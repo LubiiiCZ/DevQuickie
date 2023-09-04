@@ -21,6 +21,11 @@ public class MonsterManger
         }
     }
 
+    public bool CheckPlacementValidity(int x, int y)
+    {
+        return _pathfinder.CheckPlacementValidity(x, y);
+    }
+
     private void DrawHPBar(Monster monster)
     {
         Vector2 barPosition = new(monster.Position.X - monster.Origin.X + 4, monster.Position.Y - monster.Origin.Y - 5);
@@ -79,14 +84,19 @@ public class MonsterManger
         Monsters.Add(monster);
     }
 
-    public Monster GetClosestMonster(Vector2 position, float range)
+    public Monster GetClosestMonster(TowerTile tower)
     {
+        /*if (tower.Target is not null && Vector2.Distance(tower.Position, tower.Target.Position) <= tower.Range)
+        {
+            return tower.Target;
+        }*/
+
         Monster result = null;
         float minDistance = float.MaxValue;
 
         foreach (var monster in Monsters)
         {
-            var distance = Vector2.Distance(position, monster.Position);
+            var distance = Vector2.Distance(tower.Position, monster.Position);
             if (distance < minDistance)
             {
                 minDistance = distance;
@@ -94,8 +104,7 @@ public class MonsterManger
             }
         }
 
-        if (minDistance > range) result = null;
-
+        if (minDistance > tower.Range) result = null;
         return result;
     }
 
@@ -110,7 +119,7 @@ public class MonsterManger
 
         if (Monsters.Count < 1)
         {
-            StateManager.SwitchState(States.RewardState);
+            StateManager.SwitchState(States.Reward);
         }
     }
 

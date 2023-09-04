@@ -10,8 +10,8 @@ public class RewardManager
     public RewardManager()
     {
         _rewardFactory = new();
-        AddRewardOption(_rewardFactory.GetRewardOption(new() { Rewards.Tower }, new(300, 500)));
-        AddRewardOption(_rewardFactory.GetRewardOption(new() { Rewards.Wall }, new(400, 500)));
+        AddRewardOption(_rewardFactory.GetRewardOption(new() { Rewards.Tower }));
+        AddRewardOption(_rewardFactory.GetRewardOption(new() { Rewards.Wall, Rewards.Wall, Rewards.Wall }));
 
         RewardOption.OnTap += RewardSelected;
     }
@@ -23,9 +23,27 @@ public class RewardManager
         OnRewardSelection?.Invoke(rewards);
     }
 
+    private void CalculatePositions()
+    {
+        const int gap = 50;
+        const int topPadding = 320;
+        int count = _rewardOptions.Count;
+        var optionsWidth = count * Map.TILE_SIZE + (count - 1) * gap;
+        var width = Map.SIZE_X * Map.TILE_SIZE;
+        var paddingLeft = (width - optionsWidth) / 2;
+        int counter = 0;
+
+        foreach (var rewardOption in _rewardOptions)
+        {
+            rewardOption.SetPosition(new(paddingLeft + counter * (Map.TILE_SIZE + gap), topPadding));
+            counter++;
+        }
+    }
+
     public void AddRewardOption(RewardOption rewardOption)
     {
         _rewardOptions.Add(rewardOption);
+        CalculatePositions();
     }
 
     public void ClearRewardOptions()
