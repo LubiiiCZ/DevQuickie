@@ -20,9 +20,19 @@ public class UIManager
         buttonStartWave.Update();
     }
 
+    public Vector2 MeasureString(string msg)
+    {
+        return _font.MeasureString(msg);
+    }
+
     public void DrawMonsterCounter(int monstersLeft)
     {
         Globals.SpriteBatch.DrawString(_font, monstersLeft.ToString(), _counterPos, Color.Black);
+    }
+
+    public void DrawCustomLabel(string msg, Vector2 pos)
+    {
+        Globals.SpriteBatch.DrawString(_font, msg, pos, Color.Black);
     }
 
     public void Draw()

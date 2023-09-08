@@ -10,19 +10,9 @@
 
 
 
-Off-stream changes
----------------------
-Prioritize previous target -> tower won't switch targets if it doesn't have to
-Wave end event -> reset towers
-Rewards selection screen frame
-
 
 Cool TODO list
 ---------------------
-* Reward penalties
-* Change the texture for top and bottom rows
-Monster types
-Wave generator
 Tower upgrading
 Tower stats
 Removing towers
@@ -37,12 +27,22 @@ Music
 
 Boring TODO list
 ---------------------
-Pathfinding recalculation
-Refactor tap map logic
+Pathfinding recalculation (performance)
+Refactor tap map logic (clean code / performance)
+Refactor CreateTile method (clean code)
+Refactor CreateMonster method (clean code)
+While placing a tower reward show which one it is (UX)
+Add reward options labels (UX)
+Gamearea dimensions constants (clean code)
+Convert individual textures into texture-atlas (performance)
 
 
 Stream number - DONE
 ---------------------
+08 - Wave generator
+08 - Monster types + Monster factory
+08 - Tile buildable property
+08 - Reward penalties
 07 - Prevent blocking all paths
 07 - Pending rewards queue
 06 - Multiple reward options

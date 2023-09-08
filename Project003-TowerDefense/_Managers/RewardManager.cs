@@ -14,9 +14,9 @@ public class RewardManager
     public RewardManager(GraphicsDevice graphicsDevice)
     {
         _rewardFactory = new();
-        AddRewardOption(_rewardFactory.GetRewardOption(new() { Rewards.Tower }));
-        AddRewardOption(_rewardFactory.GetRewardOption(new() { Rewards.Wall, Rewards.Wall, Rewards.Wall }));
-        AddRewardOption(_rewardFactory.GetRewardOption(new() { Rewards.Tower, Rewards.Wall }));
+        AddRewardOption(_rewardFactory.GetRewardOption(new() { Rewards.Tower, Rewards.MonsterNinja }));
+        AddRewardOption(_rewardFactory.GetRewardOption(new() { Rewards.Wall, Rewards.Wall, Rewards.Wall, Rewards.MonsterNinja }));
+        AddRewardOption(_rewardFactory.GetRewardOption(new() { Rewards.Tower, Rewards.Wall, Rewards.MonsterRedNinja }));
 
         RewardOption.OnTap += RewardSelected;
 

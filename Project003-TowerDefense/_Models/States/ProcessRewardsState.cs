@@ -29,6 +29,14 @@ public class ProcessRewardsState : GameState
                 StateManager.SwitchState(States.Placement);
                 break;
 
+            case Rewards.MonsterNinja:
+                _gm.monstersInWave.Add(Monsters.Ninja);
+                break;
+
+            case Rewards.MonsterRedNinja:
+                _gm.monstersInWave.Add(Monsters.RedNinja);
+                break;
+
             default:
                 break;
         }

@@ -27,6 +27,6 @@ public class PlayState : GameState
         _gm.monsterManager.Draw();
         _gm.monsterManager.DrawHPBars();
         _gm.map.DrawProjectiles();
-        _gm.uiManager.DrawMonsterCounter(_gm.monsterManager.Monsters.Count);
+        _gm.uiManager.DrawMonsterCounter(_gm.monsterManager.MonstersInWave.Count);
     }
 }

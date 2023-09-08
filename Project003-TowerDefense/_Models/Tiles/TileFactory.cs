@@ -9,6 +9,7 @@ public class TileFactory
         _tileTextures = new()
         {
             { Tiles.Grass, Globals.Content.Load<Texture2D>("tile") },
+            { Tiles.Invalid, Globals.Content.Load<Texture2D>("tile_invalid") },
             { Tiles.Tower, Globals.Content.Load<Texture2D>("tower") },
             { Tiles.Wall, Globals.Content.Load<Texture2D>("wall") },
         };
@@ -21,7 +22,17 @@ public class TileFactory
 
     public Tile CreateTile(Tiles type, int mapX, int mapY)
     {
-        if (type is Tiles.Grass) return new Tile(type, GetTileTexture(type), mapX, mapY);
+        if (type is Tiles.Grass)
+        {
+            var tile = new Tile(type, GetTileTexture(type), mapX, mapY)
+            {
+                Buildable = true,
+            };
+
+            return tile;
+        }
+
+        if (type is Tiles.Invalid) return new Tile(type, GetTileTexture(type), mapX, mapY);
 
         if (type is Tiles.Tower)
         {

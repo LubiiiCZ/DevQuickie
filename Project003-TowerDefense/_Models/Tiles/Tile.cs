@@ -5,6 +5,7 @@ public readonly record struct SelectionData(int MapX, int MapY);
 public class Tile : Sprite
 {
     public bool Blocked { get; set; }
+    public bool Buildable { get; set; }
     private readonly int _mapX;
     private readonly int _mapY;
     public Tiles type;
@@ -20,7 +21,7 @@ public class Tile : Sprite
 
     public virtual void Update()
     {
-        if (_mapY == 0 || _mapY == Map.SIZE_Y - 1) return;
+        if (!Buildable) return;
 
         if (InputManager.WasTapped(Rectangle))
         {

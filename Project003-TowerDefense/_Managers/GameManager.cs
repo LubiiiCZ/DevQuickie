@@ -4,10 +4,10 @@ public class GameManager
 {
     private readonly Canvas _canvas;
     public readonly Map map;
-    public readonly MonsterManger monsterManager;
+    public readonly MonsterManager monsterManager;
     public readonly UIManager uiManager;
     public readonly RewardManager rewardManager;
-    public int monstersInWave = 0;
+    public readonly List<Monsters> monstersInWave = new();
     public Queue<RewardItem> Rewards { get; set; } = new();
     public Rewards CurrentReward { get; set; }
 
@@ -24,7 +24,7 @@ public class GameManager
 
     public void AssignTargets()
     {
-        map.Towers.ForEach(t => t.SelectTarget(monsterManager.Monsters));
+        map.Towers.ForEach(t => t.SelectTarget(monsterManager.MonstersInWave));
     }
 
     public void StartWave(object sender, EventArgs eventArgs)

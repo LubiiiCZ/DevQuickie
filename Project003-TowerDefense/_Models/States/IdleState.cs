@@ -15,6 +15,6 @@ public class IdleState : GameState
     {
         _gm.map.Draw();
         _gm.uiManager.Draw();
-        _gm.uiManager.DrawMonsterCounter(_gm.monstersInWave);
+        _gm.uiManager.DrawMonsterCounter(_gm.monstersInWave.Count);
     }
 }

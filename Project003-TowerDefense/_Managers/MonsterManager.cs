@@ -1,23 +1,23 @@
 namespace Project003;
 
-public class MonsterManger
+public class MonsterManager
 {
-    public List<Monster> Monsters { get; } = new();
-    private readonly Texture2D _monsterTex;
+    public List<Monster> MonstersInWave { get; } = new();
+    private readonly MonsterFactory _monsterFactory;
     private readonly Pathfinder _pathfinder;
-    private readonly List<int>[] _monsterQueues = new List<int>[Map.SIZE_X];
+    private readonly int[] _monsterLaneCounter = new int[Map.SIZE_X];
     private readonly Texture2D _hpBarTexture;
 
-    public MonsterManger(Map map, GraphicsDevice graphicsDevice)
+    public MonsterManager(Map map, GraphicsDevice graphicsDevice)
     {
-        _monsterTex = Globals.Content.Load<Texture2D>("hero");
+        _monsterFactory = new();
         _pathfinder = new(map);
         _hpBarTexture = new(graphicsDevice, 1, 1);
         _hpBarTexture.SetData(new Color[] { Color.DarkGreen });
 
         for (int i = 0; i < Map.SIZE_X; i++)
         {
-            _monsterQueues[i] = new();
+            _monsterLaneCounter[i] = new();
         }
     }
 
@@ -36,7 +36,7 @@ public class MonsterManger
 
     public void DrawHPBars()
     {
-        foreach (var monster in Monsters)
+        foreach (var monster in MonstersInWave)
         {
             DrawHPBar(monster);
         }
@@ -48,54 +48,61 @@ public class MonsterManger
         return r.Next(0, Map.SIZE_X);
     }
 
-    private void FillMonsterQueues(int count)
+    private void FillMonsterLanes(int count)
     {
         for (int i = 0; i < Map.SIZE_X; i++)
         {
-            _monsterQueues[i].Clear();
+            _monsterLaneCounter[i] = 0;
         }
 
         for (int i = 0; i < count; i++)
         {
-            _monsterQueues[RandomColumn()].Add(1);
+            _monsterLaneCounter[RandomColumn()]++;
         }
     }
 
-    public void SpawnMonsters(int count)
+    public void SpawnMonsters(List<Monsters> monsters)
     {
-        FillMonsterQueues(count);
+        FillMonsterLanes(monsters.Count);
+        var monsterCounter = 0;
+        var row = 0;
+        //Shuffle the list first?
 
-        for (int i = 0; i < _monsterQueues.Length; i++)
+        while (monsterCounter < monsters.Count)
         {
-            var row = 0;
-            foreach (var monster in _monsterQueues[i])
+            for (int i = 0; i < _monsterLaneCounter.Length; i++)
             {
-                SpawnMonster(i, row);
-                row++;
+                if (_monsterLaneCounter[i] > 0)
+                {
+                    SpawnMonster(monsters[monsterCounter], i, row);
+                    monsterCounter++;
+                    if (monsterCounter >= monsters.Count) break;
+                }
             }
+            row++;
         }
     }
 
-    public void SpawnMonster(int column, int row)
+    public void SpawnMonster(Monsters type, int column, int row)
     {
         Vector2 pos = new((column + 0.5f) * Map.TILE_SIZE, -row * Map.TILE_SIZE);
-        Monster monster = new(_monsterTex, pos);
+        Monster monster = _monsterFactory.CreateMonster(type, pos);
         monster.SetPath(_pathfinder.BFSearch(monster.Position, new(column, Map.SIZE_Y - 1)));
-        Monsters.Add(monster);
+        MonstersInWave.Add(monster);
     }
 
     public event EventHandler OnWaveEnd;
 
     public void Update()
     {
-        foreach (var monster in Monsters.ToArray())
+        foreach (var monster in MonstersInWave.ToArray())
         {
             monster.Update();
         }
 
-        Monsters.RemoveAll(m => m.Dead);
+        MonstersInWave.RemoveAll(m => m.Dead);
 
-        if (Monsters.Count < 1)
+        if (MonstersInWave.Count < 1)
         {
             OnWaveEnd?.Invoke(this, EventArgs.Empty);
         }
@@ -103,7 +110,7 @@ public class MonsterManger
 
     public void CheckWaveEnd()
     {
-        if (Monsters.Count < 1)
+        if (MonstersInWave.Count < 1)
         {
             OnWaveEnd?.Invoke(this, EventArgs.Empty);
         }
@@ -111,7 +118,7 @@ public class MonsterManger
 
     public void Draw()
     {
-        foreach (var monster in Monsters)
+        foreach (var monster in MonstersInWave)
         {
             monster.Draw();
         }

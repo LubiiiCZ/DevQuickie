@@ -29,7 +29,14 @@ public class Map
         {
             for (int x = 0; x < SIZE_X; x++)
             {
-                ChangeTile(Tiles.Grass, x, y);
+                if (y == 0 || y == SIZE_Y - 1)
+                {
+                    ChangeTile(Tiles.Invalid, x, y);
+                }
+                else
+                {
+                    ChangeTile(Tiles.Grass, x, y);
+                }
             }
         }
 

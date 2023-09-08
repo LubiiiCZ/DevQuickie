@@ -4,4 +4,6 @@ public enum Rewards
 {
     Tower,
     Wall,
+    MonsterNinja,
+    MonsterRedNinja,
 }

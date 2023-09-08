@@ -31,7 +31,6 @@ public class PlacementState : GameState
     public override void Draw()
     {
         _gm.map.Draw();
-        //_gm.rewardsManager.Draw();
-        //_gm.uiManager.DrawMonsterCounter(_gm.monsterManager.Monsters.Count);
+        _gm.uiManager.DrawMonsterCounter(_gm.monstersInWave.Count);
     }
 }
