@@ -4,6 +4,13 @@ public class PlayState : GameState
 {
     public PlayState(GameManager gm) : base(gm)
     {
+        _gm.monsterManager.OnWaveEnd += HandleWaveEnd;
+    }
+
+    public void HandleWaveEnd(object sender, EventArgs args)
+    {
+        StateManager.SwitchState(States.Reward);
+        _gm.map.Towers.ForEach(t => t.Reset());
     }
 
     public override void Update()
@@ -11,6 +18,7 @@ public class PlayState : GameState
         _gm.monsterManager.Update();
         _gm.AssignTargets();
         _gm.map.UpdateTowers();
+        _gm.monsterManager.CheckWaveEnd();
     }
 
     public override void Draw()

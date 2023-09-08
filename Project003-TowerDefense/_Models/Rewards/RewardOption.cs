@@ -2,10 +2,10 @@ namespace Project003;
 
 public class RewardOption
 {
-    private readonly List<RewardItem> _rewards = new();
+    public List<RewardItem> Rewards { get; } = new();
     public Vector2 Position;
     public Rectangle BoundingRectangle =>
-        new((int)Position.X, (int)Position.Y, Map.TILE_SIZE, _rewards.Count * Map.TILE_SIZE);
+        new((int)Position.X, (int)Position.Y, Map.TILE_SIZE, Rewards.Count * Map.TILE_SIZE);
 
     public RewardOption()
     {
@@ -16,7 +16,7 @@ public class RewardOption
         Position = pos;
         int counter = 0;
 
-        foreach (var item in _rewards)
+        foreach (var item in Rewards)
         {
             item.Position = new(Position.X + Map.TILE_SIZE / 2, Position.Y + counter * Map.TILE_SIZE + Map.TILE_SIZE / 2);
             counter++;
@@ -25,7 +25,7 @@ public class RewardOption
 
     public void AddRewardItem(RewardItem item)
     {
-        _rewards.Add(item);
+        Rewards.Add(item);
     }
 
     public static event RewardOptionHandler OnTap;
@@ -34,12 +34,12 @@ public class RewardOption
     {
         if (InputManager.WasTapped(BoundingRectangle))
         {
-            OnTap?.Invoke(_rewards);
+            OnTap?.Invoke(Rewards);
         }
     }
 
     public void Draw()
     {
-        _rewards.ForEach(r => r.Draw());
+        Rewards.ForEach(r => r.Draw());
     }
 }

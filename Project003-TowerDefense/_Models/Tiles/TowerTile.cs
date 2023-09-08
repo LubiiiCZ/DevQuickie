@@ -15,6 +15,13 @@ public class TowerTile : Tile
         _projectileTexture ??= Globals.Content.Load<Texture2D>("projectile");
     }
 
+    public void Reset()
+    {
+        CooldownLeft = 0;
+        Projectiles.Clear();
+        Target = null;
+    }
+
     public void FireProjectile()
     {
         Projectiles.Add(new(_projectileTexture, Position, Target));
@@ -24,6 +31,27 @@ public class TowerTile : Tile
     {
         Cooldown = cooldown;
         CooldownLeft = 0f;
+    }
+
+    public void SelectTarget(List<Monster> monsters)
+    {
+        if (CooldownLeft > 0) return;
+        if (Target is not null && !Target.Dead && Vector2.Distance(Position, Target.Position) <= Range) return;
+
+        float minDistance = float.MaxValue;
+        Monster result = null;
+
+        foreach (var monster in monsters)
+        {
+            var distance = Vector2.Distance(Position, monster.Position);
+            if (distance < minDistance && distance <= Range)
+            {
+                minDistance = distance;
+                result = monster;
+            }
+        }
+
+        Target = result;
     }
 
     public override void Update()
@@ -48,7 +76,5 @@ public class TowerTile : Tile
 
         Projectiles.ForEach(p => p.Update());
         Projectiles.RemoveAll(p => p.Dead);
-
-        Target = null;
     }
 }

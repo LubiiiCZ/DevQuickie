@@ -13,7 +13,7 @@ public class GameManager
 
     public GameManager(GraphicsDeviceManager graphics)
     {
-        rewardManager = new();
+        rewardManager = new(graphics.GraphicsDevice);
         map = new();
         monsterManager = new(map, graphics.GraphicsDevice);
         _canvas = new(graphics.GraphicsDevice, Map.TILE_SIZE * Map.SIZE_X, Map.TILE_SIZE * (Map.SIZE_Y + 1));
@@ -24,12 +24,7 @@ public class GameManager
 
     public void AssignTargets()
     {
-        foreach (var tower in map.Towers)
-        {
-            if (tower.CooldownLeft > 0) continue;
-            var monster = monsterManager.GetClosestMonster(tower);
-            if (monster is not null) tower.Target = monster;
-        }
+        map.Towers.ForEach(t => t.SelectTarget(monsterManager.Monsters));
     }
 
     public void StartWave(object sender, EventArgs eventArgs)

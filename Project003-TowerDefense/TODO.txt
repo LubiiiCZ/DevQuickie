@@ -1,23 +1,48 @@
-TODO
--------------------
-* Prettier rewards selection screen
-* Wave system
-- Prioritize previous target
 
-Change the texture for top and bottom rows
+
+
+
+   _____ ______ ___     ____  ______ ____ _   __ ______   _____  ____   ____   _   __
+  / ___//_  __//   |   / __ \/_  __//  _// | / // ____/  / ___/ / __ \ / __ \ / | / /
+  \__ \  / /  / /| |  / /_/ / / /   / / /  |/ // / __    \__ \ / / / // / / //  |/ /
+ ___/ / / /  / ___ | / _, _/ / /  _/ / / /|  // /_/ /   ___/ // /_/ // /_/ // /|  /
+/____/ /_/  /_/  |_|/_/ |_| /_/  /___//_/ |_/ \____/   /____/ \____/ \____//_/ |_/
+
+
+
+Off-stream changes
+---------------------
+Prioritize previous target -> tower won't switch targets if it doesn't have to
+Wave end event -> reset towers
+Rewards selection screen frame
+
+
+Cool TODO list
+---------------------
+* Reward penalties
+* Change the texture for top and bottom rows
+Monster types
+Wave generator
 Tower upgrading
 Tower stats
-Refactor tap map logic
 Removing towers
-Pathfinding recalculation
 Damage type
+Spell scrolls (one-time use consumables)
 Monster resistances
 Flying monsters
+Land mines
 Sound FXs
 Music
 
+
+Boring TODO list
+---------------------
+Pathfinding recalculation
+Refactor tap map logic
+
+
 Stream number - DONE
---------------------
+---------------------
 07 - Prevent blocking all paths
 07 - Pending rewards queue
 06 - Multiple reward options

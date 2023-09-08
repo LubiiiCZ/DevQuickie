@@ -84,29 +84,7 @@ public class MonsterManger
         Monsters.Add(monster);
     }
 
-    public Monster GetClosestMonster(TowerTile tower)
-    {
-        /*if (tower.Target is not null && Vector2.Distance(tower.Position, tower.Target.Position) <= tower.Range)
-        {
-            return tower.Target;
-        }*/
-
-        Monster result = null;
-        float minDistance = float.MaxValue;
-
-        foreach (var monster in Monsters)
-        {
-            var distance = Vector2.Distance(tower.Position, monster.Position);
-            if (distance < minDistance)
-            {
-                minDistance = distance;
-                result = monster;
-            }
-        }
-
-        if (minDistance > tower.Range) result = null;
-        return result;
-    }
+    public event EventHandler OnWaveEnd;
 
     public void Update()
     {
@@ -119,7 +97,15 @@ public class MonsterManger
 
         if (Monsters.Count < 1)
         {
-            StateManager.SwitchState(States.Reward);
+            OnWaveEnd?.Invoke(this, EventArgs.Empty);
+        }
+    }
+
+    public void CheckWaveEnd()
+    {
+        if (Monsters.Count < 1)
+        {
+            OnWaveEnd?.Invoke(this, EventArgs.Empty);
         }
     }
 

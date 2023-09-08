@@ -1,3 +1,5 @@
+using System.Linq;
+
 namespace Project003;
 
 public delegate void RewardOptionHandler(List<RewardItem> rewards);
@@ -6,14 +8,20 @@ public class RewardManager
 {
     private readonly RewardFactory _rewardFactory;
     private readonly List<RewardOption> _rewardOptions = new();
+    private Rectangle _frame = new();
+    private readonly Texture2D _frameTexture;
 
-    public RewardManager()
+    public RewardManager(GraphicsDevice graphicsDevice)
     {
         _rewardFactory = new();
         AddRewardOption(_rewardFactory.GetRewardOption(new() { Rewards.Tower }));
         AddRewardOption(_rewardFactory.GetRewardOption(new() { Rewards.Wall, Rewards.Wall, Rewards.Wall }));
+        AddRewardOption(_rewardFactory.GetRewardOption(new() { Rewards.Tower, Rewards.Wall }));
 
         RewardOption.OnTap += RewardSelected;
+
+        _frameTexture = new(graphicsDevice, 1, 1);
+        _frameTexture.SetData(new Color[] { Color.Sienna });
     }
 
     public event RewardOptionHandler OnRewardSelection;
@@ -25,8 +33,8 @@ public class RewardManager
 
     private void CalculatePositions()
     {
-        const int gap = 50;
-        const int topPadding = 320;
+        const int gap = Map.TILE_SIZE / 2;
+        const int topPadding = Map.TILE_SIZE * 5;
         int count = _rewardOptions.Count;
         var optionsWidth = count * Map.TILE_SIZE + (count - 1) * gap;
         var width = Map.SIZE_X * Map.TILE_SIZE;
@@ -38,6 +46,10 @@ public class RewardManager
             rewardOption.SetPosition(new(paddingLeft + counter * (Map.TILE_SIZE + gap), topPadding));
             counter++;
         }
+
+        _frame.Location = new((int)_rewardOptions[0].Position.X - gap, (int)_rewardOptions[0].Position.Y - gap);
+        _frame.Width = optionsWidth + 2 * gap;
+        _frame.Height = _rewardOptions.Max(r => r.Rewards.Count) * Map.TILE_SIZE + 2 * gap;
     }
 
     public void AddRewardOption(RewardOption rewardOption)
@@ -58,6 +70,7 @@ public class RewardManager
 
     public void Draw()
     {
+        Globals.SpriteBatch.Draw(_frameTexture, _frame, Color.White);
         _rewardOptions.ForEach(r => r.Draw());
     }
 }
