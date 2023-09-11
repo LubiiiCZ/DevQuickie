@@ -9,36 +9,28 @@
 /____/ /_/  /_/  |_|/_/ |_| /_/  /___//_/ |_/ \____/   /____/ \____/ \____//_/ |_/
 
 
-Off-stream changes
----------------------
-Added extension method to shuffle a List
-Refactored SpawnMonsters method
-Added MonsterData struct
-Refactored CreateMonster method
-Refactored processing rewards method
-
 
 Cool TODO list
 ---------------------
-Flying monsters
+Random reward generator
 Tower selection
 Tower stats
 Tower upgrading
-Anti-air tower
-Random reward generator
 Removing towers
 Damage type
-Spell scrolls (one-time use consumables)
 Monster resistances
+Spell scrolls (one-time use consumables)
 Land mines
 Sound FXs
 Music
+Long-press input -> used for hints
 
 
 Boring TODO list
 ---------------------
 Add reward options labels (UX)
-While placing a tower reward show which one it is (UX)
+Refactor tile creation (clean code)
+Split Tiles and Tile-Objects (game logic)
 Smooth monster movement (game logic)
 Pathfinding recalculation (performance)
 Refactor tap map logic (clean code / performance)
@@ -49,6 +41,9 @@ Convert individual textures into texture-atlas (performance)
 
 Stream number - DONE
 ---------------------
+09 - While placing a tower reward show which one it is
+09 - Anti-air tower
+09 - Flying monsters
 08 - Wave generator
 08 - Monster types + Monster factory
 08 - Tile buildable property

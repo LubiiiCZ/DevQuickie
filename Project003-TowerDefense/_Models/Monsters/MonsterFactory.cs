@@ -16,6 +16,13 @@ public class MonsterFactory
             Health = 5,
             Speed = 200,
         }},
+        { Monsters.FlyingNinja, new(){
+            Texture = Globals.Content.Load<Texture2D>("hero_fly"),
+            MaxHealth = 7,
+            Health = 7,
+            Speed = 100,
+            Flying = true,
+        }},
     };
 
     public Monster CreateMonster(Monsters type, Vector2 pos)

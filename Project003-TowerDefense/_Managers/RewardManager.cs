@@ -15,13 +15,18 @@ public class RewardManager
     {
         _rewardFactory = new();
         AddRewardOption(_rewardFactory.GetRewardOption(new() { Rewards.Tower, Rewards.MonsterNinja }));
-        AddRewardOption(_rewardFactory.GetRewardOption(new() { Rewards.Wall, Rewards.Wall, Rewards.Wall, Rewards.MonsterNinja }));
-        AddRewardOption(_rewardFactory.GetRewardOption(new() { Rewards.Tower, Rewards.Wall, Rewards.MonsterRedNinja }));
+        AddRewardOption(_rewardFactory.GetRewardOption(new() { Rewards.Wall, Rewards.Wall, Rewards.Wall, Rewards.MonsterFlyingNinja }));
+        AddRewardOption(_rewardFactory.GetRewardOption(new() { Rewards.TowerAir, Rewards.Wall, Rewards.MonsterRedNinja }));
 
         RewardOption.OnTap += RewardSelected;
 
         _frameTexture = new(graphicsDevice, 1, 1);
         _frameTexture.SetData(new Color[] { Color.Sienna });
+    }
+
+    public Texture2D GetRewardTexture(Rewards type)
+    {
+        return _rewardFactory.RewardTextures[type];
     }
 
     public event RewardOptionHandler OnRewardSelection;

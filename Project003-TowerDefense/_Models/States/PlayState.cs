@@ -18,6 +18,7 @@ public class PlayState : GameState
         _gm.monsterManager.Update();
         _gm.AssignTargets();
         _gm.map.UpdateTowers();
+        _gm.map.UpdateTowersSelection();
         _gm.monsterManager.CheckWaveEnd();
     }
 

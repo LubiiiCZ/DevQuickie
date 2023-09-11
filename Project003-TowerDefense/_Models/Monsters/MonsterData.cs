@@ -6,4 +6,5 @@ public struct MonsterData
     public int MaxHealth;
     public int Health;
     public int Speed;
+    public bool Flying;
 }

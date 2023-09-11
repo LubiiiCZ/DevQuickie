@@ -5,5 +5,6 @@ public enum Tiles
     Grass,
     Invalid,
     Tower,
+    TowerAir,
     Wall,
 }

@@ -4,11 +4,13 @@ public class TowerTile : Tile
 {
     public Monster Target { get; set; }
     public float Range { get; set; }
+    public int Damage { get; set; }
     public float Cooldown { get; private set; }
     public float CooldownLeft { get; private set; }
     public List<Projectile> Projectiles { get; } = new();
     private static Texture2D _projectileTexture;
     public bool Selected { get; set; }
+    public bool OnlyAir { get; set; }
 
     public TowerTile(Tiles tileType, Texture2D texture, int mapX, int mapY) : base(tileType, texture, mapX, mapY)
     {
@@ -25,7 +27,7 @@ public class TowerTile : Tile
 
     public void FireProjectile()
     {
-        Projectiles.Add(new(_projectileTexture, Position, Target));
+        Projectiles.Add(new(_projectileTexture, Position, Target, Damage));
     }
 
     public void SetCooldown(float cooldown)
@@ -44,6 +46,8 @@ public class TowerTile : Tile
 
         foreach (var monster in monsters)
         {
+            if (!monster.Data.Flying && OnlyAir) continue;
+
             var distance = Vector2.Distance(Position, monster.Position);
             if (distance < minDistance && distance <= Range)
             {
@@ -53,6 +57,14 @@ public class TowerTile : Tile
         }
 
         Target = result;
+    }
+
+    public void UpdateSelection()
+    {
+        if (InputManager.WasTapped(Rectangle))
+        {
+            Selected = !Selected;
+        }
     }
 
     public override void Update()
@@ -68,11 +80,6 @@ public class TowerTile : Tile
                 FireProjectile();
                 CooldownLeft += Cooldown;
             }
-        }
-
-        if (InputManager.WasTapped(Rectangle))
-        {
-            Selected = !Selected;
         }
 
         Projectiles.ForEach(p => p.Update());

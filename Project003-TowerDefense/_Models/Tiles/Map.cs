@@ -46,7 +46,7 @@ public class Map
     public void ChangeTile(Tiles type, int mapX, int mapY)
     {
         MapTiles[mapX, mapY] = _tileFactory.CreateTile(type, mapX, mapY);
-        if (type is Tiles.Tower) Towers.Add((TowerTile)MapTiles[mapX, mapY]);
+        if (type is Tiles.Tower or Tiles.TowerAir) Towers.Add((TowerTile)MapTiles[mapX, mapY]);
     }
 
     public event EventHandler<SelectionData> OnTileSelection;
@@ -72,6 +72,11 @@ public class Map
     public void UpdateTowers()
     {
         Towers.ForEach(t => t.Update());
+    }
+
+    public void UpdateTowersSelection()
+    {
+        Towers.ForEach(t => t.UpdateSelection());
     }
 
     public void Draw()

@@ -4,12 +4,13 @@ public class Projectile : Sprite
 {
     private Monster _target;
     private float _speed = 500f;
-    private int _damage = 1;
+    private int _damage;
     public bool Dead { get; private set; }
 
-    public Projectile(Texture2D texture, Vector2 position, Monster target) : base(texture, position)
+    public Projectile(Texture2D texture, Vector2 position, Monster target, int damage) : base(texture, position)
     {
         _target = target;
+        _damage = damage;
     }
 
     public virtual void Update()

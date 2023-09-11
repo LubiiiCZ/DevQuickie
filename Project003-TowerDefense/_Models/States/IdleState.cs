@@ -9,6 +9,7 @@ public class IdleState : GameState
     public override void Update()
     {
         _gm.uiManager.Update();
+        _gm.map.UpdateTowersSelection();
     }
 
     public override void Draw()

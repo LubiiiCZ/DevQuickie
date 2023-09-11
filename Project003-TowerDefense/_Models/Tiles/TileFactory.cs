@@ -11,6 +11,7 @@ public class TileFactory
             { Tiles.Grass, Globals.Content.Load<Texture2D>("tile") },
             { Tiles.Invalid, Globals.Content.Load<Texture2D>("tile_invalid") },
             { Tiles.Tower, Globals.Content.Load<Texture2D>("tower") },
+            { Tiles.TowerAir, Globals.Content.Load<Texture2D>("tower_air") },
             { Tiles.Wall, Globals.Content.Load<Texture2D>("wall") },
         };
     }
@@ -40,8 +41,23 @@ public class TileFactory
             {
                 Blocked = true,
                 Range = Map.TILE_SIZE * 4,
+                Damage = 1,
             };
             tile.SetCooldown(1f);
+
+            return tile;
+        }
+
+        if (type is Tiles.TowerAir)
+        {
+            var tile = new TowerTile(type, GetTileTexture(type), mapX, mapY)
+            {
+                Blocked = true,
+                Range = Map.TILE_SIZE * 5,
+                Damage = 2,
+                OnlyAir = true,
+            };
+            tile.SetCooldown(1.5f);
 
             return tile;
         }

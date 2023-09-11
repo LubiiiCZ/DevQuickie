@@ -71,7 +71,16 @@ public class MonsterManager
     {
         Vector2 pos = new((column + 0.5f) * Map.TILE_SIZE, -row * Map.TILE_SIZE);
         Monster monster = _monsterFactory.CreateMonster(type, pos);
-        monster.SetPath(_pathfinder.BFSearch(monster.Position, new(column, Map.SIZE_Y - 1)));
+
+        if (!monster.Data.Flying)
+        {
+            monster.SetPath(_pathfinder.BFSearch(monster.Position, new(column, Map.SIZE_Y - 1)));
+        }
+        else
+        {
+            monster.SetPath(new(){ new(monster.Position.X, Map.SIZE_Y * Map.TILE_SIZE) });
+        }
+
         MonstersInWave.Add(monster);
     }
 

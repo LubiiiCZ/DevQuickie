@@ -4,4 +4,5 @@ public enum Monsters
 {
     Ninja,
     RedNinja,
+    FlyingNinja,
 }
