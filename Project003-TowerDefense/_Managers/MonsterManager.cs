@@ -5,7 +5,7 @@ public class MonsterManager
     public List<Monster> MonstersInWave { get; } = new();
     private readonly MonsterFactory _monsterFactory;
     private readonly Pathfinder _pathfinder;
-    private readonly int[] _monsterLaneCounter = new int[Map.SIZE_X];
+    private readonly int[] _monsterLaneSlots = new int[Map.SIZE_X];
     private readonly Texture2D _hpBarTexture;
 
     public MonsterManager(Map map, GraphicsDevice graphicsDevice)
@@ -14,11 +14,6 @@ public class MonsterManager
         _pathfinder = new(map);
         _hpBarTexture = new(graphicsDevice, 1, 1);
         _hpBarTexture.SetData(new Color[] { Color.DarkGreen });
-
-        for (int i = 0; i < Map.SIZE_X; i++)
-        {
-            _monsterLaneCounter[i] = new();
-        }
     }
 
     public bool CheckPlacementValidity(int x, int y)
@@ -29,61 +24,50 @@ public class MonsterManager
     private void DrawHPBar(Monster monster)
     {
         Vector2 barPosition = new(monster.Position.X - monster.Origin.X + 4, monster.Position.Y - monster.Origin.Y - 5);
-        var width = (float)monster.Health / monster.MaxHealth * (Map.TILE_SIZE - 8);
+        var width = (float)monster.Data.Health / monster.Data.MaxHealth * (Map.TILE_SIZE - 8);
         Rectangle destRectangle = new((int)barPosition.X, (int)barPosition.Y, (int)width, 3);
         Globals.SpriteBatch.Draw(_hpBarTexture, destRectangle, Color.White);
     }
 
     public void DrawHPBars()
     {
-        foreach (var monster in MonstersInWave)
-        {
-            DrawHPBar(monster);
-        }
+        MonstersInWave.ForEach(DrawHPBar);
     }
 
-    private int RandomColumn()
+    private void PrepareMonsterSlots(int count)
     {
         Random r = new();
-        return r.Next(0, Map.SIZE_X);
-    }
 
-    private void FillMonsterLanes(int count)
-    {
         for (int i = 0; i < Map.SIZE_X; i++)
         {
-            _monsterLaneCounter[i] = 0;
+            _monsterLaneSlots[i] = 0;
         }
 
         for (int i = 0; i < count; i++)
         {
-            _monsterLaneCounter[RandomColumn()]++;
+            _monsterLaneSlots[r.Next(0, Map.SIZE_X)]++;
         }
     }
 
     public void SpawnMonsters(List<Monsters> monsters)
     {
-        FillMonsterLanes(monsters.Count);
+        PrepareMonsterSlots(monsters.Count);
+        monsters.Shuffle();
         var monsterCounter = 0;
-        var row = 0;
-        //Shuffle the list first?
 
-        while (monsterCounter < monsters.Count)
+        for (int i = 0; i < _monsterLaneSlots.Length; i++)
         {
-            for (int i = 0; i < _monsterLaneCounter.Length; i++)
+            var row = 0;
+            for (int m = 0; m < _monsterLaneSlots[i]; m++)
             {
-                if (_monsterLaneCounter[i] > 0)
-                {
-                    SpawnMonster(monsters[monsterCounter], i, row);
-                    monsterCounter++;
-                    if (monsterCounter >= monsters.Count) break;
-                }
+                SpawnMonster(monsters[monsterCounter], i, row);
+                monsterCounter++;
+                row++;
             }
-            row++;
         }
     }
 
-    public void SpawnMonster(Monsters type, int column, int row)
+    private void SpawnMonster(Monsters type, int column, int row)
     {
         Vector2 pos = new((column + 0.5f) * Map.TILE_SIZE, -row * Map.TILE_SIZE);
         Monster monster = _monsterFactory.CreateMonster(type, pos);

@@ -2,24 +2,23 @@ namespace Project003;
 
 public class Monster : Sprite
 {
-    public int Speed { get; set; } = 150;
+    public MonsterData Data;
     public List<Vector2> Path { get; private set; }
     private int _current;
     public Vector2 DestinationPosition { get; protected set; }
-    public int Health { get; set; } = 3;
-    public int MaxHealth { get; set; } = 3;
     public bool Dead { get; private set; }
     private float _hitDurationLeft;
 
-    public Monster(Texture2D texture, Vector2 position) : base(texture, position)
+    public Monster(MonsterData data, Vector2 position) : base(data.Texture, position)
     {
+        Data = data;
     }
 
     public void TakeDamage(int dmg)
     {
         _hitDurationLeft = 0.1f;
-        Health -= dmg;
-        if (Health <= 0) Die();
+        Data.Health -= dmg;
+        if (Data.Health <= 0) Die();
     }
 
     public void SetPath(List<Vector2> path)
@@ -69,7 +68,7 @@ public class Monster : Sprite
 
         var direction = DestinationPosition - Position;
         if (direction != Vector2.Zero) direction.Normalize();
-        Position += direction * Globals.Time * Speed;
+        Position += direction * Globals.Time * Data.Speed;
         if (Position.Y > (Map.SIZE_Y - 1) * Map.TILE_SIZE) Die();
 
         if (NearDestination()) return;

@@ -12,7 +12,7 @@ public class RewardFactory
         _rewardTextures.Add(Rewards.MonsterRedNinja, Globals.Content.Load<Texture2D>("hero_boss"));
     }
 
-    public RewardItem GetItem(Rewards rewardID)
+    private RewardItem GetItem(Rewards rewardID)
     {
         return new(rewardID, _rewardTextures[rewardID]);
     }

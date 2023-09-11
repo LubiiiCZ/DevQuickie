@@ -8,7 +8,7 @@ public class RewardState : GameState
     public RewardState(GameManager gm) : base(gm)
     {
         _gm.rewardManager.OnRewardSelection += SelectReward;
-        _rewardLabelPos = new(((Map.SIZE_X * Map.TILE_SIZE) - _gm.uiManager.MeasureString(_rewardLabel).X) / 2, 192);
+        _rewardLabelPos = new(((Map.SIZE_X * Map.TILE_SIZE) - _gm.uiManager.MeasureString(_rewardLabel).X) / 2, 64);
     }
 
     public void SelectReward(List<RewardItem> rewards)

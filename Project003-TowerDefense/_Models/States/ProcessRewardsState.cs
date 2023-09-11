@@ -2,8 +2,17 @@ namespace Project003;
 
 public class ProcessRewardsState : GameState
 {
+    private readonly Dictionary<Rewards, Action> _rewardActions;
+
     public ProcessRewardsState(GameManager gm) : base(gm)
     {
+        _rewardActions = new()
+        {
+            { Rewards.Wall, () => StateManager.SwitchState(States.Placement) },
+            { Rewards.Tower, () => StateManager.SwitchState(States.Placement) },
+            { Rewards.MonsterNinja, () => _gm.monstersInWave.Add(Monsters.Ninja) },
+            { Rewards.MonsterRedNinja, () => _gm.monstersInWave.Add(Monsters.RedNinja) }
+        };
     }
 
     public override void Update()
@@ -21,29 +30,12 @@ public class ProcessRewardsState : GameState
         }
 
         _gm.CurrentReward = reward.RewardID;
-
-        switch (reward.RewardID)
-        {
-            case Rewards.Wall:
-            case Rewards.Tower:
-                StateManager.SwitchState(States.Placement);
-                break;
-
-            case Rewards.MonsterNinja:
-                _gm.monstersInWave.Add(Monsters.Ninja);
-                break;
-
-            case Rewards.MonsterRedNinja:
-                _gm.monstersInWave.Add(Monsters.RedNinja);
-                break;
-
-            default:
-                break;
-        }
+        _rewardActions[reward.RewardID]();
     }
 
     public override void Draw()
     {
         _gm.map.Draw();
+        _gm.uiManager.DrawMonsterCounter(_gm.monstersInWave.Count);
     }
 }

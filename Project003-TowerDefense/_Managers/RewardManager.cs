@@ -34,7 +34,7 @@ public class RewardManager
     private void CalculatePositions()
     {
         const int gap = Map.TILE_SIZE / 2;
-        const int topPadding = Map.TILE_SIZE * 5;
+        const int topPadding = Map.TILE_SIZE * 3;
         int count = _rewardOptions.Count;
         var optionsWidth = count * Map.TILE_SIZE + (count - 1) * gap;
         var width = Map.SIZE_X * Map.TILE_SIZE;

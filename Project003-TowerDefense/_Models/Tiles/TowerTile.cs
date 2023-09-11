@@ -20,6 +20,7 @@ public class TowerTile : Tile
         CooldownLeft = 0;
         Projectiles.Clear();
         Target = null;
+        Selected = false;
     }
 
     public void FireProjectile()
