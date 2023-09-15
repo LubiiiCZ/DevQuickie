@@ -101,6 +101,17 @@ public class MonsterManager
         }
     }
 
+    public void DoSplashDamage(int dmg, Vector2 center, int radius)
+    {
+        foreach (var monster in MonstersInWave)
+        {
+            if (Vector2.Distance(monster.Position, center) <= radius)
+            {
+                monster.TakeDamage(dmg);
+            }
+        }
+    }
+
     public void CheckWaveEnd()
     {
         if (MonstersInWave.Count < 1)

@@ -12,6 +12,7 @@ public class RewardFactory
         RewardTextures.Add(Rewards.MonsterNinja, Globals.Content.Load<Texture2D>("hero"));
         RewardTextures.Add(Rewards.MonsterRedNinja, Globals.Content.Load<Texture2D>("hero_boss"));
         RewardTextures.Add(Rewards.MonsterFlyingNinja, Globals.Content.Load<Texture2D>("hero_fly"));
+        RewardTextures.Add(Rewards.Fireball, Globals.Content.Load<Texture2D>("fireball"));
     }
 
     private RewardItem GetItem(Rewards rewardID)

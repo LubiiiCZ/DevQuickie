@@ -5,6 +5,7 @@ public enum Rewards
     Tower,
     TowerAir,
     Wall,
+    Fireball,
     MonsterNinja,
     MonsterRedNinja,
     MonsterFlyingNinja,

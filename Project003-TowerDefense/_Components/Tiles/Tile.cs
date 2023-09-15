@@ -18,6 +18,15 @@ public class Tile : Sprite
     }
 
     public static event EventHandler<SelectionData> OnSelect;
+    public static event EventHandler<SelectionData> OnSpellSelect;
+
+    public void CheckSpellSelection()
+    {
+        if (InputManager.WasTapped(Rectangle))
+        {
+            OnSpellSelect?.Invoke(this, new SelectionData(_mapX, _mapY));
+        }
+    }
 
     public virtual void Update()
     {

@@ -41,6 +41,7 @@ public class Map
         }
 
         Tile.OnSelect += HandleSelection;
+        Tile.OnSpellSelect += HandleSpellSelection;
     }
 
     public void ChangeTile(Tiles type, int mapX, int mapY)
@@ -50,10 +51,16 @@ public class Map
     }
 
     public event EventHandler<SelectionData> OnTileSelection;
+    public event EventHandler<SelectionData> OnSpellTileSelection;
 
     public void HandleSelection(object sender, SelectionData data)
     {
         OnTileSelection?.Invoke(this, data);
+    }
+
+    public void HandleSpellSelection(object sender, SelectionData data)
+    {
+        OnSpellTileSelection?.Invoke(this, data);
     }
 
     public void Update()
@@ -61,6 +68,14 @@ public class Map
         for (int y = 0; y < SIZE_Y; y++)
         {
             for (int x = 0; x < SIZE_X; x++) MapTiles[x, y].Update();
+        }
+    }
+
+    public void CheckSpellTileSelection()
+    {
+        for (int y = 0; y < SIZE_Y; y++)
+        {
+            for (int x = 0; x < SIZE_X; x++) MapTiles[x, y].CheckSpellSelection();
         }
     }
 

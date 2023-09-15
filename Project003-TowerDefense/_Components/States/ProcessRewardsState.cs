@@ -14,6 +14,7 @@ public class ProcessRewardsState : GameState
             { Rewards.MonsterNinja, () => _gm.monstersInWave.Add(Monsters.Ninja) },
             { Rewards.MonsterRedNinja, () => _gm.monstersInWave.Add(Monsters.RedNinja) },
             { Rewards.MonsterFlyingNinja, () => _gm.monstersInWave.Add(Monsters.FlyingNinja) },
+            { Rewards.Fireball, () => _gm.spellManager.AddSpell(Spells.Fireball) },
         };
     }
 

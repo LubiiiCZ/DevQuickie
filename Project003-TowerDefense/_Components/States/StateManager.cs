@@ -7,6 +7,8 @@ public enum States
     Reward,
     ProcessRewards,
     Placement,
+    SelectTarget,
+    ProcessSpells,
 }
 
 public class StateManager
@@ -26,6 +28,8 @@ public class StateManager
         _states.Add(States.Reward, new RewardState(_gm));
         _states.Add(States.ProcessRewards, new ProcessRewardsState(_gm));
         _states.Add(States.Placement, new PlacementState(_gm));
+        _states.Add(States.SelectTarget, new SelectTargetState(_gm));
+        _states.Add(States.ProcessSpells, new ProcessSpellState(_gm));
 
         _currentState = _states[States.Reward];
     }
@@ -33,6 +37,11 @@ public class StateManager
     public static void SwitchState(States state)
     {
         _nextState = _states[state];
+    }
+
+    public static void UpdateState(States state)
+    {
+        _states[state].Update();
     }
 
     public static void Update()
@@ -44,6 +53,11 @@ public class StateManager
         }
 
         _currentState.Update();
+    }
+
+    public static void DrawState(States state)
+    {
+        _states[state].Draw();
     }
 
     public static void Draw()

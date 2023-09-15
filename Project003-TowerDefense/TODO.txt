@@ -19,28 +19,31 @@ Tower upgrading
 Removing towers
 Damage type
 Monster resistances
-Spell scrolls (one-time use consumables)
 Land mines
 Sound FXs
 Music
-Long-press input -> used for hints
+Hints system
+Losing condition
 
 
 Boring TODO list
 ---------------------
-Add reward options labels (UX)
-Refactor tile creation (clean code)
+Spells being removed after use
 Split Tiles and Tile-Objects (game logic)
+Refactor CreateTile method (clean code)
+Add reward options labels (UX)
 Smooth monster movement (game logic)
 Pathfinding recalculation (performance)
 Refactor tap map logic (clean code / performance)
-Refactor CreateTile method (clean code)
 Gamearea dimensions constants (clean code)
 Convert individual textures into texture-atlas (performance)
+Logging system
+Drag&Drop mechanic?
 
 
 Stream number - DONE
 ---------------------
+10 - Spellcasting system
 09 - While placing a tower reward show which one it is
 09 - Anti-air tower
 09 - Flying monsters
