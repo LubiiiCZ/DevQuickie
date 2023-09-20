@@ -16,6 +16,11 @@ public class MonsterManager
         _hpBarTexture.SetData(new Color[] { Color.DarkGreen });
     }
 
+    public void Reset()
+    {
+        MonstersInWave.Clear();
+    }
+
     public bool CheckPlacementValidity(int x, int y)
     {
         return _pathfinder.CheckPlacementValidity(x, y);
@@ -125,6 +130,25 @@ public class MonsterManager
         foreach (var monster in MonstersInWave)
         {
             monster.Draw();
+        }
+    }
+
+    public void UpdateMineCollisions(List<Mine> mines)
+    {
+        foreach (var monster in MonstersInWave)
+        {
+            if (monster.Dead) continue;
+
+            foreach (var mine in mines)
+            {
+                if (mine.Dead) continue;
+
+                if (Vector2.Distance(monster.Position, mine.Position) <= mine.Range)
+                {
+                    monster.TakeDamage(mine.Damage);
+                    mine.Dead = true;
+                }
+            }
         }
     }
 }

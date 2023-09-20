@@ -4,7 +4,7 @@ public enum Tiles
 {
     Grass,
     Invalid,
-    Tower,
+    /*Tower,
     TowerAir,
-    Wall,
+    Wall,*/
 }

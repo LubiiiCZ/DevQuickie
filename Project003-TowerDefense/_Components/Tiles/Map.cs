@@ -7,7 +7,8 @@ public class Map
     public const int SIZE_Y = 12;
     private readonly TileFactory _tileFactory;
     public Tile[,] MapTiles { get; }
-    public List<TowerTile> Towers { get; private set; } = new();
+    public List<Tower> Towers { get; private set; } = new();
+    public List<Mine> Mines { get; private set; } = new();
     private Texture2D _rangeTexture;
     private Vector2 _rangeOrigin;
 
@@ -44,10 +45,30 @@ public class Map
         Tile.OnSpellSelect += HandleSpellSelection;
     }
 
+    public void Reset()
+    {
+        Towers.Clear();
+        Mines.Clear();
+
+        for (int y = 0; y < SIZE_Y; y++)
+        {
+            for (int x = 0; x < SIZE_X; x++)
+            {
+                MapTiles[x, y].TileObject = null;
+            }
+        }
+    }
+
     public void ChangeTile(Tiles type, int mapX, int mapY)
     {
         MapTiles[mapX, mapY] = _tileFactory.CreateTile(type, mapX, mapY);
-        if (type is Tiles.Tower or Tiles.TowerAir) Towers.Add((TowerTile)MapTiles[mapX, mapY]);
+    }
+
+    public void PlaceObject(TileObject tileObject, int mapX, int mapY)
+    {
+        MapTiles[mapX, mapY].PlaceObject(tileObject);
+        if (tileObject is Tower tower) Towers.Add(tower);
+        if (tileObject is Mine mine) Mines.Add(mine);
     }
 
     public event EventHandler<SelectionData> OnTileSelection;
@@ -87,6 +108,19 @@ public class Map
     public void UpdateTowers()
     {
         Towers.ForEach(t => t.Update());
+    }
+
+    public void UpdateMines()
+    {
+        foreach (var mine in Mines)
+        {
+            if (mine.Dead)
+            {
+                mine.Owner.RemoveObject();
+            }
+        }
+
+        Mines.RemoveAll(m => m.Dead);
     }
 
     public void UpdateTowersSelection()

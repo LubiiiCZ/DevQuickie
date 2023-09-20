@@ -22,17 +22,19 @@ public class PlacementState : GameState
 
     public void HandleSelection(object sender, SelectionData data)
     {
+        if (_gm.CurrentReward != Rewards.Mine)
         if (!_gm.monsterManager.CheckPlacementValidity(data.MapX, data.MapY)) return;
 
-        Tiles tile = _gm.CurrentReward switch
+        TileObjects objectID = _gm.CurrentReward switch
         {
-            Rewards.Tower => Tiles.Tower,
-            Rewards.TowerAir => Tiles.TowerAir,
-            Rewards.Wall => Tiles.Wall,
-            _ => Tiles.Grass,
+            Rewards.Tower => TileObjects.Tower,
+            Rewards.TowerAir => TileObjects.TowerAir,
+            Rewards.Wall => TileObjects.Wall,
+            Rewards.Mine => TileObjects.Mine,
+            _ => TileObjects.Wall,
         };
 
-        _gm.map.ChangeTile(tile, data.MapX, data.MapY);
+        _gm.map.PlaceObject(TileObjectFactory.CreateTileObject(objectID), data.MapX, data.MapY);
 
         StateManager.SwitchState(States.ProcessRewards);
     }

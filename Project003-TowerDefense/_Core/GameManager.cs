@@ -13,6 +13,7 @@ public class GameManager
     public Rewards CurrentReward { get; set; }
     public Spells CurrentSpell { get; set; }
     public SelectionData CurrentSelectionData { get; set; }
+    public int PlayerLives { get; set; } = 3;
 
     public GameManager(GraphicsDeviceManager graphics)
     {
@@ -23,7 +24,26 @@ public class GameManager
         _canvas = new(graphics.GraphicsDevice, Map.TILE_SIZE * Map.SIZE_X, Map.TILE_SIZE * (Map.SIZE_Y + 1));
         uiManager = new();
         uiManager.buttonStartWave.OnTap += StartWave;
+        TileObjectFactory.Initialize();
         StateManager.Initialize(this);
+
+        Monster.OnGoalReached += HandleMonsterReachedGoal;
+    }
+
+    public void HandleMonsterReachedGoal(object sender, EventArgs args)
+    {
+        PlayerLives--;
+        if (PlayerLives < 1) ResetGame();
+    }
+
+    public void ResetGame()
+    {
+        PlayerLives = 3;
+        monstersInWave.Clear();
+        spellManager.Reset();
+        monsterManager.Reset();
+        map.Reset();
+        StateManager.SwitchState(States.Reward);
     }
 
     public void AssignTargets()

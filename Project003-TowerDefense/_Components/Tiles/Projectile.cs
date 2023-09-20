@@ -15,6 +15,12 @@ public class Projectile : Sprite
 
     public virtual void Update()
     {
+        if (_target.Dead)
+        {
+            Dead = true;
+            return;
+        }
+
         Vector2 direction = _target.Position - Position;
         if (direction.Length() < 5)
         {

@@ -11,6 +11,7 @@ public class ProcessRewardsState : GameState
             { Rewards.Wall, () => StateManager.SwitchState(States.Placement) },
             { Rewards.Tower, () => StateManager.SwitchState(States.Placement) },
             { Rewards.TowerAir, () => StateManager.SwitchState(States.Placement) },
+            { Rewards.Mine, () => StateManager.SwitchState(States.Placement) },
             { Rewards.MonsterNinja, () => _gm.monstersInWave.Add(Monsters.Ninja) },
             { Rewards.MonsterRedNinja, () => _gm.monstersInWave.Add(Monsters.RedNinja) },
             { Rewards.MonsterFlyingNinja, () => _gm.monstersInWave.Add(Monsters.FlyingNinja) },

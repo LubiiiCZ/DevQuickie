@@ -17,6 +17,7 @@ public class RewardManager
         AddRewardOption(_rewardFactory.GetRewardOption(new() { Rewards.Tower, Rewards.MonsterNinja }));
         AddRewardOption(_rewardFactory.GetRewardOption(new() { Rewards.Wall, Rewards.Wall, Rewards.Fireball, Rewards.MonsterFlyingNinja }));
         AddRewardOption(_rewardFactory.GetRewardOption(new() { Rewards.TowerAir, Rewards.Wall, Rewards.MonsterRedNinja }));
+        AddRewardOption(_rewardFactory.GetRewardOption(new() { Rewards.Mine, Rewards.Wall, Rewards.MonsterRedNinja }));
 
         RewardOption.OnTap += RewardSelected;
 

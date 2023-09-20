@@ -10,9 +10,9 @@ public class TileFactory
         {
             { Tiles.Grass, Globals.Content.Load<Texture2D>("tile") },
             { Tiles.Invalid, Globals.Content.Load<Texture2D>("tile_invalid") },
-            { Tiles.Tower, Globals.Content.Load<Texture2D>("tower") },
+            /*{ Tiles.Tower, Globals.Content.Load<Texture2D>("tower") },
             { Tiles.TowerAir, Globals.Content.Load<Texture2D>("tower_air") },
-            { Tiles.Wall, Globals.Content.Load<Texture2D>("wall") },
+            { Tiles.Wall, Globals.Content.Load<Texture2D>("wall") },*/
         };
     }
 
@@ -25,17 +25,15 @@ public class TileFactory
     {
         if (type is Tiles.Grass)
         {
-            var tile = new Tile(type, GetTileTexture(type), mapX, mapY)
-            {
-                Buildable = true,
-            };
-
-            return tile;
+            return new Tile(type, GetTileTexture(type), mapX, mapY);
         }
 
-        if (type is Tiles.Invalid) return new Tile(type, GetTileTexture(type), mapX, mapY);
+        if (type is Tiles.Invalid) return new Tile(type, GetTileTexture(type), mapX, mapY)
+        {
+            BlockingBuild = true,
+        };
 
-        if (type is Tiles.Tower)
+        /*if (type is Tiles.Tower)
         {
             var tile = new TowerTile(type, GetTileTexture(type), mapX, mapY)
             {
@@ -70,7 +68,7 @@ public class TileFactory
             };
 
             return tile;
-        }
+        }*/
 
         return null;
     }

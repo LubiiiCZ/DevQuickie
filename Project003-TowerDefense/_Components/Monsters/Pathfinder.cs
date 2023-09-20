@@ -45,16 +45,16 @@ public class Pathfinder
             for (int j = 0; j < Map.SIZE_Y; j++)
             {
                 _nodeMap[i, j] = new(i, j);
-                if (_map.MapTiles[i, j].Blocked) _nodeMap[i, j].visited = true;
+                if (_map.MapTiles[i, j].IsPathBlocked()) _nodeMap[i, j].visited = true;
             }
         }
     }
 
     public bool CheckPlacementValidity(int x, int y)
     {
-        _map.MapTiles[x, y].Blocked = true;
+        _map.MapTiles[x, y].BlockingPath = true;
         var check = BFSearch(Vector2.One, new(0, Map.SIZE_Y - 1));
-        _map.MapTiles[x, y].Blocked = false;
+        _map.MapTiles[x, y].BlockingPath = false;
 
         return check is not null;
     }

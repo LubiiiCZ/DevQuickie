@@ -48,11 +48,23 @@ public class Monster : Sprite
     }
 
     public static event EventHandler OnDeath;
+    public static event EventHandler OnGoalReached;
 
     public void Die()
     {
         OnDeath?.Invoke(this, EventArgs.Empty);
         Dead = true;
+    }
+
+    public void ReachGoal()
+    {
+        OnGoalReached?.Invoke(this, EventArgs.Empty);
+        Dead = true;
+    }
+
+    public void CheckGoalReached()
+    {
+        if (Position.Y > (Map.SIZE_Y - 1) * Map.TILE_SIZE) ReachGoal();
     }
 
     public void Update()
@@ -69,7 +81,8 @@ public class Monster : Sprite
         var direction = DestinationPosition - Position;
         if (direction != Vector2.Zero) direction.Normalize();
         Position += direction * Globals.Time * Data.Speed;
-        if (Position.Y > (Map.SIZE_Y - 1) * Map.TILE_SIZE) Die();
+
+        CheckGoalReached();
 
         if (NearDestination()) return;
     }

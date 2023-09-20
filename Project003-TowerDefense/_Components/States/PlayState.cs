@@ -23,6 +23,8 @@ public class PlayState : GameState
     public override void Update()
     {
         _gm.monsterManager.Update();
+        _gm.monsterManager.UpdateMineCollisions(_gm.map.Mines);
+        _gm.map.UpdateMines();
         _gm.AssignTargets();
         _gm.map.UpdateTowers();
         _gm.map.UpdateTowersSelection();

@@ -1,6 +1,6 @@
 namespace Project003;
 
-public class TowerTile : Tile
+public class Tower : TileObject
 {
     public Monster Target { get; set; }
     public float Range { get; set; }
@@ -12,9 +12,11 @@ public class TowerTile : Tile
     public bool Selected { get; set; }
     public bool OnlyAir { get; set; }
 
-    public TowerTile(Tiles tileType, Texture2D texture, int mapX, int mapY) : base(tileType, texture, mapX, mapY)
+    public Tower(TileObjects objectType, Texture2D texture) : base(objectType, texture)
     {
         _projectileTexture ??= Globals.Content.Load<Texture2D>("projectile");
+        BlockingBuild = true;
+        BlockingPath = true;
     }
 
     public void Reset()

@@ -19,17 +19,14 @@ Tower upgrading
 Removing towers
 Damage type
 Monster resistances
-Land mines
 Sound FXs
 Music
 Hints system
-Losing condition
 
 
 Boring TODO list
 ---------------------
 Spells being removed after use
-Split Tiles and Tile-Objects (game logic)
 Refactor CreateTile method (clean code)
 Add reward options labels (UX)
 Smooth monster movement (game logic)
@@ -43,6 +40,9 @@ Drag&Drop mechanic?
 
 Stream number - DONE
 ---------------------
+11 - Land mines
+11 - Losing condition - Lives
+11 - Split Tiles and Tile-Objects
 10 - Spellcasting system
 09 - While placing a tower reward show which one it is
 09 - Anti-air tower

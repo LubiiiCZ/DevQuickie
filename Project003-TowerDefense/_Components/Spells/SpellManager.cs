@@ -9,6 +9,11 @@ public class SpellManager
     {
     }
 
+    public void Reset()
+    {
+        SpellBook.Clear();
+    }
+
     public void AddSpell(Spells id)
     {
         var spell = _spellFactory.GetSpell(id);
