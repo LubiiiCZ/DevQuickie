@@ -4,6 +4,7 @@ public enum Rewards
 {
     Tower,
     TowerAir,
+    TowerIce,
     Wall,
     Mine,
     Fireball,

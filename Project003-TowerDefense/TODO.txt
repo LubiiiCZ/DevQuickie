@@ -12,6 +12,7 @@
 
 Cool TODO list
 ---------------------
+FIX FREEZE
 Random reward generator
 Tower selection
 Tower stats
@@ -26,12 +27,11 @@ Hints system
 
 Boring TODO list
 ---------------------
-Spells being removed after use
+Spells being removed after use (?)
 Refactor CreateTile method (clean code)
 Add reward options labels (UX)
 Smooth monster movement (game logic)
 Pathfinding recalculation (performance)
-Refactor tap map logic (clean code / performance)
 Gamearea dimensions constants (clean code)
 Convert individual textures into texture-atlas (performance)
 Logging system
@@ -40,6 +40,9 @@ Drag&Drop mechanic?
 
 Stream number - DONE
 ---------------------
+12 - Freezing Tower & Freeze Effect
+12 - Landmine game logic rework
+12 - Lives counter UI
 11 - Land mines
 11 - Losing condition - Lives
 11 - Split Tiles and Tile-Objects

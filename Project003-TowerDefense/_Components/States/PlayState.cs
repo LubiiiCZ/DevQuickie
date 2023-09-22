@@ -12,10 +12,12 @@ public class PlayState : GameState
     {
         StateManager.SwitchState(States.Reward);
         _gm.map.Towers.ForEach(t => t.Reset());
+        _gm.map.ResetMines();
     }
 
     public void HandleSpellCast(object sender, Spells id)
     {
+        if (!Active) return;
         _gm.CurrentSpell = id;
         StateManager.SwitchState(States.SelectTarget); //switch by spell id here
     }
@@ -24,12 +26,20 @@ public class PlayState : GameState
     {
         _gm.monsterManager.Update();
         _gm.monsterManager.UpdateMineCollisions(_gm.map.Mines);
-        _gm.map.UpdateMines();
         _gm.AssignTargets();
         _gm.map.UpdateTowers();
-        _gm.map.UpdateTowersSelection();
-        _gm.spellManager.UpdateSpells();
         _gm.monsterManager.CheckWaveEnd();
+
+        if (Active)
+        {
+            _gm.map.UpdateTowerSelection();
+            _gm.spellManager.UpdateSpells();
+        }
+
+        if (_gm.PlayerLives < 1)
+        {
+            _gm.ResetGame();
+        }
     }
 
     public override void Draw()
@@ -40,5 +50,6 @@ public class PlayState : GameState
         _gm.map.DrawProjectiles();
         _gm.spellManager.DrawSpells();
         _gm.uiManager.DrawMonsterCounter(_gm.monsterManager.MonstersInWave.Count);
+        _gm.uiManager.DrawLiveCounter(_gm.PlayerLives);
     }
 }

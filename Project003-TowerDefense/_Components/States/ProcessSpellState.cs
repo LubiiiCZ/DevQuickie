@@ -8,7 +8,7 @@ public class ProcessSpellState : GameState
     {
         _spellActions = new()
         {
-            { Spells.Fireball, () => _gm.monsterManager.DoSplashDamage(3, Map.MapToScreen(_gm.CurrentSelectionData.MapX, _gm.CurrentSelectionData.MapY), Map.TILE_SIZE * 2) },
+            { Spells.Fireball, () => _gm.monsterManager.DoSplashDamage(3, Map.MapToScreen(_gm.CurrentTile.MapX, _gm.CurrentTile.MapY), Map.TILE_SIZE * 2) },
         };
     }
 

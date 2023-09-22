@@ -8,10 +8,16 @@ public class Monster : Sprite
     public Vector2 DestinationPosition { get; protected set; }
     public bool Dead { get; private set; }
     private float _hitDurationLeft;
+    public List<Effects> Effects { get; private set; } = new();
 
     public Monster(MonsterData data, Vector2 position) : base(data.Texture, position)
     {
         Data = data;
+    }
+
+    public void ApplyEffect(Effects effect)
+    {
+        Effects.Add(effect);
     }
 
     public void TakeDamage(int dmg)
@@ -71,7 +77,20 @@ public class Monster : Sprite
     {
         if (Dead) return;
 
-        Color = (_hitDurationLeft > 0) ? Color.Red : Color.White;
+        //USE LINQ!
+        int freezeCount = 0;
+        foreach (var item in Effects)
+        {
+            if (item == Project003.Effects.Freeze) freezeCount++;
+        }
+
+        if (freezeCount > 0)
+        {
+            Data.CurrentSpeed = (int)(Data.Speed / (float)freezeCount);
+        }
+
+        Color = (freezeCount > 0) ? Color.Blue : Color.White;
+        Color = (_hitDurationLeft > 0) ? Color.Red : Color;
 
         if (_hitDurationLeft > 0)
         {
@@ -80,7 +99,7 @@ public class Monster : Sprite
 
         var direction = DestinationPosition - Position;
         if (direction != Vector2.Zero) direction.Normalize();
-        Position += direction * Globals.Time * Data.Speed;
+        Position += direction * Globals.Time * Data.CurrentSpeed;
 
         CheckGoalReached();
 

@@ -6,11 +6,22 @@ public class Projectile : Sprite
     private float _speed = 500f;
     private int _damage;
     public bool Dead { get; private set; }
+    public List<Effects> Effects { get; private set; } = new();
 
     public Projectile(Texture2D texture, Vector2 position, Monster target, int damage) : base(texture, position)
     {
         _target = target;
         _damage = damage;
+    }
+
+    public void AddEffect(Effects effect)
+    {
+        Effects.Add(effect);
+    }
+
+    public void SetEffects(List<Effects> effects)
+    {
+        Effects = effects;
     }
 
     public virtual void Update()
@@ -26,6 +37,10 @@ public class Projectile : Sprite
         {
             Dead = true;
             _target.TakeDamage(_damage);
+            foreach (var effect in Effects)
+            {
+                _target.ApplyEffect(effect);
+            }
             return;
         }
 

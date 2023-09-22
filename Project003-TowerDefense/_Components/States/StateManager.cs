@@ -32,6 +32,7 @@ public class StateManager
         _states.Add(States.ProcessSpells, new ProcessSpellState(_gm));
 
         _currentState = _states[States.Reward];
+        _currentState.Active = true;
     }
 
     public static void SwitchState(States state)
@@ -48,7 +49,9 @@ public class StateManager
     {
         if (_nextState is not null)
         {
+            _currentState.Active = false;
             _currentState = _nextState;
+            _currentState.Active = true;
             _nextState = null;
         }
 

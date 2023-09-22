@@ -141,12 +141,12 @@ public class MonsterManager
 
             foreach (var mine in mines)
             {
-                if (mine.Dead) continue;
+                if (mine.Used) continue;
 
                 if (Vector2.Distance(monster.Position, mine.Position) <= mine.Range)
                 {
                     monster.TakeDamage(mine.Damage);
-                    mine.Dead = true;
+                    mine.Used = true;
                 }
             }
         }

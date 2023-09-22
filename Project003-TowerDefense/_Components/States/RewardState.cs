@@ -31,6 +31,7 @@ public class RewardState : GameState
         _gm.map.Draw();
         _gm.rewardManager.Draw();
         _gm.uiManager.DrawMonsterCounter(_gm.monstersInWave.Count);
+        _gm.uiManager.DrawLiveCounter(_gm.PlayerLives);
         _gm.uiManager.DrawCustomLabel(_rewardLabel, _rewardLabelPos);
     }
 }

@@ -9,18 +9,21 @@ public class MonsterFactory
             MaxHealth = 3,
             Health = 3,
             Speed = 150,
+            CurrentSpeed = 150,
         }},
         { Monsters.RedNinja, new(){
             Texture = Globals.Content.Load<Texture2D>("hero_boss"),
             MaxHealth = 5,
             Health = 5,
             Speed = 200,
+            CurrentSpeed = 200,
         }},
         { Monsters.FlyingNinja, new(){
             Texture = Globals.Content.Load<Texture2D>("hero_fly"),
             MaxHealth = 7,
             Health = 7,
             Speed = 100,
+            CurrentSpeed = 100,
             Flying = true,
         }},
     };

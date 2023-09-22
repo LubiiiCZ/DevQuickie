@@ -8,6 +8,7 @@ public class RewardFactory
     {
         RewardTextures.Add(Rewards.Tower, Globals.Content.Load<Texture2D>("tower"));
         RewardTextures.Add(Rewards.TowerAir, Globals.Content.Load<Texture2D>("tower_air"));
+        RewardTextures.Add(Rewards.TowerIce, Globals.Content.Load<Texture2D>("tower_ice"));
         RewardTextures.Add(Rewards.Wall, Globals.Content.Load<Texture2D>("wall"));
         RewardTextures.Add(Rewards.MonsterNinja, Globals.Content.Load<Texture2D>("hero"));
         RewardTextures.Add(Rewards.MonsterRedNinja, Globals.Content.Load<Texture2D>("hero_boss"));

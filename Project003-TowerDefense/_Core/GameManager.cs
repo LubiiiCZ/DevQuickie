@@ -12,7 +12,7 @@ public class GameManager
     public Queue<RewardItem> Rewards { get; set; } = new();
     public Rewards CurrentReward { get; set; }
     public Spells CurrentSpell { get; set; }
-    public SelectionData CurrentSelectionData { get; set; }
+    public Tile CurrentTile { get; set; }
     public int PlayerLives { get; set; } = 3;
 
     public GameManager(GraphicsDeviceManager graphics)
@@ -33,7 +33,6 @@ public class GameManager
     public void HandleMonsterReachedGoal(object sender, EventArgs args)
     {
         PlayerLives--;
-        if (PlayerLives < 1) ResetGame();
     }
 
     public void ResetGame()

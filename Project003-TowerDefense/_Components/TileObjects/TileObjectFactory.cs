@@ -10,6 +10,7 @@ public static class TileObjectFactory
         {
             { TileObjects.Tower, Globals.Content.Load<Texture2D>("tower") },
             { TileObjects.TowerAir, Globals.Content.Load<Texture2D>("tower_air") },
+            { TileObjects.TowerIce, Globals.Content.Load<Texture2D>("tower_ice") },
             { TileObjects.Wall, Globals.Content.Load<Texture2D>("wall") },
             { TileObjects.Mine, Globals.Content.Load<Texture2D>("mine") },
         };
@@ -43,6 +44,19 @@ public static class TileObjectFactory
                 OnlyAir = true,
             };
             tileObject.SetCooldown(1.5f);
+
+            return tileObject;
+        }
+
+        if (type is TileObjects.TowerIce)
+        {
+            var tileObject = new Tower(type, GetTileObjectTexture(type))
+            {
+                Range = Map.TILE_SIZE * 3,
+                Damage = 1,
+            };
+            tileObject.SetCooldown(1.5f);
+            tileObject.AddEffect(Effects.Freeze);
 
             return tileObject;
         }

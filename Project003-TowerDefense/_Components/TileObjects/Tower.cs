@@ -11,12 +11,23 @@ public class Tower : TileObject
     private static Texture2D _projectileTexture;
     public bool Selected { get; set; }
     public bool OnlyAir { get; set; }
+    public List<Effects> Effects { get; private set; } = new();
 
     public Tower(TileObjects objectType, Texture2D texture) : base(objectType, texture)
     {
         _projectileTexture ??= Globals.Content.Load<Texture2D>("projectile");
         BlockingBuild = true;
         BlockingPath = true;
+    }
+
+    public void AddEffect(Effects effect)
+    {
+        Effects.Add(effect);
+    }
+
+    public void SetEffects(List<Effects> effects)
+    {
+        Effects = effects;
     }
 
     public void Reset()
@@ -29,7 +40,9 @@ public class Tower : TileObject
 
     public void FireProjectile()
     {
-        Projectiles.Add(new(_projectileTexture, Position, Target, Damage));
+        Projectile p = new(_projectileTexture, Position, Target, Damage);
+        p.SetEffects(Effects);
+        Projectiles.Add(p);
     }
 
     public void SetCooldown(float cooldown)

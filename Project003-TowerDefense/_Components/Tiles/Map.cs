@@ -9,7 +9,7 @@ public class Map
     public Tile[,] MapTiles { get; }
     public List<Tower> Towers { get; private set; } = new();
     public List<Mine> Mines { get; private set; } = new();
-    private Texture2D _rangeTexture;
+    private readonly Texture2D _rangeTexture;
     private Vector2 _rangeOrigin;
 
     public static Vector2 MapToScreen(int x, int y)
@@ -42,7 +42,6 @@ public class Map
         }
 
         Tile.OnSelect += HandleSelection;
-        Tile.OnSpellSelect += HandleSpellSelection;
     }
 
     public void Reset()
@@ -71,32 +70,18 @@ public class Map
         if (tileObject is Mine mine) Mines.Add(mine);
     }
 
-    public event EventHandler<SelectionData> OnTileSelection;
-    public event EventHandler<SelectionData> OnSpellTileSelection;
+    public event EventHandler<Tile> OnTileSelection;
 
-    public void HandleSelection(object sender, SelectionData data)
+    public void HandleSelection(object sender, Tile tile)
     {
-        OnTileSelection?.Invoke(this, data);
+        OnTileSelection?.Invoke(this, tile);
     }
 
-    public void HandleSpellSelection(object sender, SelectionData data)
-    {
-        OnSpellTileSelection?.Invoke(this, data);
-    }
-
-    public void Update()
+    public void UpdateTileSelection()
     {
         for (int y = 0; y < SIZE_Y; y++)
         {
-            for (int x = 0; x < SIZE_X; x++) MapTiles[x, y].Update();
-        }
-    }
-
-    public void CheckSpellTileSelection()
-    {
-        for (int y = 0; y < SIZE_Y; y++)
-        {
-            for (int x = 0; x < SIZE_X; x++) MapTiles[x, y].CheckSpellSelection();
+            for (int x = 0; x < SIZE_X; x++) MapTiles[x, y].UpdateTileSelection();
         }
     }
 
@@ -110,20 +95,15 @@ public class Map
         Towers.ForEach(t => t.Update());
     }
 
-    public void UpdateMines()
+    public void ResetMines()
     {
         foreach (var mine in Mines)
         {
-            if (mine.Dead)
-            {
-                mine.Owner.RemoveObject();
-            }
+            mine.Used = false;
         }
-
-        Mines.RemoveAll(m => m.Dead);
     }
 
-    public void UpdateTowersSelection()
+    public void UpdateTowerSelection()
     {
         Towers.ForEach(t => t.UpdateSelection());
     }
