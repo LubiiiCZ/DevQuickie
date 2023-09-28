@@ -28,9 +28,10 @@ public static class TileObjectFactory
             var tileObject = new Tower(type, GetTileObjectTexture(type))
             {
                 Range = Map.TILE_SIZE * 4,
-                Damage = 1,
+                Damage = 0,
             };
             tileObject.SetCooldown(1f);
+            tileObject.AddEffect(Effects.Burning);
 
             return tileObject;
         }

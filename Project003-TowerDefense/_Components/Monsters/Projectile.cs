@@ -39,7 +39,7 @@ public class Projectile : Sprite
             _target.TakeDamage(_damage);
             foreach (var effect in Effects)
             {
-                _target.ApplyEffect(effect);
+                BuffFactory.CreateBuff(_target, effect);
             }
             return;
         }

@@ -8,16 +8,21 @@ public class Monster : Sprite
     public Vector2 DestinationPosition { get; protected set; }
     public bool Dead { get; private set; }
     private float _hitDurationLeft;
-    public List<Effects> Effects { get; private set; } = new();
+    public List<Buff> AppliedBuffs { get; private set; } = new();
 
     public Monster(MonsterData data, Vector2 position) : base(data.Texture, position)
     {
         Data = data;
     }
 
-    public void ApplyEffect(Effects effect)
+    public void ApplyBuff(Buff buff)
     {
-        Effects.Add(effect);
+        AppliedBuffs.Add(buff);
+    }
+
+    public void RemoveBuff(Buff buff)
+    {
+        AppliedBuffs.Remove(buff);
     }
 
     public void TakeDamage(int dmg)
@@ -62,36 +67,41 @@ public class Monster : Sprite
         Dead = true;
     }
 
-    public void ReachGoal()
+    private void CheckGoalReached()
     {
-        OnGoalReached?.Invoke(this, EventArgs.Empty);
-        Dead = true;
+        if (Position.Y > (Map.SIZE_Y - 1) * Map.TILE_SIZE)
+        {
+            OnGoalReached?.Invoke(this, EventArgs.Empty);
+            Dead = true;
+        }
     }
 
-    public void CheckGoalReached()
+    public void RecalculateSpeed()
     {
-        if (Position.Y > (Map.SIZE_Y - 1) * Map.TILE_SIZE) ReachGoal();
+        int freezeCount = AppliedBuffs.Where(e => e.Effect == Effects.Freeze).Count();
+
+        if (freezeCount > 0)
+        {
+            Data.CurrentSpeed = Data.Speed * Math.Max(0.3f, 1f - (freezeCount * 0.15f));
+        }
+        else
+        {
+            Data.CurrentSpeed = Data.Speed;
+        }
+
+        //Color = (freezeCount > 0) ? Color.Blue : Color.White;
     }
 
     public void Update()
     {
         if (Dead) return;
 
-        //USE LINQ!
-        int freezeCount = 0;
-        foreach (var item in Effects)
+        foreach (var buff in AppliedBuffs.ToArray())
         {
-            if (item == Project003.Effects.Freeze) freezeCount++;
+            buff.Update();
         }
 
-        if (freezeCount > 0)
-        {
-            Data.CurrentSpeed = (int)(Data.Speed / (float)freezeCount);
-        }
-
-        Color = (freezeCount > 0) ? Color.Blue : Color.White;
-        Color = (_hitDurationLeft > 0) ? Color.Red : Color;
-
+        Color = (_hitDurationLeft > 0) ? Color.Red : Color.White;
         if (_hitDurationLeft > 0)
         {
             _hitDurationLeft -= Globals.Time;

@@ -12,7 +12,6 @@
 
 Cool TODO list
 ---------------------
-FIX FREEZE
 Random reward generator
 Tower selection
 Tower stats
@@ -40,6 +39,8 @@ Drag&Drop mechanic?
 
 Stream number - DONE
 ---------------------
+13 - Burning effect
+13 - Monster buff/debuff system
 12 - Freezing Tower & Freeze Effect
 12 - Landmine game logic rework
 12 - Lives counter UI
