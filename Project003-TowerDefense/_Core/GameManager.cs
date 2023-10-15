@@ -11,7 +11,7 @@ public class GameManager
     public readonly List<Monsters> monstersInWave = new();
     public Queue<RewardItem> Rewards { get; set; } = new();
     public Rewards CurrentReward { get; set; }
-    public Spells CurrentSpell { get; set; }
+    public Spell CurrentSpell { get; set; }
     public Tile CurrentTile { get; set; }
     public int PlayerLives { get; set; } = 3;
 

@@ -22,11 +22,19 @@ public class SpellManager
         SpellBook.Add(spell);
     }
 
-    public event EventHandler<Spells> OnCast;
+    public event EventHandler<Spell> OnCast;
 
-    public void HandleCast(object sender, Spells id)
+    public void HandleCast(object sender, Spell spell)
     {
-        OnCast?.Invoke(this, id);
+        OnCast?.Invoke(this, sender as Spell);
+    }
+
+    public void ResetSpells()
+    {
+        foreach (var spell in SpellBook)
+        {
+            spell.Used = false;
+        }
     }
 
     public void UpdateSpells()
@@ -36,6 +44,11 @@ public class SpellManager
 
     public void DrawSpells()
     {
-        SpellBook.ForEach(s => s.Draw());
+        foreach (var spell in SpellBook)
+        {
+            if (spell.Used) continue;
+            spell.Draw();
+        }
+        //SpellBook.Where(s => !s.Used).ToList().ForEach(s => s.Draw()); //performance?
     }
 }

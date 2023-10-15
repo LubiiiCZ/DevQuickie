@@ -29,7 +29,7 @@ public class StateManager
         _states.Add(States.ProcessRewards, new ProcessRewardsState(_gm));
         _states.Add(States.Placement, new PlacementState(_gm));
         _states.Add(States.SelectTarget, new SelectTargetState(_gm));
-        _states.Add(States.ProcessSpells, new ProcessSpellState(_gm));
+        _states.Add(States.ProcessSpells, new ProcessSpellsState(_gm));
 
         _currentState = _states[States.Reward];
         _currentState.Active = true;

@@ -29,7 +29,7 @@ public class MonsterManager
     private void DrawHPBar(Monster monster)
     {
         Vector2 barPosition = new(monster.Position.X - monster.Origin.X + 4, monster.Position.Y - monster.Origin.Y - 5);
-        var width = (float)monster.Data.Health / monster.Data.MaxHealth * (Map.TILE_SIZE - 8);
+        var width = monster.Data.Health / monster.Data.MaxHealth * (Map.TILE_SIZE - 8);
         Rectangle destRectangle = new((int)barPosition.X, (int)barPosition.Y, (int)width, 3);
         Globals.SpriteBatch.Draw(_hpBarTexture, destRectangle, Color.White);
     }
@@ -106,13 +106,13 @@ public class MonsterManager
         }
     }
 
-    public void DoSplashDamage(int dmg, Vector2 center, int radius)
+    public void DoSplashDamage(int dmg, DamageTypes damageType, Vector2 center, int radius)
     {
         foreach (var monster in MonstersInWave)
         {
             if (Vector2.Distance(monster.Position, center) <= radius)
             {
-                monster.TakeDamage(dmg);
+                monster.TakeDamage(dmg, damageType);
             }
         }
     }
@@ -145,7 +145,7 @@ public class MonsterManager
 
                 if (Vector2.Distance(monster.Position, mine.Position) <= mine.Range)
                 {
-                    monster.TakeDamage(mine.Damage);
+                    monster.TakeDamage(mine.Damage, mine.DamageType);
                     mine.Used = true;
                 }
             }

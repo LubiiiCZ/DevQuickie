@@ -17,8 +17,6 @@ Tower selection
 Tower stats
 Tower upgrading
 Removing towers
-Damage type
-Monster resistances
 Sound FXs
 Music
 Hints system
@@ -26,7 +24,6 @@ Hints system
 
 Boring TODO list
 ---------------------
-Spells being removed after use (?)
 Refactor CreateTile method (clean code)
 Add reward options labels (UX)
 Smooth monster movement (game logic)
@@ -39,6 +36,8 @@ Drag&Drop mechanic?
 
 Stream number - DONE
 ---------------------
+14 - Damage types
+14 - Monster resistances
 13 - Burning effect
 13 - Monster buff/debuff system
 12 - Freezing Tower & Freeze Effect

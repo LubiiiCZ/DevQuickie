@@ -10,6 +10,7 @@ public class MonsterFactory
             Health = 3,
             Speed = 150,
             CurrentSpeed = 150,
+            Resistances = { { DamageTypes.Fire, 50 }, },
         }},
         { Monsters.RedNinja, new(){
             Texture = Globals.Content.Load<Texture2D>("hero_boss"),

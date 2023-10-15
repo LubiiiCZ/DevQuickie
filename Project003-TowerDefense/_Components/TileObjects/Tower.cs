@@ -11,6 +11,7 @@ public class Tower : TileObject
     private static Texture2D _projectileTexture;
     public bool Selected { get; set; }
     public bool OnlyAir { get; set; }
+    public DamageTypes DamageType { get; set; } = DamageTypes.Normal;
     public List<Effects> Effects { get; private set; } = new();
 
     public Tower(TileObjects objectType, Texture2D texture) : base(objectType, texture)
@@ -40,7 +41,7 @@ public class Tower : TileObject
 
     public void FireProjectile()
     {
-        Projectile p = new(_projectileTexture, Position, Target, Damage);
+        Projectile p = new(_projectileTexture, Position, Target, Damage, DamageType);
         p.SetEffects(Effects);
         Projectiles.Add(p);
     }

@@ -28,10 +28,11 @@ public static class TileObjectFactory
             var tileObject = new Tower(type, GetTileObjectTexture(type))
             {
                 Range = Map.TILE_SIZE * 4,
-                Damage = 0,
+                Damage = 2,
+                DamageType = DamageTypes.Fire,
             };
             tileObject.SetCooldown(1f);
-            tileObject.AddEffect(Effects.Burning);
+            //tileObject.AddEffect(Effects.Burn);
 
             return tileObject;
         }
@@ -43,6 +44,7 @@ public static class TileObjectFactory
                 Range = Map.TILE_SIZE * 5,
                 Damage = 2,
                 OnlyAir = true,
+                DamageType = DamageTypes.Electricity,
             };
             tileObject.SetCooldown(1.5f);
 
@@ -55,6 +57,7 @@ public static class TileObjectFactory
             {
                 Range = Map.TILE_SIZE * 3,
                 Damage = 1,
+                DamageType = DamageTypes.Ice,
             };
             tileObject.SetCooldown(1.5f);
             tileObject.AddEffect(Effects.Freeze);

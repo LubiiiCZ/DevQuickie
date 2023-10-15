@@ -13,12 +13,13 @@ public class PlayState : GameState
         StateManager.SwitchState(States.Reward);
         _gm.map.Towers.ForEach(t => t.Reset());
         _gm.map.ResetMines();
+        _gm.spellManager.ResetSpells();
     }
 
-    public void HandleSpellCast(object sender, Spells id)
+    public void HandleSpellCast(object sender, Spell spell)
     {
         if (!Active) return;
-        _gm.CurrentSpell = id;
+        _gm.CurrentSpell = spell;
         StateManager.SwitchState(States.SelectTarget); //switch by spell id here
     }
 

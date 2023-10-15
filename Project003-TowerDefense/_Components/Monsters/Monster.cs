@@ -1,3 +1,5 @@
+using Java.Lang.Invoke;
+
 namespace Project003;
 
 public class Monster : Sprite
@@ -25,10 +27,22 @@ public class Monster : Sprite
         AppliedBuffs.Remove(buff);
     }
 
-    public void TakeDamage(int dmg)
+    private float GetDamageMultiplier(DamageTypes damageType)
+    {
+        float multiplier = 1f;
+
+        if (Data.Resistances.TryGetValue(damageType, out int resistnace))
+        {
+            multiplier = (100 - resistnace) / 100f;
+        }
+
+        return multiplier;
+    }
+
+    public void TakeDamage(int dmg, DamageTypes damageType)
     {
         _hitDurationLeft = 0.1f;
-        Data.Health -= dmg;
+        Data.Health -= dmg * GetDamageMultiplier(damageType);
         if (Data.Health <= 0) Die();
     }
 
