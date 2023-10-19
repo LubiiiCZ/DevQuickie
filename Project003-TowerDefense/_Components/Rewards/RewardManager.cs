@@ -1,5 +1,3 @@
-using System.Linq;
-
 namespace Project003;
 
 public delegate void RewardOptionHandler(List<RewardItem> rewards);
@@ -14,10 +12,7 @@ public class RewardManager
     public RewardManager(GraphicsDevice graphicsDevice)
     {
         _rewardFactory = new();
-        AddRewardOption(_rewardFactory.GetRewardOption(new() { Rewards.Tower, Rewards.MonsterNinja }));
-        AddRewardOption(_rewardFactory.GetRewardOption(new() { Rewards.TowerIce, Rewards.Wall, Rewards.Fireball, Rewards.MonsterFlyingNinja }));
-        AddRewardOption(_rewardFactory.GetRewardOption(new() { Rewards.TowerAir, Rewards.Wall, Rewards.MonsterRedNinja }));
-        AddRewardOption(_rewardFactory.GetRewardOption(new() { Rewards.Mine, Rewards.Wall, Rewards.MonsterRedNinja }));
+        GenerateRandomRewardOptions(4);
 
         RewardOption.OnTap += RewardSelected;
 
@@ -67,6 +62,16 @@ public class RewardManager
     public void ClearRewardOptions()
     {
         _rewardOptions.Clear();
+    }
+
+    public void GenerateRandomRewardOptions(int options)
+    {
+        ClearRewardOptions();
+
+        for (int i = 0; i < options; i++)
+        {
+            AddRewardOption(_rewardFactory.GetRewardOption(_rewardFactory.GetRandomRewardsList(2)));
+        }
     }
 
     public void Update()

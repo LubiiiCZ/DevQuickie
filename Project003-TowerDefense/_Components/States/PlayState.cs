@@ -14,6 +14,7 @@ public class PlayState : GameState
         _gm.map.Towers.ForEach(t => t.Reset());
         _gm.map.ResetMines();
         _gm.spellManager.ResetSpells();
+        _gm.rewardManager.GenerateRandomRewardOptions(4);
     }
 
     public void HandleSpellCast(object sender, Spell spell)

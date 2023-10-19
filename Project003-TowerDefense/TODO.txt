@@ -12,7 +12,6 @@
 
 Cool TODO list
 ---------------------
-Random reward generator
 Tower selection
 Tower stats
 Tower upgrading
@@ -36,6 +35,7 @@ Drag&Drop mechanic?
 
 Stream number - DONE
 ---------------------
+15 - Random reward generator
 14 - Damage types
 14 - Monster resistances
 13 - Burning effect
