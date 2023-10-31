@@ -108,6 +108,11 @@ public class Map
         Towers.ForEach(t => t.UpdateSelection());
     }
 
+    public void DrawRange(Vector2 position, float range)
+    {
+        Globals.SpriteBatch.Draw(_rangeTexture, position, null, Color.White * 0.2f, 0f, _rangeOrigin, range / 160f, SpriteEffects.None, 0f);
+    }
+
     public void Draw()
     {
         for (int y = 0; y < SIZE_Y; y++)
@@ -119,7 +124,7 @@ public class Map
         {
             if (tower.Selected)
             {
-                Globals.SpriteBatch.Draw(_rangeTexture, tower.Position, null, Color.White * 0.2f, 0f, _rangeOrigin, tower.Range / 160f, SpriteEffects.None, 0f);
+                DrawRange(tower.Position, tower.Range);
             }
         }
     }

@@ -22,20 +22,25 @@ public class ProcessRewardsState : GameState
 
     public override void Update()
     {
-        RewardItem reward;
-
         if (_gm.Rewards.Count > 0)
         {
-            reward = _gm.Rewards.Dequeue();
+            _gm.CurrentReward = _gm.Rewards.Dequeue().RewardID;
+            _rewardActions[_gm.CurrentReward]();
         }
         else
         {
-            StateManager.SwitchState(States.Idle);
-            return;
-        }
+            _gm.RewardsLeft--;
 
-        _gm.CurrentReward = reward.RewardID;
-        _rewardActions[reward.RewardID]();
+            if (_gm.RewardsLeft > 0)
+            {
+                StateManager.SwitchState(States.Reward);
+                _gm.rewardManager.GenerateRandomRewardOptions(4);
+            }
+            else
+            {
+                StateManager.SwitchState(States.Idle);
+            }
+        }
     }
 
     public override void Draw()

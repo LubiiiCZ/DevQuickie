@@ -8,7 +8,7 @@ public class ProcessSpellsState : GameState
     {
         _spellActions = new()
         {
-            { Spells.Fireball, () => _gm.monsterManager.DoSplashDamage(3, DamageTypes.Fire, Map.MapToScreen(_gm.CurrentTile.MapX, _gm.CurrentTile.MapY), Map.TILE_SIZE * 2) },
+            { Spells.Fireball, () => _gm.monsterManager.DoSplashDamage(3, DamageTypes.Fire, _gm.CurrentSpell.Position, Map.TILE_SIZE * 2) },
         };
     }
 
@@ -16,6 +16,7 @@ public class ProcessSpellsState : GameState
     {
         _spellActions[_gm.CurrentSpell.SpellID]();
         _gm.CurrentSpell.Used = true;
+        _gm.CurrentSpell.Position = InputManager.StartPosition;
         StateManager.UpdateState(States.Play);
         StateManager.SwitchState(States.Play);
     }

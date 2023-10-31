@@ -17,7 +17,7 @@ public class SpellManager
     public void AddSpell(Spells id)
     {
         var spell = _spellFactory.GetSpell(id);
-        spell.Position = new(Map.TILE_SIZE * SpellBook.Count + Map.TILE_SIZE / 2, Map.SIZE_Y * Map.TILE_SIZE + Map.TILE_SIZE / 2);
+        spell.Position = new(Map.TILE_SIZE * (SpellBook.Count + 1) + Map.TILE_SIZE / 2, Map.SIZE_Y * Map.TILE_SIZE + Map.TILE_SIZE / 2);
         spell.OnCast += HandleCast;
         SpellBook.Add(spell);
     }

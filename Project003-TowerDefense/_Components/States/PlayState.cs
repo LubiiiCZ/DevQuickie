@@ -11,17 +11,23 @@ public class PlayState : GameState
     public void HandleWaveEnd(object sender, EventArgs args)
     {
         StateManager.SwitchState(States.Reward);
+        _gm.RewardsLeft = 1;
         _gm.map.Towers.ForEach(t => t.Reset());
         _gm.map.ResetMines();
         _gm.spellManager.ResetSpells();
         _gm.rewardManager.GenerateRandomRewardOptions(4);
+        if (InputManager.IsDragging)
+        {
+            (InputManager.DraggedItem as Sprite).Position = InputManager.StartPosition;
+            InputManager.IsDragging = false;
+        }
     }
 
     public void HandleSpellCast(object sender, Spell spell)
     {
         if (!Active) return;
         _gm.CurrentSpell = spell;
-        StateManager.SwitchState(States.SelectTarget); //switch by spell id here
+        StateManager.SwitchState(States.ProcessSpells); //switch by spell id here
     }
 
     public override void Update()
@@ -53,5 +59,9 @@ public class PlayState : GameState
         _gm.spellManager.DrawSpells();
         _gm.uiManager.DrawMonsterCounter(_gm.monsterManager.MonstersInWave.Count);
         _gm.uiManager.DrawLiveCounter(_gm.PlayerLives);
+        if (InputManager.IsDragging)
+        {
+            _gm.map.DrawRange((InputManager.DraggedItem as Spell).Position, (InputManager.DraggedItem as Spell).Range);
+        }
     }
 }

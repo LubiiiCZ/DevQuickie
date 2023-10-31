@@ -11,9 +11,11 @@ public class GameManager
     public readonly List<Monsters> monstersInWave = new();
     public Queue<RewardItem> Rewards { get; set; } = new();
     public Rewards CurrentReward { get; set; }
+    public int RewardsLeft { get; set; }
+    public int RewardRerolls { get; set; }
     public Spell CurrentSpell { get; set; }
     public Tile CurrentTile { get; set; }
-    public int PlayerLives { get; set; } = 3;
+    public int PlayerLives { get; set; }
 
     public GameManager(GraphicsDeviceManager graphics)
     {
@@ -28,6 +30,8 @@ public class GameManager
         StateManager.Initialize(this);
 
         Monster.OnGoalReached += HandleMonsterReachedGoal;
+
+        ResetGame();
     }
 
     public void HandleMonsterReachedGoal(object sender, EventArgs args)
@@ -37,12 +41,15 @@ public class GameManager
 
     public void ResetGame()
     {
-        PlayerLives = 3;
+        PlayerLives = 10;
+        RewardsLeft = 3;
+        RewardRerolls = 99;
         monstersInWave.Clear();
         spellManager.Reset();
         monsterManager.Reset();
         map.Reset();
         StateManager.SwitchState(States.Reward);
+        InputManager.IsDragging = false;
     }
 
     public void AssignTargets()

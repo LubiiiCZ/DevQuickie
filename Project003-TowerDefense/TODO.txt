@@ -10,8 +10,15 @@
 
 
 
+
 Cool TODO list
 ---------------------
+More enemy types
+More tower types
+More spells
+Game events
+Bosses
+Elements interactions
 Tower selection
 Tower stats
 Tower upgrading
@@ -30,11 +37,13 @@ Pathfinding recalculation (performance)
 Gamearea dimensions constants (clean code)
 Convert individual textures into texture-atlas (performance)
 Logging system
-Drag&Drop mechanic?
 
 
 Stream number - DONE
 ---------------------
+16 - Drag&Drop mechanic
+16 - Multiple rewards at start
+16 - Reward re-rolls
 15 - Random reward generator
 14 - Damage types
 14 - Monster resistances

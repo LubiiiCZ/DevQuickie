@@ -11,6 +11,6 @@ public class SpellFactory
 
     public Spell GetSpell(Spells spellID)
     {
-        return new(spellID, SpellTextures[spellID]);
+        return new(spellID, Map.TILE_SIZE * 2, SpellTextures[spellID]);
     }
 }
