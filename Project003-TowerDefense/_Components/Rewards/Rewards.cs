@@ -8,6 +8,7 @@ public enum Rewards
     Wall,
     Mine,
     Fireball,
+    Freeze,
     MonsterNinja,
     MonsterRedNinja,
     MonsterFlyingNinja,

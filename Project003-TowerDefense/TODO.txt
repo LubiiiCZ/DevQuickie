@@ -13,9 +13,9 @@
 
 Cool TODO list
 ---------------------
+More spells
 More enemy types
 More tower types
-More spells
 Game events
 Bosses
 Elements interactions
@@ -30,9 +30,10 @@ Hints system
 
 Boring TODO list
 ---------------------
+Spell charges UI (UX)
+Smooth monster movement (game logic)
 Refactor CreateTile method (clean code)
 Add reward options labels (UX)
-Smooth monster movement (game logic)
 Pathfinding recalculation (performance)
 Gamearea dimensions constants (clean code)
 Convert individual textures into texture-atlas (performance)
@@ -41,6 +42,8 @@ Logging system
 
 Stream number - DONE
 ---------------------
+17 - Spell charges
+17 - Freeze spell
 16 - Drag&Drop mechanic
 16 - Multiple rewards at start
 16 - Reward re-rolls
@@ -55,7 +58,7 @@ Stream number - DONE
 11 - Land mines
 11 - Losing condition - Lives
 11 - Split Tiles and Tile-Objects
-10 - Spellcasting system
+10 - Spellcasting system - Fireball
 09 - While placing a tower reward show which one it is
 09 - Anti-air tower
 09 - Flying monsters

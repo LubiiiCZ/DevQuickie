@@ -2,15 +2,22 @@ namespace Project003;
 
 public class SpellFactory
 {
-    public Dictionary<Spells, Texture2D> SpellTextures = new();
-
-    public SpellFactory()
+    public Dictionary<Spells, SpellData> SpellProp = new()
     {
-        SpellTextures.Add(Spells.Fireball, Globals.Content.Load<Texture2D>("fireball"));
-    }
+        { Spells.Fireball, new(){
+            Texture = Globals.Content.Load<Texture2D>("fireball"),
+            Range = Map.TILE_SIZE * 1,
+            Damage = 3,
+        }},
+        { Spells.Freeze, new(){
+            Texture = Globals.Content.Load<Texture2D>("freeze"),
+            Range = Map.TILE_SIZE * 2,
+            Damage = 0,
+        }},
+    };
 
-    public Spell GetSpell(Spells spellID)
+    public Spell CreateSpell(Spells spellID)
     {
-        return new(spellID, Map.TILE_SIZE * 2, SpellTextures[spellID]);
+        return new(spellID, SpellProp[spellID]);
     }
 }

@@ -3,18 +3,19 @@ namespace Project003;
 public class Spell : Sprite
 {
     public Spells SpellID { get; }
-    public bool Used { get; set; }
-    public int Range { get; set; }
+    public SpellData Data { get; set; }
+    public int Charges { get; set; } = 1;
+    public int MaxCharges { get; set; } = 1;
 
-    public Spell(Spells id, int range, Texture2D texture) : base(texture, Vector2.Zero)
+    public Spell(Spells id, SpellData data) : base(data.Texture, Vector2.Zero)
     {
         SpellID = id;
-        Range = range;
+        Data = data;
     }
 
     public void Update()
     {
-        if (Used) return;
+        if (Charges < 1) return;
         if (InputManager.WasTapped(Rectangle) && !InputManager.IsDragging)
         {
             InputManager.IsDragging = true;

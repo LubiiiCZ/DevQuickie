@@ -14,6 +14,7 @@ public class RewardFactory
         RewardTextures.Add(Rewards.TowerIce, Globals.Content.Load<Texture2D>("tower_ice"));
         RewardTextures.Add(Rewards.Wall, Globals.Content.Load<Texture2D>("wall"));
         RewardTextures.Add(Rewards.Fireball, Globals.Content.Load<Texture2D>("fireball"));
+        RewardTextures.Add(Rewards.Freeze, Globals.Content.Load<Texture2D>("freeze"));
         RewardTextures.Add(Rewards.Mine, Globals.Content.Load<Texture2D>("mine"));
         RewardTextures.Add(Rewards.MonsterNinja, Globals.Content.Load<Texture2D>("hero"));
         RewardTextures.Add(Rewards.MonsterRedNinja, Globals.Content.Load<Texture2D>("hero_boss"));
@@ -25,6 +26,7 @@ public class RewardFactory
         PositiveRewardValues.Add(Rewards.TowerIce, 2);
         PositiveRewardValues.Add(Rewards.Wall, 1);
         PositiveRewardValues.Add(Rewards.Fireball, 2);
+        PositiveRewardValues.Add(Rewards.Freeze, 2);
         PositiveRewardValues.Add(Rewards.Mine, 2);
 
         //NEGATIVE REWARDS

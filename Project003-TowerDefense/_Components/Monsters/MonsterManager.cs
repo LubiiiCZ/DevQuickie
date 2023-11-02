@@ -106,13 +106,27 @@ public class MonsterManager
         }
     }
 
-    public void DoSplashDamage(int dmg, DamageTypes damageType, Vector2 center, int radius)
+    public void DoSplashDamage(int dmg, DamageTypes damageType, Vector2 center, float radius)
     {
         foreach (var monster in MonstersInWave)
         {
             if (Vector2.Distance(monster.Position, center) <= radius)
             {
                 monster.TakeDamage(dmg, damageType);
+            }
+        }
+    }
+
+    public void ApplyEffectArea(Vector2 center, float radius, Effects effect, int count = 1)
+    {
+        foreach (var monster in MonstersInWave)
+        {
+            if (Vector2.Distance(monster.Position, center) <= radius)
+            {
+                for (int i = 0; i < count; i++)
+                {
+                    BuffFactory.CreateBuff(monster, effect);
+                }
             }
         }
     }

@@ -16,10 +16,20 @@ public class SpellManager
 
     public void AddSpell(Spells id)
     {
-        var spell = _spellFactory.GetSpell(id);
-        spell.Position = new(Map.TILE_SIZE * (SpellBook.Count + 1) + Map.TILE_SIZE / 2, Map.SIZE_Y * Map.TILE_SIZE + Map.TILE_SIZE / 2);
-        spell.OnCast += HandleCast;
-        SpellBook.Add(spell);
+        var existingSpell = SpellBook.Find(s => s.SpellID == id);
+
+        if (existingSpell is null)
+        {
+            var spell = _spellFactory.CreateSpell(id);
+            spell.Position = new(Map.TILE_SIZE * (SpellBook.Count + 1) + Map.TILE_SIZE / 2, Map.SIZE_Y * Map.TILE_SIZE + Map.TILE_SIZE / 2);
+            spell.OnCast += HandleCast;
+            SpellBook.Add(spell);
+        }
+        else
+        {
+            existingSpell.Charges++;
+            existingSpell.MaxCharges++;
+        }
     }
 
     public event EventHandler<Spell> OnCast;
@@ -33,7 +43,7 @@ public class SpellManager
     {
         foreach (var spell in SpellBook)
         {
-            spell.Used = false;
+            spell.Charges = spell.MaxCharges;
         }
     }
 
@@ -46,7 +56,7 @@ public class SpellManager
     {
         foreach (var spell in SpellBook)
         {
-            if (spell.Used) continue;
+            if (spell.Charges < 1) continue;
             spell.Draw();
         }
         //SpellBook.Where(s => !s.Used).ToList().ForEach(s => s.Draw()); //performance?

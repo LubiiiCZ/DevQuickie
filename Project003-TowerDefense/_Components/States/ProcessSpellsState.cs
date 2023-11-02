@@ -2,20 +2,21 @@ namespace Project003;
 
 public class ProcessSpellsState : GameState
 {
-    private readonly Dictionary<Spells, Action> _spellActions;
+    private readonly Dictionary<Spells, Action<Spell>> _spellActions;
 
     public ProcessSpellsState(GameManager gm) : base(gm)
     {
         _spellActions = new()
         {
-            { Spells.Fireball, () => _gm.monsterManager.DoSplashDamage(3, DamageTypes.Fire, _gm.CurrentSpell.Position, Map.TILE_SIZE * 2) },
+            { Spells.Fireball, (s) => _gm.monsterManager.DoSplashDamage(s.Data.Damage, DamageTypes.Fire, _gm.CurrentSpell.Position, s.Data.Range) },
+            { Spells.Freeze, (s) => _gm.monsterManager.ApplyEffectArea(_gm.CurrentSpell.Position, s.Data.Range, Effects.Freeze, 5) },
         };
     }
 
     public override void Update()
     {
-        _spellActions[_gm.CurrentSpell.SpellID]();
-        _gm.CurrentSpell.Used = true;
+        _spellActions[_gm.CurrentSpell.SpellID](_gm.CurrentSpell);
+        _gm.CurrentSpell.Charges--;
         _gm.CurrentSpell.Position = InputManager.StartPosition;
         StateManager.UpdateState(States.Play);
         StateManager.SwitchState(States.Play);
