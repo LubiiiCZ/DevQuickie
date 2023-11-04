@@ -10,12 +10,21 @@
 
 
 
+Content TODO list
+=====================
+Spells
+- Lightning bolt - single target high electricity dmg
+Enemies
+- Boss - tanky ground slow
+Towers
+- Cannon - ground splash damage
+Rewards
+- Life - x1
+- Reroll - x3
 
-Cool TODO list
+
+Cool TODO list - mechanics, features
 ---------------------
-More spells
-More enemy types
-More tower types
 Game events
 Bosses
 Elements interactions
@@ -28,7 +37,7 @@ Music
 Hints system
 
 
-Boring TODO list
+Boring TODO list - refactoring, bugfix
 ---------------------
 Spell charges UI (UX)
 Smooth monster movement (game logic)
