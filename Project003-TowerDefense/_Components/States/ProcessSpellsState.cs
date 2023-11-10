@@ -8,8 +8,9 @@ public class ProcessSpellsState : GameState
     {
         _spellActions = new()
         {
-            { Spells.Fireball, (s) => _gm.monsterManager.DoSplashDamage(s.Data.Damage, DamageTypes.Fire, _gm.CurrentSpell.Position, s.Data.Range) },
-            { Spells.Freeze, (s) => _gm.monsterManager.ApplyEffectArea(_gm.CurrentSpell.Position, s.Data.Range, Effects.Freeze, 5) },
+            { Spells.Fireball, (s) => _gm.monsterManager.DoSplashDamage(s.Data.Damage, DamageTypes.Fire, TargetingTypes.All, _gm.CurrentSpell.Position, s.Data.Radius) },
+            { Spells.Freeze, (s) => _gm.monsterManager.ApplyEffectArea(_gm.CurrentSpell.Position, s.Data.Radius, TargetingTypes.All, Effects.Freeze, 5) },
+            { Spells.Ligthing, (s) => _gm.monsterManager.SelectNearestTarget(_gm.CurrentSpell.Position, TargetingTypes.All)?.TakeDamage(_gm.CurrentSpell.Data.Damage, DamageTypes.Electricity) },
         };
     }
 

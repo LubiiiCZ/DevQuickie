@@ -1,5 +1,3 @@
-using Java.Lang.Invoke;
-
 namespace Project003;
 
 public class Monster : Sprite

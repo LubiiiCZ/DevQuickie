@@ -13,14 +13,13 @@
 Content TODO list
 =====================
 Spells
-- Lightning bolt - single target high electricity dmg
+-
 Enemies
 - Boss - tanky ground slow
 Towers
-- Cannon - ground splash damage
+-
 Rewards
-- Life - x1
-- Reroll - x3
+-
 
 
 Cool TODO list - mechanics, features
@@ -42,6 +41,7 @@ Boring TODO list - refactoring, bugfix
 Spell charges UI (UX)
 Smooth monster movement (game logic)
 Refactor CreateTile method (clean code)
+Refactor Create TileObject method (clean code)
 Add reward options labels (UX)
 Pathfinding recalculation (performance)
 Gamearea dimensions constants (clean code)
@@ -51,6 +51,9 @@ Logging system
 
 Stream number - DONE
 ---------------------
+18 - New spell - Lightning bolt
+18 - New tower - Cannon
+18 - New rewards - Reroll, Life
 17 - Spell charges
 17 - Freeze spell
 16 - Drag&Drop mechanic

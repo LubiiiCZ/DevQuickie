@@ -34,6 +34,7 @@ public class PlacementState : GameState
             Rewards.Tower => TileObjects.Tower,
             Rewards.TowerAir => TileObjects.TowerAir,
             Rewards.TowerIce => TileObjects.TowerIce,
+            Rewards.TowerCannon => TileObjects.TowerCannon,
             Rewards.Wall => TileObjects.Wall,
             Rewards.Mine => TileObjects.Mine,
             _ => TileObjects.Wall,

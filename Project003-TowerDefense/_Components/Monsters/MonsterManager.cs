@@ -106,10 +106,13 @@ public class MonsterManager
         }
     }
 
-    public void DoSplashDamage(int dmg, DamageTypes damageType, Vector2 center, float radius)
+    public void DoSplashDamage(int dmg, DamageTypes damageType, TargetingTypes targetingType, Vector2 center, float radius)
     {
         foreach (var monster in MonstersInWave)
         {
+            if (!monster.Data.Flying && targetingType == TargetingTypes.Air) continue;
+            if (monster.Data.Flying && targetingType == TargetingTypes.Ground) continue;
+
             if (Vector2.Distance(monster.Position, center) <= radius)
             {
                 monster.TakeDamage(dmg, damageType);
@@ -117,10 +120,13 @@ public class MonsterManager
         }
     }
 
-    public void ApplyEffectArea(Vector2 center, float radius, Effects effect, int count = 1)
+    public void ApplyEffectArea(Vector2 center, float radius, TargetingTypes targetingType, Effects effect, int count = 1)
     {
         foreach (var monster in MonstersInWave)
         {
+            if (!monster.Data.Flying && targetingType == TargetingTypes.Air) continue;
+            if (monster.Data.Flying && targetingType == TargetingTypes.Ground) continue;
+
             if (Vector2.Distance(monster.Position, center) <= radius)
             {
                 for (int i = 0; i < count; i++)
@@ -129,6 +135,27 @@ public class MonsterManager
                 }
             }
         }
+    }
+
+    public Monster SelectNearestTarget(Vector2 position, TargetingTypes targetingType)
+    {
+        float minDistance = float.MaxValue;
+        Monster result = null;
+
+        foreach (var monster in MonstersInWave)
+        {
+            if (!monster.Data.Flying && targetingType == TargetingTypes.Air) continue;
+            if (monster.Data.Flying && targetingType == TargetingTypes.Ground) continue;
+
+            var distance = Vector2.Distance(position, monster.Position);
+            if (distance < minDistance)
+            {
+                minDistance = distance;
+                result = monster;
+            }
+        }
+
+        return result;
     }
 
     public void CheckWaveEnd()

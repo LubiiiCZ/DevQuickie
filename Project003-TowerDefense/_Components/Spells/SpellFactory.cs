@@ -6,13 +6,18 @@ public class SpellFactory
     {
         { Spells.Fireball, new(){
             Texture = Globals.Content.Load<Texture2D>("fireball"),
-            Range = Map.TILE_SIZE * 1,
+            Radius = Map.TILE_SIZE * 1,
             Damage = 3,
         }},
         { Spells.Freeze, new(){
             Texture = Globals.Content.Load<Texture2D>("freeze"),
-            Range = Map.TILE_SIZE * 2,
+            Radius = Map.TILE_SIZE * 2,
             Damage = 0,
+        }},
+        { Spells.Ligthing, new(){
+            Texture = Globals.Content.Load<Texture2D>("lightning"),
+            Radius = 1,
+            Damage = 10,
         }},
     };
 

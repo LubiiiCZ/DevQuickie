@@ -61,7 +61,7 @@ public class PlayState : GameState
         _gm.uiManager.DrawLiveCounter(_gm.PlayerLives);
         if (InputManager.IsDragging)
         {
-            _gm.map.DrawRange((InputManager.DraggedItem as Spell).Position, (InputManager.DraggedItem as Spell).Data.Range);
+            _gm.map.DrawRange((InputManager.DraggedItem as Spell).Position, (InputManager.DraggedItem as Spell).Data.Radius);
         }
     }
 }

@@ -12,12 +12,16 @@ public class ProcessRewardsState : GameState
             { Rewards.Tower, () => StateManager.SwitchState(States.Placement) },
             { Rewards.TowerAir, () => StateManager.SwitchState(States.Placement) },
             { Rewards.TowerIce, () => StateManager.SwitchState(States.Placement) },
+            { Rewards.TowerCannon, () => StateManager.SwitchState(States.Placement) },
             { Rewards.Mine, () => StateManager.SwitchState(States.Placement) },
             { Rewards.MonsterNinja, () => _gm.monstersInWave.Add(Monsters.Ninja) },
             { Rewards.MonsterRedNinja, () => _gm.monstersInWave.Add(Monsters.RedNinja) },
             { Rewards.MonsterFlyingNinja, () => _gm.monstersInWave.Add(Monsters.FlyingNinja) },
             { Rewards.Fireball, () => _gm.spellManager.AddSpell(Spells.Fireball) },
             { Rewards.Freeze, () => _gm.spellManager.AddSpell(Spells.Freeze) },
+            { Rewards.Lightning, () => _gm.spellManager.AddSpell(Spells.Ligthing) },
+            { Rewards.Life, () => _gm.PlayerLives++ },
+            { Rewards.Reroll, () => _gm.RewardRerolls += 3 },
         };
     }
 

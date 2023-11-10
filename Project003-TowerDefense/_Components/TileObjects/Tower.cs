@@ -5,13 +5,15 @@ public class Tower : TileObject
     public Monster Target { get; set; }
     public float Range { get; set; }
     public int Damage { get; set; }
+    public float SplashRadius { get; set; } = 1f;
     public float Cooldown { get; private set; }
     public float CooldownLeft { get; private set; }
     public List<Projectile> Projectiles { get; } = new();
     private static Texture2D _projectileTexture;
     public bool Selected { get; set; }
-    public bool OnlyAir { get; set; }
+    public TargetingTypes TargetingType { get; set; }
     public DamageTypes DamageType { get; set; } = DamageTypes.Normal;
+    public AttackTypes AttackType { get; set; } = AttackTypes.SingleTarget;
     public List<Effects> Effects { get; private set; } = new();
 
     public Tower(TileObjects objectType, Texture2D texture) : base(objectType, texture)
@@ -41,7 +43,7 @@ public class Tower : TileObject
 
     public void FireProjectile()
     {
-        Projectile p = new(_projectileTexture, Position, Target, Damage, DamageType);
+        Projectile p = new(_projectileTexture, Position, Target, Damage, SplashRadius, DamageType, AttackType, TargetingType);
         p.SetEffects(Effects);
         Projectiles.Add(p);
     }
@@ -62,7 +64,8 @@ public class Tower : TileObject
 
         foreach (var monster in monsters)
         {
-            if (!monster.Data.Flying && OnlyAir) continue;
+            if (!monster.Data.Flying && TargetingType == TargetingTypes.Air) continue;
+            if (monster.Data.Flying && TargetingType == TargetingTypes.Ground) continue;
 
             var distance = Vector2.Distance(Position, monster.Position);
             if (distance < minDistance && distance <= Range)

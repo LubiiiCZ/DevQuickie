@@ -11,6 +11,7 @@ public static class TileObjectFactory
             { TileObjects.Tower, Globals.Content.Load<Texture2D>("tower") },
             { TileObjects.TowerAir, Globals.Content.Load<Texture2D>("tower_air") },
             { TileObjects.TowerIce, Globals.Content.Load<Texture2D>("tower_ice") },
+            { TileObjects.TowerCannon, Globals.Content.Load<Texture2D>("cannon") },
             { TileObjects.Wall, Globals.Content.Load<Texture2D>("wall") },
             { TileObjects.Mine, Globals.Content.Load<Texture2D>("mine") },
         };
@@ -29,10 +30,10 @@ public static class TileObjectFactory
             {
                 Range = Map.TILE_SIZE * 4,
                 Damage = 2,
-                DamageType = DamageTypes.Fire,
+                TargetingType = TargetingTypes.All,
+                DamageType = DamageTypes.Normal,
             };
             tileObject.SetCooldown(1f);
-            //tileObject.AddEffect(Effects.Burn);
 
             return tileObject;
         }
@@ -43,7 +44,7 @@ public static class TileObjectFactory
             {
                 Range = Map.TILE_SIZE * 5,
                 Damage = 2,
-                OnlyAir = true,
+                TargetingType = TargetingTypes.Air,
                 DamageType = DamageTypes.Electricity,
             };
             tileObject.SetCooldown(1.5f);
@@ -58,9 +59,26 @@ public static class TileObjectFactory
                 Range = Map.TILE_SIZE * 3,
                 Damage = 1,
                 DamageType = DamageTypes.Ice,
+                TargetingType = TargetingTypes.All,
             };
             tileObject.SetCooldown(1.5f);
             tileObject.AddEffect(Effects.Freeze);
+
+            return tileObject;
+        }
+
+        if (type is TileObjects.TowerCannon)
+        {
+            var tileObject = new Tower(type, GetTileObjectTexture(type))
+            {
+                Range = Map.TILE_SIZE * 3,
+                Damage = 4,
+                DamageType = DamageTypes.Normal,
+                SplashRadius = Map.TILE_SIZE * 2,
+                AttackType = AttackTypes.Splash,
+                TargetingType = TargetingTypes.Ground,
+            };
+            tileObject.SetCooldown(2.5f);
 
             return tileObject;
         }

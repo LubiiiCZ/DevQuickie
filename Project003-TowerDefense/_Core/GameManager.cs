@@ -22,6 +22,7 @@ public class GameManager
         rewardManager = new(graphics.GraphicsDevice);
         map = new();
         monsterManager = new(map, graphics.GraphicsDevice);
+        DamageHelper.Initialize(monsterManager);
         spellManager = new();
         _canvas = new(graphics.GraphicsDevice, Map.TILE_SIZE * Map.SIZE_X, Map.TILE_SIZE * (Map.SIZE_Y + 1));
         uiManager = new();
@@ -43,7 +44,7 @@ public class GameManager
     {
         PlayerLives = 10;
         RewardsLeft = 3;
-        RewardRerolls = 99;
+        RewardRerolls = 3;
         monstersInWave.Clear();
         spellManager.Reset();
         monsterManager.Reset();
