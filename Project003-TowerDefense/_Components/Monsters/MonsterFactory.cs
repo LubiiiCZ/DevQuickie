@@ -27,6 +27,13 @@ public class MonsterFactory
             CurrentSpeed = 100,
             Flying = true,
         }},
+        { Monsters.Boss, new(){
+            Texture = Globals.Content.Load<Texture2D>("hero_boss"),
+            MaxHealth = 100,
+            Health = 100,
+            Speed = 100,
+            CurrentSpeed = 100,
+        }},
     };
 
     public Monster CreateMonster(Monsters type, Vector2 pos)

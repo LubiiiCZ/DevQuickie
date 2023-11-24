@@ -21,6 +21,26 @@ public class MonsterManager
         MonstersInWave.Clear();
     }
 
+    public void AdjustAllMonstersSpeed(int percentage)
+    {
+        foreach (var monster in MonstersInWave)
+        {
+            var newSpeed = (100 + percentage) / 100 * monster.Data.Speed;
+            monster.Data.Speed = newSpeed;
+            monster.Data.CurrentSpeed = newSpeed;
+        }
+    }
+
+    public void AdjustAllMonstersHealth(int percentage)
+    {
+        foreach (var monster in MonstersInWave)
+        {
+            var newHealth = (100 + percentage) / 100 * monster.Data.MaxHealth;
+            monster.Data.MaxHealth = newHealth;
+            monster.Data.Health = newHealth;
+        }
+    }
+
     public bool CheckPlacementValidity(int x, int y)
     {
         return _pathfinder.CheckPlacementValidity(x, y);
@@ -54,10 +74,19 @@ public class MonsterManager
         }
     }
 
-    public void SpawnMonsters(List<Monsters> monsters)
+    public void SpawnMonsters(List<Monsters> monsters, int waveNumber)
     {
-        PrepareMonsterSlots(monsters.Count);
-        monsters.Shuffle();
+        List<Monsters> currentMonsters = new();
+        currentMonsters.AddRange(monsters);
+
+        if (waveNumber % 3 == 0)
+        {
+            currentMonsters.Clear();
+            currentMonsters.Add(Monsters.Boss);
+        }
+
+        PrepareMonsterSlots(currentMonsters.Count);
+        currentMonsters.Shuffle();
         var monsterCounter = 0;
 
         for (int i = 0; i < _monsterLaneSlots.Length; i++)
@@ -65,7 +94,7 @@ public class MonsterManager
             var row = 0;
             for (int m = 0; m < _monsterLaneSlots[i]; m++)
             {
-                SpawnMonster(monsters[monsterCounter], i, row);
+                SpawnMonster(currentMonsters[monsterCounter], i, row);
                 monsterCounter++;
                 row++;
             }

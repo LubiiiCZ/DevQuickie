@@ -100,8 +100,6 @@ public class Monster : Sprite
         {
             Data.CurrentSpeed = Data.Speed;
         }
-
-        //Color = (freezeCount > 0) ? Color.Blue : Color.White;
     }
 
     public void Update()

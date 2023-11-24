@@ -15,7 +15,7 @@ Content TODO list
 Spells
 -
 Enemies
-- Boss - tanky ground slow
+-
 Towers
 -
 Rewards
@@ -24,8 +24,6 @@ Rewards
 
 Cool TODO list - mechanics, features
 ---------------------
-Game events
-Boss wave
 Elements interactions
 Tower selection
 Tower stats
@@ -51,6 +49,9 @@ Logging system
 
 Stream number - DONE
 ---------------------
+19 - Game events mechanic
+19 - New boss monster
+19 - Boss wave mechanic
 18 - New spell - Lightning bolt
 18 - New tower - Cannon
 18 - New rewards - Reroll, Life

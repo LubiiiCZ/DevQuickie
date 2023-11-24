@@ -8,6 +8,7 @@ public class GameManager
     public readonly SpellManager spellManager;
     public readonly UIManager uiManager;
     public readonly RewardManager rewardManager;
+    public readonly GameEventManager gameEventManager;
     public readonly List<Monsters> monstersInWave = new();
     public Queue<RewardItem> Rewards { get; set; } = new();
     public Rewards CurrentReward { get; set; }
@@ -16,6 +17,8 @@ public class GameManager
     public Spell CurrentSpell { get; set; }
     public Tile CurrentTile { get; set; }
     public int PlayerLives { get; set; }
+    public int WaveNumber { get; set; }
+    public bool WaveInProgress { get; set; }
 
     public GameManager(GraphicsDeviceManager graphics)
     {
@@ -24,6 +27,8 @@ public class GameManager
         monsterManager = new(map, graphics.GraphicsDevice);
         DamageHelper.Initialize(monsterManager);
         spellManager = new();
+        gameEventManager = new(this);
+
         _canvas = new(graphics.GraphicsDevice, Map.TILE_SIZE * Map.SIZE_X, Map.TILE_SIZE * (Map.SIZE_Y + 1));
         uiManager = new();
         uiManager.buttonStartWave.OnTap += StartWave;
@@ -45,6 +50,8 @@ public class GameManager
         PlayerLives = 10;
         RewardsLeft = 3;
         RewardRerolls = 3;
+        WaveNumber = 1;
+        WaveInProgress = false;
         monstersInWave.Clear();
         spellManager.Reset();
         monsterManager.Reset();
@@ -60,7 +67,9 @@ public class GameManager
 
     public void StartWave(object sender, EventArgs eventArgs)
     {
-        monsterManager.SpawnMonsters(monstersInWave);
+        WaveInProgress = true;
+        monsterManager.SpawnMonsters(monstersInWave, WaveNumber);
+        gameEventManager.ApplyRandomEvent();
         StateManager.SwitchState(States.Play);
     }
 

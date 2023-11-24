@@ -10,6 +10,9 @@ public class PlayState : GameState
 
     public void HandleWaveEnd(object sender, EventArgs args)
     {
+        if (!_gm.WaveInProgress) return;
+
+        _gm.WaveInProgress = false;
         StateManager.SwitchState(States.Reward);
         _gm.RewardsLeft = 1;
         _gm.map.Towers.ForEach(t => t.Reset());
@@ -21,6 +24,7 @@ public class PlayState : GameState
             (InputManager.DraggedItem as Sprite).Position = InputManager.StartPosition;
             InputManager.IsDragging = false;
         }
+        _gm.WaveNumber++;
     }
 
     public void HandleSpellCast(object sender, Spell spell)
