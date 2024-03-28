@@ -1,18 +1,11 @@
 namespace Quickie008;
 
-public class Sprite
+public class Sprite(Texture2D tex, Vector2 pos)
 {
-    protected readonly Texture2D texture;
-    protected readonly Vector2 origin;
-    protected Vector2 position;
+    protected readonly Texture2D texture = tex;
+    protected readonly Vector2 origin = new(tex.Width / 2, tex.Height / 2);
+    protected Vector2 position = pos;
     protected float rotation;
-
-    public Sprite(Texture2D tex, Vector2 pos)
-    {
-        texture = tex;
-        position = pos;
-        origin = new(tex.Width / 2, tex.Height / 2);
-    }
 
     public virtual void Draw()
     {

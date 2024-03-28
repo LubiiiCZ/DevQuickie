@@ -1,14 +1,14 @@
 namespace Quickie014;
 
-public class Circle
+public class Circle(Texture2D tex)
 {
     private static readonly Random _r = new();
-    private readonly Texture2D _texture;
-    public Vector2 Origin { get; }
-    public Vector2 Position { get; set; }
-    public Vector2 Direction { get; set; }
-    public int Speed { get; set; }
-    public Color Color { get; set; }
+    private readonly Texture2D _texture = tex;
+    public Vector2 Origin { get; } = new(tex.Width / 2, tex.Height / 2);
+    public Vector2 Position { get; set; } = RandomPosition();
+    public Vector2 Direction { get; set; } = RandomDirection();
+    public int Speed { get; set; } = 200;
+    public Color Color { get; set; } = Color.White;
 
     private static Vector2 RandomPosition()
     {
@@ -22,16 +22,6 @@ public class Circle
     {
         var angle = _r.NextDouble() * 2 * Math.PI;
         return new((float)Math.Sin(angle), -(float)Math.Cos(angle));
-    }
-
-    public Circle(Texture2D tex)
-    {
-        _texture = tex;
-        Origin = new(tex.Width / 2, tex.Height / 2);
-        Speed = 200;
-        Position = RandomPosition();
-        Direction = RandomDirection();
-        Color = Color.White;
     }
 
     public void Update()

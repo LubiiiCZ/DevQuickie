@@ -11,7 +11,7 @@ public enum GameStates
 
 public static class GameStateManager
 {
-    public static Dictionary<GameStates, GameState> States { get; } = new();
+    public static Dictionary<GameStates, GameState> States { get; } = [];
 
     public static void Init(GameManager gm)
     {

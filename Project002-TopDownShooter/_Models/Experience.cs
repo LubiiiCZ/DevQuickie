@@ -1,14 +1,9 @@
 namespace Project002;
 
-public class Experience : Sprite
+public class Experience(Texture2D tex, Vector2 pos) : Sprite(tex, pos)
 {
-    public float Lifespan { get; private set; }
+    public float Lifespan { get; private set; } = LIFE;
     private const float LIFE = 5f;
-
-    public Experience(Texture2D tex, Vector2 pos) : base(tex, pos)
-    {
-        Lifespan = LIFE;
-    }
 
     public void Update()
     {

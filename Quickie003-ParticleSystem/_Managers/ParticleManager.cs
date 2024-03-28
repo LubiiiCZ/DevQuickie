@@ -2,8 +2,8 @@ namespace Quickie003;
 
 public static class ParticleManager
 {
-    	private static readonly List<Particle> _particles = new();
-        private static readonly List<ParticleEmitter> _particleEmitters = new();
+    	private static readonly List<Particle> _particles = [];
+        private static readonly List<ParticleEmitter> _particleEmitters = [];
 
         public static void AddParticle(Particle p)
         {

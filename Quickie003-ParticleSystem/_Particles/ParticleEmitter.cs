@@ -1,17 +1,10 @@
 namespace Quickie003;
 
-public class ParticleEmitter
+public class ParticleEmitter(IEmitter emitter, ParticleEmitterData data)
 {
-    private readonly ParticleEmitterData _data;
-    private float _intervalLeft;
-    private readonly IEmitter _emitter;
-
-    public ParticleEmitter(IEmitter emitter, ParticleEmitterData data)
-    {
-        _emitter = emitter;
-        _data = data;
-        _intervalLeft = data.interval;
-    }
+    private readonly ParticleEmitterData _data = data;
+    private float _intervalLeft = data.interval;
+    private readonly IEmitter _emitter = emitter;
 
     private void Emit(Vector2 pos)
     {

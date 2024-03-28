@@ -1,13 +1,9 @@
 namespace Quickie015;
 
-public class Hero : Sprite
+public class Hero(Texture2D texture, Vector2 position) : Sprite(texture, position)
 {
     private const float SPEED = 500;
     private Vector2 _minPos, _maxPos;
-
-    public Hero(Texture2D texture, Vector2 position) : base(texture, position)
-    {
-    }
 
     public void SetBounds(Point mapSize, Point tileSize)
     {

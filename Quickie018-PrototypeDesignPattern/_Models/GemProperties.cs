@@ -1,11 +1,6 @@
 namespace Quickie018;
 
-public class GemProperties
+public class GemProperties(Color color)
 {
-    public Color Color { get; set; }
-
-    public GemProperties(Color color)
-    {
-        Color = color;
-    }
+    public Color Color { get; set; } = color;
 }

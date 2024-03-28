@@ -4,8 +4,8 @@ namespace Project001;
 
 public class MenuState : GameState
 {
-    private readonly List<Button> _buttons = new();
-    private readonly List<RotatingSprite> _sprites = new();
+    private readonly List<Button> _buttons = [];
+    private readonly List<RotatingSprite> _sprites = [];
 
     public MenuState(GameManager gm)
     {

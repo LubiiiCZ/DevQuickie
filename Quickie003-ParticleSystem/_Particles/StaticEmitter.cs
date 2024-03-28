@@ -1,11 +1,6 @@
 namespace Quickie003;
 
-public class StaticEmitter : IEmitter
+public class StaticEmitter(Vector2 pos) : IEmitter
 {
-    public Vector2 EmitPosition { get; }
-
-    public StaticEmitter(Vector2 pos)
-    {
-        EmitPosition = pos;
-    }
+    public Vector2 EmitPosition { get; } = pos;
 }

@@ -1,15 +1,9 @@
 namespace Quickie020;
 
-public class Sprite
+public class Sprite(Texture2D texture, Vector2 position)
 {
-    protected Texture2D texture;
-    public Vector2 Position { get; set; }
-
-    public Sprite(Texture2D texture, Vector2 position)
-    {
-        this.texture = texture;
-        Position = position;
-    }
+    protected Texture2D texture = texture;
+    public Vector2 Position { get; set; } = position;
 
     public virtual void Draw(SpriteBatch spriteBatch)
     {

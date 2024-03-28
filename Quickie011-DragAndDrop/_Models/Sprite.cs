@@ -1,21 +1,14 @@
 namespace Quickie011;
 
-public class Sprite
+public class Sprite(Texture2D tex, Vector2 pos)
 {
-    protected readonly Texture2D texture;
-    protected readonly Vector2 origin;
-    public Vector2 Position { get; set; }
+    protected readonly Texture2D texture = tex;
+    protected readonly Vector2 origin = new(tex.Width / 2, tex.Height / 2);
+    public Vector2 Position { get; set; } = pos;
     public Rectangle Rectangle => new((int)(Position.X - origin.X),
                                       (int)(Position.Y - origin.Y),
                                       texture.Width,
                                       texture.Height);
-
-    public Sprite(Texture2D tex, Vector2 pos)
-    {
-        texture = tex;
-        Position = pos;
-        origin = new(tex.Width / 2, tex.Height / 2);
-    }
 
     public void Draw()
     {

@@ -2,7 +2,7 @@ namespace Project002;
 
 public static class ZombieManager
 {
-    public static List<Zombie> Zombies { get; } = new();
+    public static List<Zombie> Zombies { get; } = [];
     private static Texture2D _texture;
     private static float _spawnCooldown;
     private static float _spawnTime;

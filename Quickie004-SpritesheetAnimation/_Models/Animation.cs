@@ -3,7 +3,7 @@ namespace Quickie004;
 public class Animation
 {
     private readonly Texture2D _texture;
-    private readonly List<Rectangle> _sourceRectangles = new();
+    private readonly List<Rectangle> _sourceRectangles = [];
     private readonly int _frames;
     private int _frame;
     private readonly float _frameTime;

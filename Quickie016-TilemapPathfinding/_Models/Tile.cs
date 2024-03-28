@@ -1,17 +1,11 @@
 namespace Quickie016;
 
-public class Tile : Sprite
+public class Tile(Texture2D texture, Vector2 position, int mapX, int mapY) : Sprite(texture, position)
 {
     public bool Blocked { get; set; }
     public bool Path { get; set; }
-    private readonly int _mapX;
-    private readonly int _mapY;
-
-    public Tile(Texture2D texture, Vector2 position, int mapX, int mapY) : base(texture, position)
-    {
-        _mapX = mapX;
-        _mapY = mapY;
-    }
+    private readonly int _mapX = mapX;
+    private readonly int _mapY = mapY;
 
     public void Update()
     {

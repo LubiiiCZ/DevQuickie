@@ -1,15 +1,10 @@
 namespace Quickie019;
 
-public class TrailStrategyTime : TrailStrategy
+public class TrailStrategyTime(Vector2 position) : TrailStrategy
 {
     private const float TIME = 0.1f;
     private float _time;
-    private Vector2 _lastPosition;
-
-    public TrailStrategyTime(Vector2 position)
-    {
-        _lastPosition = position;
-    }
+    private Vector2 _lastPosition = position;
 
     public override bool Ready(Vector2 position)
     {

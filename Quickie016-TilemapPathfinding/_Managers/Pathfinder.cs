@@ -2,25 +2,19 @@ namespace Quickie016;
 
 public static class Pathfinder
 {
-    class Node
+    class Node(int x, int y)
     {
-        public int x;
-        public int y;
+        public int x = x;
+        public int y = y;
         public Node parent;
         public bool visited;
-
-        public Node(int x, int y)
-        {
-            this.x = x;
-            this.y = y;
-        }
     }
 
     private static Node[,] _nodeMap;
     private static Map _map;
     private static Hero _hero;
-    private static readonly int[] row = { -1, 0, 0, 1 };
-    private static readonly int[] col = { 0, -1, 1, 0 };
+    private static readonly int[] row = [-1, 0, 0, 1];
+    private static readonly int[] col = [0, -1, 1, 0];
 
     public static void Init(Map map, Hero hero)
     {
@@ -97,7 +91,7 @@ public static class Pathfinder
     private static List<Vector2> RetracePath(int goalX, int goalY)
     {
         Stack<Vector2> stack = new();
-        List<Vector2> result = new();
+        List<Vector2> result = [];
         Node curr = _nodeMap[goalX, goalY];
 
         while (curr is not null)

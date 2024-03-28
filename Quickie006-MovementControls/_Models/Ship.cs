@@ -1,15 +1,9 @@
 namespace Quickie006;
 
-public class Ship : Sprite
+public class Ship(Texture2D tex, Vector2 pos) : Sprite(tex, pos)
 {
-    private float _rotation;
-    private readonly float _rotationSpeed;
-
-    public Ship(Texture2D tex, Vector2 pos) : base(tex, pos)
-    {
-        _rotation = 0;
-        _rotationSpeed = 3f;
-    }
+    private float _rotation = 0;
+    private readonly float _rotationSpeed = 3f;
 
     public void Update()
     {

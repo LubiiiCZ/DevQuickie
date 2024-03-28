@@ -2,8 +2,8 @@ namespace Project005;
 
 public class Deck : Clickable
 {
-    private readonly Dictionary<Values, Texture2D> _textures = new();
-    private readonly List<Card> _cards = new();
+    private readonly Dictionary<Values, Texture2D> _textures = [];
+    private readonly List<Card> _cards = [];
     public Values DiscardValue { get; private set; }
     private Vector2 _position { get; }
     private Vector2 _discardPosition { get; }

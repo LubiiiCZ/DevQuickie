@@ -2,7 +2,7 @@ namespace Project005;
 
 public class Player
 {
-    public Dictionary<Values, HandCard> Hand { get; } = new();
+    public Dictionary<Values, HandCard> Hand { get; } = [];
 
     public Player()
     {

@@ -1,12 +1,8 @@
 namespace Quickie012;
 
-public class Player : Sprite
+public class Player(Texture2D tex, Vector2 pos) : Sprite(tex, pos)
 {
     public Vector2 Direction { get; private set; }
-
-    public Player(Texture2D tex, Vector2 pos) : base(tex, pos)
-    {
-    }
 
     public void Update()
     {

@@ -3,7 +3,7 @@ namespace Project002;
 public static class ProjectileManager
 {
     private static Texture2D _texture;
-    public static List<Projectile> Projectiles { get; } = new();
+    public static List<Projectile> Projectiles { get; } = [];
 
     public static void Init(Texture2D tex)
     {

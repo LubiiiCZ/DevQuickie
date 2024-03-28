@@ -2,7 +2,7 @@ namespace Quickie014;
 
 public class GameManager
 {
-    private readonly List<Circle> _circles = new();
+    private readonly List<Circle> _circles = [];
 
     public GameManager()
     {

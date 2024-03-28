@@ -1,11 +1,6 @@
 namespace Project002;
 
-public class MovingSprite : Sprite
+public class MovingSprite(Texture2D tex, Vector2 pos) : Sprite(tex, pos)
 {
-    public int Speed { get; set; }
-
-    public MovingSprite(Texture2D tex, Vector2 pos) : base(tex, pos)
-    {
-        Speed = 300;
-    }
+    public int Speed { get; set; } = 300;
 }

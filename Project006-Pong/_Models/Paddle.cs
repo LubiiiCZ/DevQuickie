@@ -1,21 +1,14 @@
 namespace Project006;
 
-public class Paddle
+public class Paddle(Vector2 position, Keys up, Keys down)
 {
-    public Vector2 Position;
+    public Vector2 Position = position;
     public Rectangle Body { get; private set; }
-    private float _speed = 500f;
-    private float _aiSpeed = 400f;
-    private readonly Keys _up;
-    private readonly Keys _down;
+    private readonly float _speed = 500f;
+    private readonly float _aiSpeed = 400f;
+    private readonly Keys _up = up;
+    private readonly Keys _down = down;
     public bool Ai;
-
-    public Paddle(Vector2 position, Keys up, Keys down)
-    {
-        Position = position;
-        _up = up;
-        _down = down;
-    }
 
     public void Update(Ball ball)
     {

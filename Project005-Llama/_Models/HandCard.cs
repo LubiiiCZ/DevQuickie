@@ -12,7 +12,7 @@ public class HandCard : Clickable
         Value = value;
         _texture = texture;
         _position = position;
-        RectangleArea = new(position.ToPoint(), new(_texture.Width, _texture.Height));
+        RectangleArea = new(position.ToPoint(), new(texture.Width, texture.Height));
     }
 
     public void Draw()

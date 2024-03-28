@@ -2,7 +2,7 @@ namespace Quickie012;
 
 public class PatrolMovementAI : MovementAI
 {
-    private readonly List<Vector2> _path = new();
+    private readonly List<Vector2> _path = [];
     private int _current;
 
     public void AddWaypoint(Vector2 wp)

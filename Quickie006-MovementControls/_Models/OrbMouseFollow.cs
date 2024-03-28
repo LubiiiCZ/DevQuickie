@@ -1,12 +1,8 @@
 namespace Quickie006;
 
-public class OrbMouseFollow : Sprite
+public class OrbMouseFollow(Texture2D tex, Vector2 pos) : Sprite(tex, pos)
 {
     protected virtual Vector2 Destination => InputManager.MousePosition;
-
-    public OrbMouseFollow(Texture2D tex, Vector2 pos) : base(tex, pos)
-    {
-    }
 
     public virtual void Update()
     {

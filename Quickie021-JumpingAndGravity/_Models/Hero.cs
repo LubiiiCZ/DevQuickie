@@ -1,6 +1,6 @@
 namespace Quickie021;
 
-public class Hero : Sprite
+public class Hero(Texture2D texture, Vector2 position) : Sprite(texture, position)
 {
     private const float SPEED = 750f;
     private const float GRAVITY = 5000f;
@@ -8,10 +8,6 @@ public class Hero : Sprite
     private const int OFFSET = 10;
     private Vector2 _velocity;
     private bool _onGround;
-
-    public Hero(Texture2D texture, Vector2 position) : base(texture, position)
-    {
-    }
 
     private Rectangle CalculateBounds(Vector2 pos)
     {

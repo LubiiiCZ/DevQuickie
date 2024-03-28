@@ -2,7 +2,7 @@ namespace Quickie004;
 
 public class AnimationManager
 {
-    private readonly Dictionary<object, Animation> _anims = new();
+    private readonly Dictionary<object, Animation> _anims = [];
     private object _lastKey;
 
     public void AddAnimation(object key, Animation animation)

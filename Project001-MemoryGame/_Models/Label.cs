@@ -1,17 +1,11 @@
 namespace Project001;
 
-public class Label
+public class Label(SpriteFont font, Vector2 position)
 {
-    private readonly SpriteFont _font;
-    private Vector2 _centerPos;
+    private readonly SpriteFont _font = font;
+    private Vector2 _centerPos = position;
     private Vector2 _pos;
     public string Text { get; private set; }
-
-    public Label(SpriteFont font, Vector2 position)
-    {
-        _font = font;
-        _centerPos = position;
-    }
 
     public void SetText(string text)
     {

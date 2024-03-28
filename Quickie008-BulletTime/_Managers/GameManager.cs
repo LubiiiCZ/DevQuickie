@@ -3,7 +3,7 @@ namespace Quickie008;
 public class GameManager
 {
     private const int BULLET_COUNT = 100;
-    private readonly List<Bullet> _bullets = new();
+    private readonly List<Bullet> _bullets = [];
 
     public GameManager()
     {

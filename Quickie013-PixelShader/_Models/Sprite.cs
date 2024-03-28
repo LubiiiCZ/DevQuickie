@@ -1,13 +1,8 @@
 namespace Quickie013;
 
-public class Sprite
+public class Sprite(Texture2D tex)
 {
-    protected readonly Texture2D texture;
-
-    public Sprite(Texture2D tex)
-    {
-        texture = tex;
-    }
+    protected readonly Texture2D texture = tex;
 
     public virtual void Draw(Vector2 pos)
     {

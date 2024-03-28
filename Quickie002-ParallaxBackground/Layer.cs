@@ -1,23 +1,13 @@
 namespace Quickie002;
 
-public class Layer
+public class Layer(Texture2D texture, float depth, float moveScale, float defaultSpeed = 0.0f)
 {
-    private readonly Texture2D _texture;
-    private Vector2 _position;
-    private Vector2 _position2;
-    private readonly float _depth;
-    private readonly float _moveScale;
-    private readonly float _defaultSpeed;
-
-    public Layer(Texture2D texture, float depth, float moveScale, float defaultSpeed = 0.0f)
-    {
-        _texture = texture;
-        _depth = depth;
-        _moveScale = moveScale;
-        _defaultSpeed = defaultSpeed;
-        _position = Vector2.Zero;
-        _position2 = Vector2.Zero;
-    }
+    private readonly Texture2D _texture = texture;
+    private Vector2 _position = Vector2.Zero;
+    private Vector2 _position2 = Vector2.Zero;
+    private readonly float _depth = depth;
+    private readonly float _moveScale = moveScale;
+    private readonly float _defaultSpeed = defaultSpeed;
 
     public void Update(float movement)
     {

@@ -2,9 +2,9 @@ namespace Project004;
 
 public class Bag
 {
-    public readonly List<Die> Dice = new();
-    private Random _random = new();
-    private Texture2D _texture;
+    public readonly List<Die> Dice = [];
+    private readonly Random _random = new();
+    private readonly Texture2D _texture;
 
     public Bag()
     {
@@ -16,11 +16,11 @@ public class Bag
     {
         Dice.Clear();
 
-        DieTypes[] dice = new DieTypes[] {
+        DieTypes[] dice = [
             DieTypes.Green, DieTypes.Green, DieTypes.Green, DieTypes.Green, DieTypes.Green, DieTypes.Green,
             DieTypes.Yellow, DieTypes.Yellow, DieTypes.Yellow, DieTypes.Yellow,
             DieTypes.Red, DieTypes.Red, DieTypes.Red,
-        };
+        ];
 
         foreach (var die in dice)
         {

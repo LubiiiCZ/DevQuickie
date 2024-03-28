@@ -1,35 +1,27 @@
 namespace Project004;
 
-public class Die
+public class Die(DieTypes type)
 {
-    private Icons[] _sides = new Icons[6];
-    public static readonly Dictionary<Icons, Texture2D> Textures = new();
-    private static readonly Random _random = new();
-    public Icons ActiveSide;
-    public Vector2 Position = Vector2.Zero;
-    public Color color = Color.White;
-    public bool used;
-
-    public Die(DieTypes type)
+    private readonly Icons[] _sides = type switch
     {
-        ActiveSide = Icons.Brain;
+        DieTypes.Green => [Icons.Brain, Icons.Brain, Icons.Brain, Icons.Blast, Icons.Feet, Icons.Feet,],
+        DieTypes.Yellow => [Icons.Brain, Icons.Brain, Icons.Blast, Icons.Blast, Icons.Feet, Icons.Feet,],
+        DieTypes.Red => [Icons.Brain, Icons.Blast, Icons.Blast, Icons.Blast, Icons.Feet, Icons.Feet,],
+        _ => [Icons.Brain, Icons.Brain, Icons.Brain, Icons.Blast, Icons.Feet, Icons.Feet,],
+    };
 
-        color = type switch
-        {
-            DieTypes.Green => Color.Green,
-            DieTypes.Yellow => Color.Yellow,
-            DieTypes.Red => Color.Red,
-            _ => Color.Green,
-        };
-
-        _sides = type switch
-        {
-            DieTypes.Green => new Icons[]{ Icons.Brain, Icons.Brain, Icons.Brain, Icons.Blast, Icons.Feet, Icons.Feet,},
-            DieTypes.Yellow => new Icons[]{ Icons.Brain, Icons.Brain, Icons.Blast, Icons.Blast, Icons.Feet, Icons.Feet,},
-            DieTypes.Red => new Icons[]{ Icons.Brain, Icons.Blast, Icons.Blast, Icons.Blast, Icons.Feet, Icons.Feet,},
-            _ => new Icons[]{ Icons.Brain, Icons.Brain, Icons.Brain, Icons.Blast, Icons.Feet, Icons.Feet,},
-        };
-    }
+    public static readonly Dictionary<Icons, Texture2D> Textures = [];
+    private static readonly Random _random = new();
+    public Icons ActiveSide = Icons.Brain;
+    public Vector2 Position = Vector2.Zero;
+    public Color color = type switch
+    {
+        DieTypes.Green => Color.Green,
+        DieTypes.Yellow => Color.Yellow,
+        DieTypes.Red => Color.Red,
+        _ => Color.Green,
+    };
+    public bool used;
 
     public static void Load()
     {

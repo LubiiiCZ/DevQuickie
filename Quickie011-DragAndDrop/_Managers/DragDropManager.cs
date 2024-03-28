@@ -2,8 +2,8 @@ namespace Quickie011;
 
 public static class DragDropManager
 {
-    private static readonly List<IDraggable> _draggables = new();
-    private static readonly List<ITargetable> _targets = new();
+    private static readonly List<IDraggable> _draggables = [];
+    private static readonly List<ITargetable> _targets = [];
     private static IDraggable _dragItem;
 
     public static void AddDraggable(IDraggable item)

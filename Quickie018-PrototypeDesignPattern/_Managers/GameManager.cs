@@ -2,7 +2,7 @@ namespace Quickie018;
 
 public class GameManager
 {
-    private readonly List<Gem> _gems = new();
+    private readonly List<Gem> _gems = [];
     private readonly Gem _gem;
 
     public GameManager()

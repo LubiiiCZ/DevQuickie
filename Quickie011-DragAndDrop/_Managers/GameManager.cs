@@ -2,8 +2,8 @@ namespace Quickie011;
 
 public class GameManager
 {
-    private readonly List<Gem> _gems = new();
-    private readonly List<Socket> _sockets = new();
+    private readonly List<Gem> _gems = [];
+    private readonly List<Socket> _sockets = [];
 
     public GameManager()
     {

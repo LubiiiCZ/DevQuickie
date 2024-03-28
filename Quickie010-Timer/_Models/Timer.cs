@@ -1,26 +1,16 @@
 namespace Quickie010;
 
-public class Timer
+public class Timer(Texture2D texture, SpriteFont font, Vector2 position, float length)
 {
-    private readonly Texture2D _texture;
-    private readonly Vector2 _position;
-    private readonly SpriteFont _font;
-    private readonly Vector2 _textPosition;
+    private readonly Texture2D _texture = texture;
+    private readonly Vector2 _position = position;
+    private readonly SpriteFont _font = font;
+    private readonly Vector2 _textPosition = new(position.X + 32, position.Y + 2);
     private string _text;
-    private readonly float _timeLength;
-    private float _timeLeft;
+    private readonly float _timeLength = length;
+    private float _timeLeft = length;
     private bool _active;
     public bool Repeat { get; set; }
-
-    public Timer(Texture2D texture, SpriteFont font, Vector2 position, float length)
-    {
-        _texture = texture;
-        _font = font;
-        _position = position;
-        _textPosition = new(position.X + 32, position.Y + 2);
-        _timeLength = length;
-        _timeLeft = length;
-    }
 
     private void FormatText()
     {

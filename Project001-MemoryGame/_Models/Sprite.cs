@@ -1,21 +1,12 @@
 namespace Project001;
 
-public class Sprite
+public class Sprite(Texture2D tex, Vector2 pos)
 {
-    public Vector2 Position { get; set; }
-    protected Vector2 origin;
-    public Texture2D Texture { get; protected set; }
-    protected Vector2 scale;
-    protected Color color;
-
-    public Sprite(Texture2D tex, Vector2 pos)
-    {
-        Texture = tex;
-        Position = pos;
-        origin = new(tex.Width / 2, tex.Height / 2);
-        scale = Vector2.One;
-        color = Color.White;
-    }
+    public Vector2 Position { get; set; } = pos;
+    protected Vector2 origin = new(tex.Width / 2, tex.Height / 2);
+    public Texture2D Texture { get; protected set; } = tex;
+    protected Vector2 scale = Vector2.One;
+    protected Color color = Color.White;
 
     public virtual void Draw()
     {

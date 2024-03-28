@@ -3,7 +3,7 @@ namespace Quickie012;
 public class GameManager
 {
     private readonly Player _player;
-    private readonly List<Bot> _bots = new();
+    private readonly List<Bot> _bots = [];
 
     public GameManager()
     {

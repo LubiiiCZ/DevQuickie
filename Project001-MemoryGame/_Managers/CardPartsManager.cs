@@ -2,7 +2,7 @@ namespace Project001;
 
 public static class CardPartsManager
 {
-    private static readonly List<CardPart> _parts = new();
+    private static readonly List<CardPart> _parts = [];
 
     public static void AddParts(Card card)
     {

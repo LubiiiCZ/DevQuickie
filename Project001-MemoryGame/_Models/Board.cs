@@ -6,7 +6,7 @@ public class Board
     private Point _dimensions;
     private const int CARD_SPACING = 10;
     private readonly Point _cardDistance;
-    public List<Card> Cards { get; } = new();
+    public List<Card> Cards { get; } = [];
     public int CardsLeft { get; private set; }
     private readonly Texture2D _textureBack;
     public static readonly Texture2D[] CardTextures = new Texture2D[MAX_CARDS];

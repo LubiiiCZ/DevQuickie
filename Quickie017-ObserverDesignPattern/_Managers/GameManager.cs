@@ -5,8 +5,8 @@ public class GameManager
     private Hero _hero;
     private UI _ui;
     private SoundManager _soundManager;
-    private readonly List<Sprite> _gems = new();
-    private readonly List<Gate> _gates = new();
+    private readonly List<Sprite> _gems = [];
+    private readonly List<Gate> _gates = [];
     private readonly Texture2D _gate;
     private readonly Texture2D _openGate;
 

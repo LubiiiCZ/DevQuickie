@@ -1,11 +1,7 @@
 namespace Quickie006;
 
-public class OrbKeyboard : Sprite
+public class OrbKeyboard(Texture2D tex, Vector2 pos) : Sprite(tex, pos)
 {
-    public OrbKeyboard(Texture2D tex, Vector2 pos) : base(tex, pos)
-    {
-    }
-
     public void Update()
     {
         if (InputManager.Direction != Vector2.Zero)

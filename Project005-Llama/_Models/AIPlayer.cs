@@ -2,7 +2,7 @@ namespace Project005;
 
 public class AIPlayer
 {
-    public List<Values> Hand { get; set; } = new();
+    public List<Values> Hand { get; set; } = [];
     private readonly Texture2D _texture;
     private readonly Vector2 _position;
 

@@ -15,8 +15,8 @@ Feet - You must re-roll this die
 
 public class GameManager
 {
-    private Bag _bag;
-    private List<Die> _hand = new();
+    private readonly Bag _bag;
+    private readonly List<Die> _hand = [];
     private int _blasts = 0;
     private int _brainsTotal = 0;
     private int _brains = 0;

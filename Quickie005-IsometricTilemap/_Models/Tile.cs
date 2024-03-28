@@ -1,17 +1,11 @@
 namespace Quickie005;
 
-public class Tile
+public class Tile(Texture2D texture, Vector2 position)
 {
-    private readonly Texture2D _texture;
-    private readonly Vector2 _position;
+    private readonly Texture2D _texture = texture;
+    private readonly Vector2 _position = position;
     private bool _keyboardSelected;
     private bool _mouseSelected;
-
-    public Tile(Texture2D texture, Vector2 position)
-    {
-        _texture = texture;
-        _position = position;
-    }
 
     public void KeyboardSelect()
     {

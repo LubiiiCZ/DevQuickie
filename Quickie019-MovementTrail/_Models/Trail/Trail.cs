@@ -1,18 +1,11 @@
 namespace Quickie019;
 
-public class Trail
+public class Trail(Texture2D tex, Vector2 position)
 {
-    private readonly Texture2D _texture;
-    private readonly List<TrailPart> _trail;
-    private readonly TrailStrategy _strategy;
+    private readonly Texture2D _texture = tex;
+    private readonly List<TrailPart> _trail = [];
+    private readonly TrailStrategy _strategy = new TrailStrategyDistance(position);
     private const float LIFESPAN = 1f;
-
-    public Trail(Texture2D tex, Vector2 position)
-    {
-        _texture = tex;
-        _trail = new();
-        _strategy = new TrailStrategyDistance(position);
-    }
 
     private void AddTrail(Vector2 position, float rotation)
     {

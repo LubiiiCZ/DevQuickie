@@ -14,13 +14,13 @@ public class Map
         _tiles = new Tile[MAP_SIZE.X, MAP_SIZE.Y];
 
         Texture2D[] textures =
-        {
+        [
             Globals.Content.Load<Texture2D>("tile0"),
             Globals.Content.Load<Texture2D>("tile1"),
             Globals.Content.Load<Texture2D>("tile2"),
             Globals.Content.Load<Texture2D>("tile3"),
             Globals.Content.Load<Texture2D>("tile4"),
-        };
+        ];
 
         TILE_SIZE.X = textures[0].Width;
         TILE_SIZE.Y = textures[0].Height / 2;

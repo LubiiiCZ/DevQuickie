@@ -37,9 +37,9 @@ namespace Project005;
 
 public class GameManager
 {
-    private Deck _deck;
-    private Player _player;
-    private AIPlayer _ai;
+    private readonly Deck _deck;
+    private readonly Player _player;
+    private readonly AIPlayer _ai;
     private bool _playersTurn;
     private bool _playerWon;
     private bool _aiWon;

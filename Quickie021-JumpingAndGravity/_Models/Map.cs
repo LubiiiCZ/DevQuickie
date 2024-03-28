@@ -59,7 +59,7 @@ public class Map
         topTile = MathHelper.Clamp(topTile, 0, tiles.GetLength(0));
         bottomTile = MathHelper.Clamp(bottomTile, 0, tiles.GetLength(0));
 
-        List<Rectangle> result = new();
+        List<Rectangle> result = [];
 
         for (int x = topTile; x <= bottomTile; x++)
         {

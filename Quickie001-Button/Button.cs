@@ -1,18 +1,11 @@
 namespace Quickie001;
 
-public class Button
+public class Button(Texture2D t, Vector2 p)
 {
-    private readonly Texture2D _texture;
-    private Vector2 _position;
-    private readonly Rectangle _rect;
+    private readonly Texture2D _texture = t;
+    private Vector2 _position = p;
+    private readonly Rectangle _rect = new((int)p.X, (int)p.Y, t.Width, t.Height);
     private Color _shade = Color.White;
-
-    public Button(Texture2D t, Vector2 p)
-    {
-        _texture = t;
-        _position = p;
-        _rect = new((int)p.X, (int)p.Y, t.Width, t.Height);
-    }
 
     public void Update()
     {

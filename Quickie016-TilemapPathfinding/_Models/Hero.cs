@@ -1,19 +1,12 @@
 namespace Quickie016;
 
-public class Hero : Sprite
+public class Hero(Texture2D tex, Vector2 pos) : Sprite(tex, pos)
 {
-    public Vector2 DestinationPosition { get; protected set; }
-    public bool MoveDone { get; protected set; }
-    protected float speed;
+    public Vector2 DestinationPosition { get; protected set; } = pos;
+    public bool MoveDone { get; protected set; } = true;
+    protected float speed = 600;
     public List<Vector2> Path { get; private set; }
     private int _current;
-
-    public Hero(Texture2D tex, Vector2 pos) : base(tex, pos)
-    {
-        speed = 600;
-        DestinationPosition = pos;
-        MoveDone = true;
-    }
 
     public void SetPath(List<Vector2> path)
     {

@@ -1,16 +1,10 @@
 namespace Project005;
 
-public class Card
+public class Card(Values value, Texture2D texture)
 {
-    private Texture2D _texture;
-    public Values Value { get; }
+    private Texture2D _texture = texture;
+    public Values Value { get; } = value;
     public Vector2 Position { get; set; }
-
-    public Card(Values value, Texture2D texture)
-    {
-        Value = value;
-        _texture = texture;
-    }
 
     public void Draw()
     {
