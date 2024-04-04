@@ -75,6 +75,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project010", "Project010-Fr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chill003", "Chill003-ExploringAseprite\Chill003.csproj", "{2B2198DC-51A0-434E-B5EF-52E7569C3F88}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quickie024", "Quickie024-SceneTransitions\Quickie024.csproj", "{45E12822-94E9-46DB-8D6F-25480F86CD82}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -228,5 +230,9 @@ Global
 		{2B2198DC-51A0-434E-B5EF-52E7569C3F88}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2B2198DC-51A0-434E-B5EF-52E7569C3F88}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2B2198DC-51A0-434E-B5EF-52E7569C3F88}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45E12822-94E9-46DB-8D6F-25480F86CD82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45E12822-94E9-46DB-8D6F-25480F86CD82}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45E12822-94E9-46DB-8D6F-25480F86CD82}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45E12822-94E9-46DB-8D6F-25480F86CD82}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
