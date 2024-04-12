@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>Lubiii.GameDev.Quickie.MonoGame</id>
+    <version>1.0.0</version>
+    <description>
+      GameDev Quickie project template using MonoGame.
+    </description>
+    <authors>Lubiii - GameDev Quickie</authors>
+    <license type="expression">Apache-2.0</license>
+    <packageTypes>
+      <packageType name="Template" />
+    </packageTypes>
+    <readme>readme.md</readme>
+  </metadata>
+  <files>
+    <file src="Content\**\*.*" exclude="Content\**\bin\**\*.*;Content\**\obj\**\*.*" target="Content" />
+    <file src="readme.md" target=".\" />
+  </files>
+</package>

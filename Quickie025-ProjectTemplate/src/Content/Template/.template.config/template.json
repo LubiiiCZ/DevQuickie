@@ -1,0 +1,13 @@
+{
+    "$schema": "http://json.schemastore.org/template",
+    "author": "Lubiii - GameDev Quickie",
+    "classifications": ["Games"],
+    "identity": "Lubiii.GameDev.Quickie.MonoGame",
+    "name": "GameDev Quickie",
+    "shortName": "quickie",
+    "tags": {
+      "language": "C#",
+      "type": "project"
+    },
+    "sourceName": "Template"
+}
