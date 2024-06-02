@@ -1,0 +1,61 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "",
+    "expandedProjectPaths": [
+        "obj",
+        ".",
+        "bin",
+        "Content"
+    ],
+    "fileStates": {
+        "Chill006.tsx": {
+            "scaleInDock": 0.75,
+            "scaleInEditor": 1
+        },
+        "Content/map.tmx": {
+            "scale": 0.5,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 1456,
+                "y": 1170
+            }
+        },
+        "Content/test.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Content/tiles.tsx": {
+            "scaleInDock": 0.5,
+            "scaleInEditor": 1
+        },
+        "map.tmx": {
+            "scale": 0.5,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 2221,
+                "y": 652
+            }
+        }
+    },
+    "last.imagePath": "L:/Projects/DevQuickie/Chill006/Content",
+    "map.lastUsedFormat": "tmx",
+    "openFiles": [
+    ],
+    "project": "Chill006.tiled-project",
+    "recentFiles": [
+        "Content/map.tmx",
+        "Content/tiles.tsx",
+        "Content/test.tsx",
+        "Chill006.tsx",
+        "map.tmx"
+    ],
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.spacing": 11,
+    "tileset.tileSize": {
+        "height": 100,
+        "width": 100
+    }
+}
